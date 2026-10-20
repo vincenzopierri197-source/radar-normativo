@@ -106,7 +106,7 @@ jobs:
           if git cat-file -e origin/main:data/telegram_sent.json 2>/dev/null; then
             git show origin/main:data/telegram_sent.json > data/telegram_sent.json
           else
-            printf '{ "schema_version": 1, "sent_ids": {} }\\n' > data/telegram_sent.json
+            printf '{ "schema_version": 1, "sent_ids": {} }\n' > data/telegram_sent.json
           fi
 
           python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json
