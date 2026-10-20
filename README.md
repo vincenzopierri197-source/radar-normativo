@@ -42,7 +42,7 @@ python -m radar_normativo archive --latest data/latest.json --archive data/archi
 python -m radar_normativo briefing --input data/new_items.json --output data/briefing.txt --limit 10
 ```
 
-La scansione fallisce se una fonte non è leggibile, e l'archivio rifiuta scansioni incomplete. Il workflow GitHub Actions esegue la raccolta dal lunedì al sabato alle 05:30 UTC. Se trova aggiornamenti concorrenti sulla `main`, rilegge l'archivio più recente e riapplica la scansione, evitando di risolvere conflitti JSON tramite rebase.
+Il workflow interrompe l'aggiornamento dell'archivio se una fonte non è leggibile; l'archivio rifiuta scansioni incomplete o prive dei risultati delle fonti. Il workflow GitHub Actions esegue la raccolta dal lunedì al sabato alle 05:30 UTC. Se trova aggiornamenti concorrenti sulla `main`, rilegge l'archivio più recente e riapplica la scansione, evitando di risolvere conflitti JSON tramite rebase.
 
 ## Telegram (opzionale)
 
