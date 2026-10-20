@@ -23,6 +23,6 @@ def main()->None:
  elif args.command=="briefing":
   payload=json.loads(Path(args.input).read_text(encoding="utf-8")); items=payload if isinstance(payload,list) else payload.get("items",[]) if isinstance(payload,dict) else []; out=Path(args.output); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(render_briefing(items,limit=args.limit),encoding="utf-8"); print(f"Briefing generato: {len(items)} elementi; {out}")
  elif args.command=="telegram":
-  result=send_new_items(args.input,args.ledger,dry_run=args.dry_run,include_finance=args.finance); print(f"Telegram: {result['sent']} schede inviate; {result['pending']} nuove; {result['skipped']} già registrate.")
+  result=send_new_items(args.input,args.ledger,dry_run=args.dry_run,include_finance=args.finance); mode="simulazione" if args.dry_run else "invio"; print(f"Telegram ({mode}): {result['sent']} schede inviate; {result['pending']} nuove; {result['skipped']} già registrate.")
  elif args.command=="bot": run_bot(archive_path=args.archive_path,sources_path=args.sources_path,state_path=args.state_path,latest_path=args.latest_path)
 if __name__=="__main__": main()
