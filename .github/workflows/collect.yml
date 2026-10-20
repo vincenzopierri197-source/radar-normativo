@@ -1,21 +1,15 @@
 name: Raccolta fonti normative
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "config/sources.json"
-      - ".github/workflows/collect.yml"
   workflow_dispatch:
   schedule:
-    # GitHub Actions cron usa UTC: esegue la raccolta ogni 6 ore, tutti i giorni.
-    - cron: "0 */6 * * *"
+    # GitHub Actions usa UTC. Due controlli coprono ora legale/solare italiana;
+    # il job prosegue solo quando in Europe/Rome sono le 08:00.
+    - cron: "0 6,7 * * *"
 
 permissions:
   contents: write
 
-# Un solo workflow di raccolta alla volta; le scritture concorrenti sulla main
-# vengono gestite rigenerando l'archivio sull'ultima versione, non con un rebase JSON.
 concurrency:
   group: radar-normativo-collect-main
   cancel-in-progress: false
@@ -24,29 +18,39 @@ jobs:
   collect:
     runs-on: ubuntu-24.04
     steps:
+      - name: Verifica finestra delle 08:00 italiane
+        id: window
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" != "schedule" || "$(TZ=Europe/Rome date +%H)" == "08" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Avvio raccolta."
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Fuori dalla finestra delle 08:00 italiane: salto questa esecuzione."
+          fi
+
       - name: Checkout
+        if: steps.window.outputs.run == 'true'
         uses: actions/checkout@v6
 
       - name: Set up Python
+        if: steps.window.outputs.run == 'true'
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
 
       - name: Install
+        if: steps.window.outputs.run == 'true'
         run: python -m pip install -e .
 
-      - name: Test Telegram delivery (manual runs only)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scripts/test_telegram.py
-
       - name: Collect configured feeds
+        if: steps.window.outputs.run == 'true'
         run: python -m radar_normativo collect --config config/sources.json --output data/latest.json
 
       - name: Check source availability
+        if: steps.window.outputs.run == 'true'
         run: |
           python - <<'PY'
           import json
@@ -68,17 +72,16 @@ jobs:
           PY
 
       - name: Update historical archive
+        if: steps.window.outputs.run == 'true'
         run: python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
 
       - name: Persist archive without rebase conflicts
+        if: steps.window.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # La scansione resta nei file ignorati. A ogni tentativo si riparte
-          # dall'archivio più recente su main e si riapplica la scansione corrente.
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
@@ -99,7 +102,8 @@ jobs:
           echo "Impossibile salvare l'archivio dopo 5 tentativi." >&2
           exit 1
 
-      - name: Send new items to Telegram (optional)
+      - name: Send one daily Telegram briefing
+        if: steps.window.outputs.run == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -107,25 +111,19 @@ jobs:
         run: |
           set -euo pipefail
           if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
-            echo "Telegram non configurato: salto l'invio. Aggiungere i secrets TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID."
+            echo "Telegram non configurato: salto l'invio."
             exit 0
           fi
-
-          # Recupera il registro persistente degli invii dalla versione corrente di main.
           git fetch origin main
           if git cat-file -e origin/main:data/telegram_sent.json 2>/dev/null; then
             git show origin/main:data/telegram_sent.json > data/telegram_sent.json
           else
             printf '{ "schema_version": 1, "sent_ids": {} }\n' > data/telegram_sent.json
           fi
-
           python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json
-
-          # Il registro è ignorato per impostazione predefinita: versionarlo esplicitamente
-          # consente di evitare invii duplicati nelle scansioni successive.
           git add -f data/telegram_sent.json
           if git diff --cached --quiet; then
-            echo "Registro Telegram invariato."
+            echo "Nessuna nuova notizia da registrare."
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -134,7 +132,7 @@ jobs:
           git push origin HEAD:main
 
       - name: Upload scan and newly discovered items
-        if: always()
+        if: always() && steps.window.outputs.run == 'true'
         uses: actions/upload-artifact@v6
         with:
           name: radar-normativo-scan
