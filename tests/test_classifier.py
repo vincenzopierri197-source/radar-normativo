@@ -22,3 +22,27 @@ def test_classifies_english_eu_legal_titles():
 
 def test_unknown_topic_returns_empty_list():
     assert classify_topics("Avviso senza parole chiave specifiche") == []
+
+
+def test_classifies_health_food_transport_and_digital_regulation():
+    assert "salute_farmaci" in classify_topics(
+        "Agenzia Italiana del Farmaco", "Autorizzazione all'immissione in commercio del medicinale"
+    )
+    assert "agricoltura_alimentazione" in classify_topics(
+        "Commission Recommendation on monitoring nitrate and nitrite in feed"
+    )
+    assert "trasporti_infrastrutture" in classify_topics(
+        "Disposizioni per l'impiego su strada di dispositivi di sicurezza stradale"
+    )
+    assert "digitale_cyber" in classify_topics(
+        "Agreement on the Union Secure Connectivity Programme"
+    )
+
+
+def test_classifies_treasury_bonds_and_insurance():
+    assert "economia_finanza" in classify_topics(
+        "Ministero dell'Economia e delle Finanze", "Riapertura delle sottoscrizioni dei buoni del Tesoro poliennali"
+    )
+    assert "economia_finanza" in classify_topics(
+        "IVASS — modifiche al registro delle imprese assicurative"
+    )

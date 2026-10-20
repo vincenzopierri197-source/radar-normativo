@@ -40,6 +40,35 @@ RULES: dict[str, tuple[str, ...]] = {
         "clima", "environment", "environmental", "energy", "renewable", "emissions",
         "waste", "climate", "electricity", "gas supply",
     ),
+    "salute_farmaci": (
+        "salute", "sanità", "sanitario", "farmaco", "farmaci", "medicinale", "medicinali",
+        "aifa", "medicinali per uso umano", "autorizzazione all'immissione in commercio",
+        "health", "healthcare", "public health", "medicine", "medicines", "medicinal product",
+        "medicinal products", "pharmaceutical", "pharmaceuticals", "veterinary medicinal",
+    ),
+    "agricoltura_alimentazione": (
+        "agricoltura", "agricolo", "agricoli", "alimentare", "alimenti", "mangimi",
+        "pesca", "prodotti agricoli", "agriculture", "agricultural", "food", "feed",
+        "fisheries", "fishery", "food additives", "geographical indication",
+        "protected geographical indication", "lupin", "nitrate and nitrite",
+    ),
+    "trasporti_infrastrutture": (
+        "trasporto", "trasporti", "infrastruttura", "infrastrutture", "strada", "stradale",
+        "veicolo", "veicoli", "sicurezza stradale", "transport", "transportation",
+        "infrastructure", "road safety", "road transport", "vehicle", "vehicles",
+        "aviation", "maritime transport",
+    ),
+    "digitale_cyber": (
+        "digitale", "cybersecurity", "cyber security", "cybercrime", "cybercriminalità",
+        "telecomunicazioni", "comunicazioni elettroniche", "digital", "cyber",
+        "electronic communications", "information technology", "space programme",
+        "secure connectivity", "satellite communications",
+    ),
+    "difesa_sicurezza": (
+        "difesa", "forze armate", "forze di polizia", "sicurezza nazionale",
+        "defence", "defense", "armed forces", "peace facility", "military",
+        "restrictive measures", "human rights",
+    ),
 }
 
 

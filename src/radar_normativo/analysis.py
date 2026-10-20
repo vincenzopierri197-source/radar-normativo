@@ -14,6 +14,11 @@ TOPIC_WEIGHTS: dict[str, int] = {
     "economia_finanza": 19,
     "giustizia_diritto_penale": 17,
     "ambiente_energia": 15,
+    "salute_farmaci": 20,
+    "agricoltura_alimentazione": 18,
+    "trasporti_infrastrutture": 17,
+    "digitale_cyber": 19,
+    "difesa_sicurezza": 14,
 }
 
 IMPACT_TERMS: dict[str, int] = {
