@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime, timezone\nfrom calendar import timegm
+from calendar import timegm
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -21,9 +22,7 @@ def _first_text(entry: Any, *keys: str) -> str:
 def _entry_date(entry: Any) -> str | None:
     parsed = entry.get("published_parsed") or entry.get("updated_parsed")
     if parsed:
-        from time import struct_time, strftime, gmtime, mktime
-        # feedparser supplies a UTC-like struct_time for parsed feed dates.
-        return datetime.fromtimestamp(mktime(parsed), tz=timezone.utc).isoformat()
+        return datetime.fromtimestamp(timegm(parsed), tz=timezone.utc).isoformat()
     return _first_text(entry, "published", "updated") or None
 
 
@@ -49,8 +48,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 title = _first_text(entry, "title")
                 if not link or not title:
                     continue
-                stable_key = link.strip()
-                item_id = hashlib.sha256(stable_key.encode("utf-8")).hexdigest()[:20]
+                item_id = hashlib.sha256(link.strip().encode("utf-8")).hexdigest()[:20]
                 items[item_id] = {
                     "id": item_id,
                     "title": title,
@@ -66,7 +64,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 }
                 count += 1
             source_results.append({"name": name, "ok": True, "items": count})
-        except Exception as exc:  # keep other sources running if one feed fails
+        except Exception as exc:
             source_results.append({"name": name, "ok": False, "error": str(exc)[:300]})
 
     return {
@@ -74,5 +72,9 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "item_count": len(items),
         "source_results": source_results,
-        "items": sorted(items.values(), key=lambda item: (item.get("published_at") or "", item["title"]), reverse=True),
+        "items": sorted(
+            items.values(),
+            key=lambda item: (item.get("published_at") or "", item["title"]),
+            reverse=True,
+        ),
     }
