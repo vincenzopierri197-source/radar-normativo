@@ -42,9 +42,12 @@ def update_archive(
     if not isinstance(latest, dict) or not isinstance(latest.get("items"), list):
         raise ValueError("Scansione non valida: atteso un oggetto JSON con 'items'")
 
+    source_results = latest.get("source_results")
+    if not isinstance(source_results, list) or not source_results:
+        raise ValueError("Archivio non aggiornato: la scansione non contiene risultati delle fonti")
     failures = [
-        source for source in latest.get("source_results", [])
-        if not source.get("ok", False)
+        source for source in source_results
+        if not isinstance(source, dict) or not source.get("ok", False)
     ]
     if failures:
         names = ", ".join(str(source.get("name", "fonte sconosciuta")) for source in failures)
