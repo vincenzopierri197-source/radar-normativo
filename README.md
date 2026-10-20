@@ -58,7 +58,9 @@ Per un invio reale, configura le variabili d'ambiente `TELEGRAM_BOT_TOKEN` e `TE
 python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json
 ```
 
-Il registro `data/telegram_sent.json` impedisce di reinviare gli elementi già registrati. Non inserire mai token o credenziali nei file versionati; se in futuro si abilita l'invio automatico da GitHub Actions, usare esclusivamente GitHub Actions secrets. Il workflow attuale non invia messaggi Telegram automaticamente.
+Il registro `data/telegram_sent.json` impedisce di reinviare gli elementi già registrati. Non inserire mai token o credenziali nei file versionati: su GitHub configura i repository secrets `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`.
+
+Quando entrambi i secrets sono configurati, il workflow invia automaticamente su Telegram gli elementi nuovi individuati dalla scansione, anche durante l'esecuzione programmata dal lunedì al sabato alle 05:30 UTC. Se non vengono trovate nuove pubblicazioni, non viene inviato alcun avviso normativo. Le esecuzioni avviate manualmente con **Run workflow** inviano prima anche un messaggio di prova per verificare il collegamento; le esecuzioni programmate non inviano quel messaggio di prova.
 
 ## Campi e limiti
 
