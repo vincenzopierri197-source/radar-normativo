@@ -8,8 +8,8 @@ on:
       - ".github/workflows/collect.yml"
   workflow_dispatch:
   schedule:
-    # GitHub Actions cron usa UTC: lunedì-sabato alle 05:30 UTC.
-    - cron: "30 5 * * 1-6"
+    # GitHub Actions cron usa UTC: esegue la raccolta ogni 6 ore, tutti i giorni.
+    - cron: "0 */6 * * *"
 
 permissions:
   contents: write
