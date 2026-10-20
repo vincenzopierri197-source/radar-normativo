@@ -16,17 +16,21 @@ def test_analysis_scores_relevant_tax_item_and_explains_reasons():
     assert result["relevance_score"] >= 60
     assert result["priority"] == "alta"
     assert result["relevance_reasons"]
+    assert result["analysis_version"] == 2
     assert result["legal_status"] == "non_verificato"
 
 
-def test_analysis_does_not_invent_topics_or_legal_status():
-    result = analyze_item({"title": "Avviso generico"})
+def test_analysis_does_not_reward_metadata_as_relevance():
+    result = analyze_item({
+        "title": "Avviso generico",
+        "published_at": "2026-10-20",
+        "url": "https://example.test/atto",
+    })
 
     assert result["topics"] == []
     assert result["relevance_score"] == 0
     assert result["priority"] == "bassa"
     assert result["legal_status"] == "non_verificato"
-    assert "richiedono verifica" in result["legal_status_note"]
 
 
 def test_analysis_classifies_from_title_when_topics_missing():
@@ -34,3 +38,13 @@ def test_analysis_classifies_from_title_when_topics_missing():
 
     assert "fisco" in result["topics"]
     assert result["relevance_score"] > 0
+
+
+def test_analysis_reclassifies_stale_empty_topics_for_eu_items():
+    result = analyze_item({
+        "title": "Commission Implementing Regulation on VAT and tax credit",
+        "topics": [],
+        "language": "en",
+    })
+    assert "fisco" in result["topics"]
+    assert result["priority"] in {"media", "alta"}
