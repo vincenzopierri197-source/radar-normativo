@@ -11,7 +11,7 @@ Sistema indipendente per monitorare fonti normative italiane ed europee, classif
 - Archivio storico con prima/ultima rilevazione e conteggio dei giorni UTC distinti in cui ogni atto è stato osservato.
 - Classificazione euristica in italiano e inglese, utile anche per EUR-Lex.
 - Punteggio editoriale spiegabile che non premia semplicemente la presenza di una data o di un URL.
-- Briefing testuale e invio Telegram opzionale con registro anti-duplicati.
+- Riepilogo Telegram giornaliero aggregato, con registro anti-duplicati e suddivisione automatica solo se supera il limite di Telegram.
 - Bot Telegram interattivo con comandi per ultime pubblicazioni, novità giornaliere, ricerca, fonti, filtri e stato del sistema.
 - Test automatici per classificazione, archivio, briefing, CLI, bot e Telegram.
 
@@ -43,11 +43,13 @@ python -m radar_normativo archive --latest data/latest.json --archive data/archi
 python -m radar_normativo briefing --input data/new_items.json --output data/briefing.txt --limit 10
 ```
 
-Il workflow GitHub Actions esegue la raccolta ogni 6 ore, tutti i giorni (cron UTC). L'archivio non viene aggiornato se una fonte è in errore.
+Il workflow programmato effettua una scansione al giorno e invia il riepilogo alle **08:00 ora italiana**. Il calendario usa due trigger UTC e prosegue solo nel trigger che corrisponde alle 08:00 in `Europe/Rome`, così da gestire ora legale e ora solare. Le esecuzioni manuali restano disponibili da GitHub Actions. L'archivio non viene aggiornato se una fonte è in errore.
 
-## Telegram: notifiche automatiche e comandi
+## Telegram: riepilogo e comandi
 
 Per le notifiche automatiche, configura i secrets GitHub `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`. Non inserire mai il token nei file versionati.
+
+Ogni mattina il bot raccoglie le nuove pubblicazioni dall'ultima scansione e le invia in un unico riepilogo, con titolo, materia, data, fonte, sintesi disponibile, stato giuridico non verificato e collegamento ufficiale. Non vengono reinviati atti già registrati. Se non ci sono novità, non viene inviato alcun messaggio. Se le notizie superano il limite tecnico di Telegram, il riepilogo viene diviso automaticamente in più messaggi per non perdere contenuti.
 
 Per attivare i comandi interattivi, installa il progetto su un computer/server sempre acceso, configura le stesse variabili d'ambiente e avvia:
 
@@ -70,8 +72,6 @@ Comandi disponibili in Telegram:
 
 I filtri vengono salvati localmente in `data/bot_state.json` e applicati alle liste. Se il bot è ospitato su un server separato, occorre sincronizzare periodicamente `data/archive.json` e `config/sources.json` dal repository per vedere gli aggiornamenti più recenti.
 
-Il registro `data/telegram_sent.json` impedisce di reinviare gli elementi già notificati. Se non vengono trovate nuove pubblicazioni, non viene inviato alcun avviso normativo.
-
 ## Campi e limiti
 
 Ogni scheda può contenere `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. I punteggi sono euristici e le classificazioni possono essere errate o incomplete. La data del feed può essere diversa dalla data di adozione, pubblicazione ufficiale o entrata in vigore. Le sintesi del feed non vengono inventate: se la fonte non ne fornisce una, il campo resta vuoto.
@@ -81,7 +81,7 @@ Ogni scheda può contenere `topics`, `relevance_score`, `priority`, `relevance_r
 - [x] Raccolta RSS/Atom configurabile e controllo fonti
 - [x] Archivio storico e deduplicazione URL canonici
 - [x] Classificazione multilingue e punteggio spiegabile
-- [x] Briefing e invio Telegram manuale opzionale
+- [x] Riepilogo giornaliero Telegram aggregato e registro anti-duplicati
 - [x] Comandi Telegram interattivi e filtri locali
 - [ ] Verifica più ampia delle fonti ufficiali e dei feed
 - [ ] Monitoraggio delle modifiche agli atti e briefing giornaliero Telegram
