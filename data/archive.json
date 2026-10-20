@@ -88,7 +88,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.380574+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -96,9 +98,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 18,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -110,7 +114,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381018+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -118,9 +124,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 18,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -156,7 +164,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381077+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -164,9 +174,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 4,
+      "relevance_score": 18,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision (+4)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -204,7 +215,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "digitale_cyber"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381151+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -212,9 +225,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 4,
+      "relevance_score": 23,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: digitale_cyber (+19)",
         "indicatori testuali: decision (+4)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -255,7 +269,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "The corrigendum does not concern the English version.",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "digitale_cyber"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381295+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -263,9 +279,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 19,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: digitale_cyber (+19)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -277,7 +295,9 @@
       "published_at": "2026-10-19T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "digitale_cyber"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.380679+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -285,9 +305,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 19,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: digitale_cyber (+19)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -447,7 +469,8 @@
       "summary": "Designazione   del   laboratorio   Biochem   Service    S.r.l.,    in\nCastelvetrano, al rilascio dei certificati  di  analisi  nel  settore\noleicolo. (26A05458)",
       "language": "it",
       "topics": [
-        "lavoro"
+        "lavoro",
+        "agricoltura_alimentazione"
       ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.482823+00:00",
@@ -473,7 +496,8 @@
       "summary": "Modifica al decreto 8  maggio  2026,  con  il  quale  il  laboratorio\nOlivolab S.r.l., in Greve di Chianti, e' stato designato al  rilascio\ndei certificati di analisi nel settore oleicolo. (26A05459)",
       "language": "it",
       "topics": [
-        "lavoro"
+        "lavoro",
+        "agricoltura_alimentazione"
       ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.482882+00:00",
@@ -500,7 +524,8 @@
       "summary": "Definizione delle modalita' di inserimento dei dati nella piattaforma\ninformatizzata denominata «Registro unico  delle  movimentazioni  del\nlatte di bufala e dei suoi derivati». (26A05457)",
       "language": "it",
       "topics": [
-        "fisco"
+        "fisco",
+        "agricoltura_alimentazione"
       ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.482759+00:00",
@@ -525,7 +550,9 @@
       "published_at": "2026-10-19T16:50:04+00:00",
       "summary": "Avvio del provvedimento di cancellazione d'ufficio dal Registro unico\ndegli intermediari di assicurazione e  riassicurazione,  per  mancato\nesercizio dell'attivita' senza  giustificato  motivo  per  oltre  tre\nanni. (26A05450)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483755+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -533,9 +560,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 19,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: economia_finanza (+19)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -573,7 +602,9 @@
       "published_at": "2026-10-19T16:50:04+00:00",
       "summary": "Modifica  dell'autorizzazione   all'immissione   in   commercio   del\nmedicinale per uso umano,  a  base  di  rosuvastatina  ed  ezetimibe,\n«Cholecomb». (26A05447)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483603+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -581,9 +612,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 5,
+      "relevance_score": 25,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: modifica (+5)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -597,7 +629,9 @@
       "published_at": "2026-10-19T16:50:04+00:00",
       "summary": "Modifica  dell'autorizzazione   all'immissione   in   commercio   del\nmedicinale per uso umano, a base di escina, «Essaven». (26A05448)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483661+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -605,9 +639,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 5,
+      "relevance_score": 25,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: modifica (+5)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -621,7 +656,9 @@
       "published_at": "2026-10-19T16:50:03+00:00",
       "summary": "Disposizioni per l'impiego su  strada  di  dispositivi  di  sicurezza\nstradale per  i  motociclisti  (DSM).  Modifica  e  sostituzione  del\ndecreto 1° aprile 2019. (26A05446)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "trasporti_infrastrutture"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483174+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -629,9 +666,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 25,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: trasporti_infrastrutture (+17)",
         "indicatori testuali: modifica, disposizioni (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -645,7 +683,9 @@
       "published_at": "2026-10-19T16:50:03+00:00",
       "summary": "Ruoli del personale militare collocato in ausiliaria (26A05379)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483804+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -653,9 +693,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 14,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -667,7 +709,9 @@
       "published_at": "2026-10-19T16:50:03+00:00",
       "summary": "Autorizzazione all'importazione  parallela  del  medicinale  per  uso\numano «Cerazette». (26A05435)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483512+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -675,9 +719,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 20,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -689,7 +735,9 @@
       "published_at": "2026-10-19T16:50:03+00:00",
       "summary": "Autorizzazione all'importazione  parallela  del  medicinale  per  uso\numano «Cialis». (26A05436)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483555+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -697,9 +745,11 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 0,
+      "relevance_score": 20,
       "priority": "bassa",
-      "relevance_reasons": [],
+      "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)"
+      ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
     },
     {
@@ -711,7 +761,9 @@
       "published_at": "2026-10-19T16:50:02+00:00",
       "summary": "Classificazione, ai sensi dell'articolo 12, comma 5,  della  legge  8\nnovembre 2012, n. 189, del  medicinale  per  uso  umano,  a  base  di\nrisankizumab, «Skyrizi». (Determina n. 1369/2026). (26A05372)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483402+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -719,9 +771,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 28,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: legge (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -735,7 +788,9 @@
       "published_at": "2026-10-19T16:50:02+00:00",
       "summary": "Classificazione, ai sensi dell'articolo 12, comma 5,  della  legge  8\nnovembre 2012, n. 189, del  medicinale  per  uso  umano,  a  base  di\npalbociclib,  «Palbociclib  Viatris».   (Determina   n.   1366/2026).\n(26A05369)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483239+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -743,9 +798,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 28,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: legge (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -759,7 +815,9 @@
       "published_at": "2026-10-19T16:50:02+00:00",
       "summary": "Classificazione, ai sensi dell'articolo 12, comma 5,  della  legge  8\nnovembre 2012, n. 189, del  medicinale  per  uso  umano,  a  base  di\nplozasiran, «Redemplo». (Determina n. 1367/2026). (26A05370)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483297+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -767,9 +825,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 28,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: legge (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -783,7 +842,9 @@
       "published_at": "2026-10-19T16:50:02+00:00",
       "summary": "Classificazione, ai sensi dell'articolo 12, comma 5,  della  legge  8\nnovembre 2012, n. 189, del  medicinale  per  uso  umano,  a  base  di\nranibizumab, «Rexatilux». (Determina n. 1368/2026). (26A05371)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483351+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -791,9 +852,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 28,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: legge (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -829,7 +891,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382227+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -837,9 +901,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -877,7 +942,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382058+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -885,9 +952,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -925,7 +993,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381678+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -933,9 +1003,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
+      "relevance_score": 27,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: directive, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1351,7 +1422,9 @@
       "published_at": "2026-10-15T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383212+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1359,9 +1432,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 4,
+      "relevance_score": 18,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision (+4)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1403,7 +1477,8 @@
       "summary": "",
       "language": "en",
       "topics": [
-        "giustizia_diritto_penale"
+        "giustizia_diritto_penale",
+        "digitale_cyber"
       ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382854+00:00",
@@ -1412,10 +1487,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 33,
+      "relevance_score": 35,
       "priority": "media",
       "relevance_reasons": [
-        "area tematica: giustizia_diritto_penale (+17)",
+        "area tematica: digitale_cyber (+19)",
         "indicatori testuali: regulation, decision, implementing (+16)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1541,7 +1616,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383482+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1549,9 +1626,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1565,7 +1643,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384335+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1573,9 +1653,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1589,7 +1670,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383864+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1597,9 +1680,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1613,7 +1697,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383547+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1621,9 +1707,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1637,7 +1724,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383315+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1645,9 +1734,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1661,7 +1751,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384200+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1669,9 +1761,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1755,7 +1848,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384264+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1763,9 +1858,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 9,
+      "relevance_score": 23,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision, amending (+9)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1983,7 +2079,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385125+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1991,9 +2089,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2007,7 +2106,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385407+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2015,9 +2116,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2056,7 +2158,8 @@
       "summary": "",
       "language": "en",
       "topics": [
-        "ambiente_energia"
+        "ambiente_energia",
+        "trasporti_infrastrutture"
       ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385266+00:00",
@@ -2065,10 +2168,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 28,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
-        "area tematica: ambiente_energia (+15)",
+        "area tematica: trasporti_infrastrutture (+17)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2106,7 +2209,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385335+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2114,9 +2219,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 32,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2130,7 +2236,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385710+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2138,9 +2246,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 17,
-      "priority": "bassa",
+      "relevance_score": 36,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: regulation, amending, implementing (+17)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2200,7 +2309,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385644+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2208,9 +2319,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 9,
+      "relevance_score": 23,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision, amending (+9)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2224,7 +2336,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384666+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2232,9 +2346,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 22,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision, implementing (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2730,7 +2845,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:23:29.674314+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2738,9 +2855,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 9,
+      "relevance_score": 23,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: decision, amending (+9)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
