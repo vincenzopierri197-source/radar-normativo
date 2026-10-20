@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T17:00:54.407955+00:00",
+  "updated_at": "2026-10-20T17:03:34.180799+00:00",
   "item_count": 121,
   "items": [
     {
@@ -14,10 +14,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405339+00:00",
+      "collected_at": "2026-10-20T17:03:34.178156+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "b8528aab9ff0b5151fba",
@@ -30,10 +30,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405283+00:00",
+      "collected_at": "2026-10-20T17:03:34.178188+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "86bfd2fdbae870f4cc7e",
@@ -46,10 +46,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405441+00:00",
+      "collected_at": "2026-10-20T17:03:34.178319+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e1da82842923668db44c",
@@ -62,10 +62,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405167+00:00",
+      "collected_at": "2026-10-20T17:03:34.178040+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "f2518c4c24ad985855c9",
@@ -78,10 +78,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405366+00:00",
+      "collected_at": "2026-10-20T17:03:34.178243+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "adb11b6d79920b8dbfec",
@@ -94,10 +94,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405540+00:00",
+      "collected_at": "2026-10-20T17:03:34.178395+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "1b9db48697a563d50ed1",
@@ -110,10 +110,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405390+00:00",
+      "collected_at": "2026-10-20T17:03:34.178267+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "9a11ae4c9c76e719c3c9",
@@ -126,10 +126,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405311+00:00",
+      "collected_at": "2026-10-20T17:03:34.178216+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c1b7a803f583be17cd31",
@@ -142,10 +142,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405422+00:00",
+      "collected_at": "2026-10-20T17:03:34.178300+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c6ab4048b4dbdd0e8585",
@@ -158,10 +158,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405249+00:00",
+      "collected_at": "2026-10-20T17:03:34.178125+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "066561e32fba87336e02",
@@ -174,10 +174,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405516+00:00",
+      "collected_at": "2026-10-20T17:03:34.178371+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "9cec9bccf4e230cc58f2",
@@ -190,10 +190,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405207+00:00",
+      "collected_at": "2026-10-20T17:03:34.178083+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "98fb2b1012905c900f90",
@@ -208,10 +208,10 @@
         "fisco"
       ],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606271+00:00",
+      "collected_at": "2026-10-20T17:03:33.689978+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "5308ade7b0569d7ca148",
@@ -224,10 +224,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606133+00:00",
+      "collected_at": "2026-10-20T17:03:33.689841+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "57cb6874301af6220190",
@@ -240,10 +240,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606503+00:00",
+      "collected_at": "2026-10-20T17:03:33.690233+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "930926b620fe1cc3832c",
@@ -256,10 +256,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606308+00:00",
+      "collected_at": "2026-10-20T17:03:33.690034+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "08f070514bfa41d25f3b",
@@ -272,10 +272,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606330+00:00",
+      "collected_at": "2026-10-20T17:03:33.690061+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "d3de18fb76a1550efc47",
@@ -288,10 +288,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606356+00:00",
+      "collected_at": "2026-10-20T17:03:33.690086+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c23111936cb4059758ab",
@@ -304,10 +304,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606211+00:00",
+      "collected_at": "2026-10-20T17:03:33.689918+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "110450b779db77afa443",
@@ -320,10 +320,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606239+00:00",
+      "collected_at": "2026-10-20T17:03:33.689946+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e463515ae944f05a340a",
@@ -338,10 +338,10 @@
         "fisco"
       ],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606179+00:00",
+      "collected_at": "2026-10-20T17:03:33.689886+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "eeca0744a76c77d909ec",
@@ -354,10 +354,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606640+00:00",
+      "collected_at": "2026-10-20T17:03:33.690369+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "24f4c01ddc182c754a91",
@@ -372,10 +372,10 @@
         "imprese"
       ],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606612+00:00",
+      "collected_at": "2026-10-20T17:03:33.690342+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c6044b3761adec71bcf8",
@@ -388,10 +388,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606568+00:00",
+      "collected_at": "2026-10-20T17:03:33.690298+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "0fb1f7169c858fc47bf6",
@@ -404,10 +404,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606589+00:00",
+      "collected_at": "2026-10-20T17:03:33.690319+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "db9fbc6bd3d131a1e2f3",
@@ -420,10 +420,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606383+00:00",
+      "collected_at": "2026-10-20T17:03:33.690114+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "039c3c56ef6b8230ee9c",
@@ -436,10 +436,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606659+00:00",
+      "collected_at": "2026-10-20T17:03:33.690389+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "68690f4f7dc45efdf6ff",
@@ -452,10 +452,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606525+00:00",
+      "collected_at": "2026-10-20T17:03:33.690255+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "12ceab57878673d2e87b",
@@ -468,10 +468,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606544+00:00",
+      "collected_at": "2026-10-20T17:03:33.690274+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "4d8ee49ab430db9c4b53",
@@ -484,10 +484,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606478+00:00",
+      "collected_at": "2026-10-20T17:03:33.690208+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "63992b0fe4a6968a846d",
@@ -500,10 +500,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606410+00:00",
+      "collected_at": "2026-10-20T17:03:33.690141+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "441e784a6dcb9cb1fc1e",
@@ -516,10 +516,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606433+00:00",
+      "collected_at": "2026-10-20T17:03:33.690163+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "442869d8c01cf41e8884",
@@ -532,10 +532,10 @@
       "language": "it",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:53.606456+00:00",
+      "collected_at": "2026-10-20T17:03:33.690186+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e7910db92bd8b7099884",
@@ -548,10 +548,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405638+00:00",
+      "collected_at": "2026-10-20T17:03:34.178494+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "2c25422c2a526ab8007f",
@@ -564,10 +564,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405935+00:00",
+      "collected_at": "2026-10-20T17:03:34.178767+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "1e4706007d0237246a10",
@@ -580,10 +580,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405905+00:00",
+      "collected_at": "2026-10-20T17:03:34.178739+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "16e1a99634ad73026a77",
@@ -596,10 +596,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405817+00:00",
+      "collected_at": "2026-10-20T17:03:34.178676+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e2611f16dd9325255034",
@@ -612,10 +612,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405865+00:00",
+      "collected_at": "2026-10-20T17:03:34.178704+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "926c392a48e234b3c74d",
@@ -628,10 +628,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405669+00:00",
+      "collected_at": "2026-10-20T17:03:34.178524+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "ebc690b99637b54a434b",
@@ -644,10 +644,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405776+00:00",
+      "collected_at": "2026-10-20T17:03:34.178634+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "359b4c2dfe7d334c2f16",
@@ -660,10 +660,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405750+00:00",
+      "collected_at": "2026-10-20T17:03:34.178607+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c8d52b49b5237f579108",
@@ -676,10 +676,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405569+00:00",
+      "collected_at": "2026-10-20T17:03:34.178424+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "a17e3dc732d1d96c72cc",
@@ -692,10 +692,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405686+00:00",
+      "collected_at": "2026-10-20T17:03:34.178559+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e0b38f417b17fd204608",
@@ -708,10 +708,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405718+00:00",
+      "collected_at": "2026-10-20T17:03:34.178575+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "220290b771facb9dda08",
@@ -724,10 +724,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405703+00:00",
+      "collected_at": "2026-10-20T17:03:34.178542+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "15d5ff6c57e3007eea47",
@@ -740,10 +740,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405953+00:00",
+      "collected_at": "2026-10-20T17:03:34.178817+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "93c1a1ea6501d9c2b356",
@@ -756,10 +756,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405588+00:00",
+      "collected_at": "2026-10-20T17:03:34.178444+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "0673e17f4bcfe20297de",
@@ -772,10 +772,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405984+00:00",
+      "collected_at": "2026-10-20T17:03:34.178799+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "11e39bf73012ae1c2121",
@@ -788,10 +788,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.405605+00:00",
+      "collected_at": "2026-10-20T17:03:34.178462+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c324fd2650824bf2fbb2",
@@ -804,10 +804,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406008+00:00",
+      "collected_at": "2026-10-20T17:03:34.178842+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "0e10bf38b18a8fc35deb",
@@ -820,10 +820,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406058+00:00",
+      "collected_at": "2026-10-20T17:03:34.178890+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "90ba7037b19a536ab05e",
@@ -836,10 +836,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406320+00:00",
+      "collected_at": "2026-10-20T17:03:34.179202+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "54658badfffcd08f6a05",
@@ -852,10 +852,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406355+00:00",
+      "collected_at": "2026-10-20T17:03:34.179235+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "4fe4a24cd206c430f4fe",
@@ -868,10 +868,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406256+00:00",
+      "collected_at": "2026-10-20T17:03:34.179129+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "22642948aa0e26e9345f",
@@ -884,10 +884,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406141+00:00",
+      "collected_at": "2026-10-20T17:03:34.179089+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "17f34b7baff75ea78220",
@@ -900,10 +900,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406115+00:00",
+      "collected_at": "2026-10-20T17:03:34.179061+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "2e4ad94f66bdb014dd12",
@@ -916,10 +916,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406385+00:00",
+      "collected_at": "2026-10-20T17:03:34.179264+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "886445c97c24c11c034b",
@@ -932,10 +932,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406177+00:00",
+      "collected_at": "2026-10-20T17:03:34.178927+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "f7df8fbe69ec1de10e90",
@@ -950,10 +950,10 @@
         "giustizia_diritto_penale"
       ],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406216+00:00",
+      "collected_at": "2026-10-20T17:03:34.178968+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "ff633c3f85142909a09e",
@@ -966,10 +966,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406087+00:00",
+      "collected_at": "2026-10-20T17:03:34.179025+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "1f84176335b002b6016f",
@@ -982,10 +982,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406291+00:00",
+      "collected_at": "2026-10-20T17:03:34.179166+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "729b958cde6781ad406f",
@@ -998,10 +998,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406026+00:00",
+      "collected_at": "2026-10-20T17:03:34.178859+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "abf1179cc0e694b5f5d9",
@@ -1014,10 +1014,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406402+00:00",
+      "collected_at": "2026-10-20T17:03:34.179282+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "4a07ca94b801da2e7116",
@@ -1030,10 +1030,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406274+00:00",
+      "collected_at": "2026-10-20T17:03:34.179148+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "60574a54b0218ad77bc9",
@@ -1046,10 +1046,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406506+00:00",
+      "collected_at": "2026-10-20T17:03:34.179420+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "6e927b9d4bf4be434220",
@@ -1062,10 +1062,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406893+00:00",
+      "collected_at": "2026-10-20T17:03:34.179669+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "8cfb1dea3c47e8379d2a",
@@ -1078,10 +1078,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406628+00:00",
+      "collected_at": "2026-10-20T17:03:34.179514+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "1c67798e49af81e60a44",
@@ -1094,10 +1094,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406534+00:00",
+      "collected_at": "2026-10-20T17:03:34.179392+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "cb876cb986e7c58c37bb",
@@ -1110,10 +1110,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406430+00:00",
+      "collected_at": "2026-10-20T17:03:34.179312+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "b472fc507fec69f95ae3",
@@ -1126,10 +1126,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406807+00:00",
+      "collected_at": "2026-10-20T17:03:34.179732+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "ec0a2a700b58f77423d2",
@@ -1142,10 +1142,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406700+00:00",
+      "collected_at": "2026-10-20T17:03:34.179586+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "c8df8dfcfe136de4e792",
@@ -1158,10 +1158,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406780+00:00",
+      "collected_at": "2026-10-20T17:03:34.179702+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "a04e97652451f2342a43",
@@ -1174,10 +1174,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406748+00:00",
+      "collected_at": "2026-10-20T17:03:34.179635+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e32436eb8fdad4799977",
@@ -1190,10 +1190,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406836+00:00",
+      "collected_at": "2026-10-20T17:03:34.179759+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "db3f1a1a3ba34467f933",
@@ -1206,10 +1206,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406565+00:00",
+      "collected_at": "2026-10-20T17:03:34.179450+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "d70f02c218a380dbfedc",
@@ -1222,10 +1222,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406731+00:00",
+      "collected_at": "2026-10-20T17:03:34.179617+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "528cc4331491d771dfdb",
@@ -1238,10 +1238,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406447+00:00",
+      "collected_at": "2026-10-20T17:03:34.179330+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "d85f40efe6ae2e8c29d3",
@@ -1254,10 +1254,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406464+00:00",
+      "collected_at": "2026-10-20T17:03:34.179346+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "087f70c831c828f40ccc",
@@ -1270,10 +1270,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406584+00:00",
+      "collected_at": "2026-10-20T17:03:34.179470+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "6d65de15448129ff4254",
@@ -1286,10 +1286,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406644+00:00",
+      "collected_at": "2026-10-20T17:03:34.179530+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "12a8f8f751c2686be8db",
@@ -1302,10 +1302,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406670+00:00",
+      "collected_at": "2026-10-20T17:03:34.179557+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "d2228a7056671f24f3c4",
@@ -1318,10 +1318,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406480+00:00",
+      "collected_at": "2026-10-20T17:03:34.179363+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "4ffdca1b4643ff6770c2",
@@ -1334,10 +1334,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406601+00:00",
+      "collected_at": "2026-10-20T17:03:34.179487+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "6e764f1a6c325a89dfe6",
@@ -1350,10 +1350,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407161+00:00",
+      "collected_at": "2026-10-20T17:03:34.180046+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "14dd407e768e382cdd55",
@@ -1366,10 +1366,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407405+00:00",
+      "collected_at": "2026-10-20T17:03:34.180296+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "7a9a25e4eaf13dfe4519",
@@ -1382,10 +1382,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407487+00:00",
+      "collected_at": "2026-10-20T17:03:34.180327+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "a6ef0fdc533753bcb0bd",
@@ -1398,10 +1398,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407283+00:00",
+      "collected_at": "2026-10-20T17:03:34.180174+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "47ebb2a7d3f525378434",
@@ -1414,10 +1414,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407192+00:00",
+      "collected_at": "2026-10-20T17:03:34.180076+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "1f9c0c4ab95981efb964",
@@ -1430,10 +1430,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407379+00:00",
+      "collected_at": "2026-10-20T17:03:34.180270+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "5bd7773efe31d14407d7",
@@ -1446,10 +1446,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407461+00:00",
+      "collected_at": "2026-10-20T17:03:34.180380+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e859046376d338852707",
@@ -1462,10 +1462,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407242+00:00",
+      "collected_at": "2026-10-20T17:03:34.180132+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "9ffd7ec6712d1643d757",
@@ -1478,10 +1478,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407042+00:00",
+      "collected_at": "2026-10-20T17:03:34.179906+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "ef07b070a916fe508a68",
@@ -1494,10 +1494,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407430+00:00",
+      "collected_at": "2026-10-20T17:03:34.180350+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "39fd6896942af8a9d077",
@@ -1510,10 +1510,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407019+00:00",
+      "collected_at": "2026-10-20T17:03:34.179882+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "bb37ca663412e1ce579f",
@@ -1526,10 +1526,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406991+00:00",
+      "collected_at": "2026-10-20T17:03:34.179854+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "060d7e1c522ebb666a4a",
@@ -1542,10 +1542,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407103+00:00",
+      "collected_at": "2026-10-20T17:03:34.179965+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "f6b7fea5573f606f5859",
@@ -1558,10 +1558,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407138+00:00",
+      "collected_at": "2026-10-20T17:03:34.180018+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e212888290a8668d2534",
@@ -1574,10 +1574,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407345+00:00",
+      "collected_at": "2026-10-20T17:03:34.180236+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "366412a8fba901fe1a5f",
@@ -1590,10 +1590,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406943+00:00",
+      "collected_at": "2026-10-20T17:03:34.179808+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "8e1bbdcbeb7b2d7cd229",
@@ -1606,10 +1606,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407061+00:00",
+      "collected_at": "2026-10-20T17:03:34.179924+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "78fa8ebad3603db772f1",
@@ -1622,10 +1622,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407209+00:00",
+      "collected_at": "2026-10-20T17:03:34.180093+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "a45c7e1dcc21c57ad198",
@@ -1638,10 +1638,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407300+00:00",
+      "collected_at": "2026-10-20T17:03:34.180191+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "b5bc16071084354cf180",
@@ -1654,10 +1654,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407532+00:00",
+      "collected_at": "2026-10-20T17:03:34.180414+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "91fecb08a15ec2dd42b3",
@@ -1670,10 +1670,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.406961+00:00",
+      "collected_at": "2026-10-20T17:03:34.179825+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e0c42272e09c094ff9a0",
@@ -1686,10 +1686,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407077+00:00",
+      "collected_at": "2026-10-20T17:03:34.179940+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "11bcf0654b7b2815a1b4",
@@ -1702,10 +1702,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407559+00:00",
+      "collected_at": "2026-10-20T17:03:34.180433+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "f245d1f166df26d36d76",
@@ -1718,10 +1718,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407787+00:00",
+      "collected_at": "2026-10-20T17:03:34.180654+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "da2eed5ac636275c09da",
@@ -1734,10 +1734,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407808+00:00",
+      "collected_at": "2026-10-20T17:03:34.180675+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "20c76f5d42f467139366",
@@ -1750,10 +1750,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407663+00:00",
+      "collected_at": "2026-10-20T17:03:34.180533+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "7edd9d014e7258b96732",
@@ -1766,10 +1766,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407636+00:00",
+      "collected_at": "2026-10-20T17:03:34.180506+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "e02884ad096b98f47a21",
@@ -1782,10 +1782,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407757+00:00",
+      "collected_at": "2026-10-20T17:03:34.180576+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "9e06149c54bda8726856",
@@ -1798,10 +1798,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407865+00:00",
+      "collected_at": "2026-10-20T17:03:34.180713+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "03d1a74b821e117c6801",
@@ -1814,10 +1814,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407950+00:00",
+      "collected_at": "2026-10-20T17:03:34.180794+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "65a2eca416cc346dab60",
@@ -1830,10 +1830,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407741+00:00",
+      "collected_at": "2026-10-20T17:03:34.180626+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "835b090de4dd605b35ea",
@@ -1846,10 +1846,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407691+00:00",
+      "collected_at": "2026-10-20T17:03:34.180560+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "ca3008fc6d8bdab7980a",
@@ -1862,10 +1862,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407831+00:00",
+      "collected_at": "2026-10-20T17:03:34.180697+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "7cbd8a0fc7d374b4c1b0",
@@ -1878,10 +1878,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407719+00:00",
+      "collected_at": "2026-10-20T17:03:34.180605+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "71e4e7779a88385bd415",
@@ -1894,10 +1894,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407898+00:00",
+      "collected_at": "2026-10-20T17:03:34.180744+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "804518afa5edb6a1345e",
@@ -1910,10 +1910,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407914+00:00",
+      "collected_at": "2026-10-20T17:03:34.180760+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "8a914ff9a170570c79e4",
@@ -1926,10 +1926,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407586+00:00",
+      "collected_at": "2026-10-20T17:03:34.180457+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     },
     {
       "id": "eac8091c07db2dd258b2",
@@ -1942,10 +1942,10 @@
       "language": "en",
       "topics": [],
       "legal_status": "non_verificato",
-      "collected_at": "2026-10-20T17:00:54.407603+00:00",
+      "collected_at": "2026-10-20T17:03:34.180473+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "last_seen_at": "2026-10-20T17:00:54.407955+00:00",
-      "seen_count": 1
+      "last_seen_at": "2026-10-20T17:03:34.180799+00:00",
+      "seen_count": 2
     }
   ]
 }
