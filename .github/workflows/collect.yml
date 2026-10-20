@@ -1,9 +1,15 @@
-name: Collect official feeds
+name: Raccolta fonti normative
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "config/sources.json"
+      - "src/**"
+      - ".github/workflows/collect.yml"
   workflow_dispatch:
   schedule:
-    # GitHub Actions cron uses UTC; adjust after validating desired local time.
+    # GitHub Actions cron usa UTC: lunedì-sabato alle 05:30 UTC.
     - cron: "30 5 * * 1-6"
 
 permissions:
@@ -15,19 +21,42 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
+
       - name: Install
         run: python -m pip install .
+
       - name: Collect configured feeds
         run: python -m radar_normativo collect --config config/sources.json --output data/latest.json
+
+      - name: Check source availability
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("data/latest.json").read_text(encoding="utf-8"))
+          for source in result["source_results"]:
+              status = "OK" if source["ok"] else "ERRORE"
+              print(f"{status}: {source['name']} — {source.get('items', 0)} elementi")
+              if not source["ok"]:
+                  print(f"  Dettaglio: {source.get('error', 'errore non specificato')}")
+          failed = [source for source in result["source_results"] if not source["ok"]]
+          print(f"Totale elementi raccolti: {result['item_count']}")
+          if failed:
+              raise SystemExit(f"{len(failed)} fonte/i non raggiungibile/i o non leggibile/i")
+          PY
+
       - name: Upload scan as artifact
-        uses: actions/upload-artifact@v4
+        if: always()
+        uses: actions/upload-artifact@v6
         with:
           name: radar-normativo-scan
           path: data/latest.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
