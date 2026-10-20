@@ -45,6 +45,7 @@ Non inserire mai token o credenziali nei file versionati. In GitHub vanno impost
 ```bash
 python -m radar_normativo collect
 python -m radar_normativo collect --config config/sources.json --output data/latest.json
+python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
 ```
 
 Il risultato è un JSON con gli elementi raccolti e metadati della scansione. La cartella `data/` è esclusa da Git: i runner di GitHub Actions sono effimeri, quindi la persistenza storica in produzione richiederà uno storage durevole dedicato.
@@ -62,7 +63,7 @@ Il risultato è un JSON con gli elementi raccolti e metadati della scansione. La
 - [x] Struttura iniziale, CLI e test automatici
 - [x] Raccolta generica RSS/Atom configurabile
 - [ ] Verifica e attivazione di feed ufficiali italiani ed europei (non attivi finché gli URL RSS non sono verificati)
-- [ ] Normalizzazione avanzata e archivio persistente
+- [x] Archivio storico versionato e rilevamento delle nuove pubblicazioni
 - [x] Prima classificazione tematica euristica (da validare con casi reali)\n- [ ] Priorità configurabili e classificazione avanzata
 - [ ] Bot Telegram e comandi
 - [ ] Monitoraggio delle modifiche e briefing quotidiano
