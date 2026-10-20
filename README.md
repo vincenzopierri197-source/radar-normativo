@@ -42,7 +42,7 @@ python -m radar_normativo archive --latest data/latest.json --archive data/archi
 python -m radar_normativo briefing --input data/new_items.json --output data/briefing.txt --limit 10
 ```
 
-Il workflow interrompe l'aggiornamento dell'archivio se una fonte non è leggibile; l'archivio rifiuta scansioni incomplete o prive dei risultati delle fonti. Il workflow GitHub Actions esegue la raccolta dal lunedì al sabato alle 05:30 UTC. Se trova aggiornamenti concorrenti sulla `main`, rilegge l'archivio più recente e riapplica la scansione, evitando di risolvere conflitti JSON tramite rebase.
+Il workflow interrompe l'aggiornamento dell'archivio se una fonte non è leggibile; l'archivio rifiuta scansioni incomplete o prive dei risultati delle fonti. Il workflow GitHub Actions esegue la raccolta ogni 6 ore, tutti i giorni (cron UTC). Se trova aggiornamenti concorrenti sulla `main`, rilegge l'archivio più recente e riapplica la scansione, evitando di risolvere conflitti JSON tramite rebase.
 
 ## Telegram (opzionale)
 
@@ -60,7 +60,7 @@ python -m radar_normativo telegram --input data/new_items.json --ledger data/tel
 
 Il registro `data/telegram_sent.json` impedisce di reinviare gli elementi già registrati. Non inserire mai token o credenziali nei file versionati: su GitHub configura i repository secrets `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`.
 
-Quando entrambi i secrets sono configurati, il workflow invia automaticamente su Telegram gli elementi nuovi individuati dalla scansione, anche durante l'esecuzione programmata dal lunedì al sabato alle 05:30 UTC. Se non vengono trovate nuove pubblicazioni, non viene inviato alcun avviso normativo. Le esecuzioni avviate manualmente con **Run workflow** inviano prima anche un messaggio di prova per verificare il collegamento; le esecuzioni programmate non inviano quel messaggio di prova.
+Quando entrambi i secrets sono configurati, il workflow invia automaticamente su Telegram gli elementi nuovi individuati dalla scansione, anche durante le esecuzioni programmate ogni 6 ore. Se non vengono trovate nuove pubblicazioni, non viene inviato alcun avviso normativo. Le esecuzioni avviate manualmente con **Run workflow** inviano prima anche un messaggio di prova per verificare il collegamento; le esecuzioni programmate non inviano quel messaggio di prova.
 
 ## Campi e limiti
 
