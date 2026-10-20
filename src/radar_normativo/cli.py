@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from radar_normativo.archive import update_archive
+from radar_normativo.briefing import render_briefing
 from radar_normativo.collector import collect_sources
 
 
@@ -29,6 +30,13 @@ def main() -> None:
     archive.add_argument("--archive", dest="archive_path", default="data/archive.json", help="archivio storico")
     archive.add_argument("--new-items", default="data/new_items.json", help="pubblicazioni nuove della scansione")
 
+    briefing = subparsers.add_parser(
+        "briefing", help="genera un briefing testuale pronto per revisione e Telegram"
+    )
+    briefing.add_argument("--input", default="data/new_items.json", help="JSON con una lista items o singoli elementi")
+    briefing.add_argument("--output", default="data/briefing.txt", help="file testuale generato")
+    briefing.add_argument("--limit", type=int, default=10, help="numero massimo di schede")
+
     args = parser.parse_args()
 
     if args.command == "collect":
@@ -50,6 +58,18 @@ def main() -> None:
             f"Archivio aggiornato: {result['archive_count']} elementi totali; "
             f"{result['new_item_count']} nuove pubblicazioni."
         )
+    elif args.command == "briefing":
+        payload = json.loads(Path(args.input).read_text(encoding="utf-8"))
+        if isinstance(payload, list):
+            items = payload
+        elif isinstance(payload, dict) and isinstance(payload.get("items"), list):
+            items = payload["items"]
+        else:
+            parser.error("Il JSON deve contenere una lista di elementi oppure una chiave 'items'")
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(render_briefing(items, limit=args.limit), encoding="utf-8")
+        print(f"Briefing generato: {len(items)} elementi disponibili; file: {output}")
 
 
 if __name__ == "__main__":
