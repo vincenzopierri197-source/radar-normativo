@@ -100,4 +100,4 @@ def test_archive_does_not_increment_seen_count_twice_on_same_day(tmp_path):
     saved = json.loads(archive.read_text(encoding="utf-8"))["items"][0]
     assert saved["seen_count"] == 1
     assert saved["last_seen_at"] == "2026-10-20T18:00:00+00:00"
-\n
+
