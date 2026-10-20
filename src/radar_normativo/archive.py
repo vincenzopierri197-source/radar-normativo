@@ -16,6 +16,21 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _utc_day(value: Any) -> str:
+    """Restituisce il giorno UTC di un timestamp ISO, anche se ha un offset diverso."""
+    timestamp = str(value or "").strip()
+    if not timestamp:
+        return ""
+    try:
+        parsed = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc).date().isoformat()
+    except ValueError:
+        # Per dati storici non ISO mantiene un fallback conservativo.
+        return timestamp[:10]
+
+
 def _canonical_url(value: Any) -> str:
     url = str(value or "").strip()
     parts = urlsplit(url)
@@ -97,8 +112,12 @@ def update_archive(
                 prior_count = 1
             # Il conteggio rappresenta i giorni UTC distinti in cui l'atto è stato visto,
             # non il numero di workflow/manual run ripetuti nella stessa giornata.
-            last_seen = str(previous.get("last_seen_at") or "")
-            seen_count = prior_count if last_seen[:10] == str(scan_time)[:10] else prior_count + 1
+            last_seen = previous.get("last_seen_at") or ""
+            seen_count = (
+                prior_count
+                if _utc_day(last_seen) == _utc_day(scan_time)
+                else prior_count + 1
+            )
             # Mantiene l'identificatore storico anche quando cambia la forma dell'URL.
             item["id"] = existing_id
             previous.update(item)

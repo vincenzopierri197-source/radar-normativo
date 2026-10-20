@@ -101,3 +101,22 @@ def test_archive_does_not_increment_seen_count_twice_on_same_day(tmp_path):
     assert saved["seen_count"] == 1
     assert saved["last_seen_at"] == "2026-10-20T18:00:00+00:00"
 
+
+
+def test_archive_observation_count_uses_utc_day_across_timezones(tmp_path):
+    latest = tmp_path / "latest.json"
+    archive = tmp_path / "archive.json"
+    new_items = tmp_path / "new_items.json"
+    item = {"id": "utc-day", "title": "Atto UTC", "url": "https://example.test/utc-day"}
+
+    # 23:30 in UTC-02 is 01:30 UTC del giorno successivo.
+    write_scan(latest, "2026-10-20T23:30:00-02:00", [item])
+    update_archive(latest, archive, new_items)
+
+    # È ancora lo stesso giorno UTC, anche se la data locale nel timestamp cambia.
+    write_scan(latest, "2026-10-21T01:00:00+00:00", [item])
+    update_archive(latest, archive, new_items)
+
+    saved = json.loads(archive.read_text(encoding="utf-8"))["items"][0]
+    assert saved["seen_count"] == 1
+    assert saved["last_seen_at"] == "2026-10-21T01:00:00+00:00"
