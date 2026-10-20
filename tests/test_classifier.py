@@ -12,5 +12,13 @@ def test_classifies_multiple_topics_from_summary():
     assert "imprese" in topics
 
 
+def test_classifies_english_eu_legal_titles():
+    topics = classify_topics(
+        "Commission Implementing Regulation on VAT and tax credit for enterprises"
+    )
+    assert "fisco" in topics
+    assert "imprese" in topics
+
+
 def test_unknown_topic_returns_empty_list():
     assert classify_topics("Avviso senza parole chiave specifiche") == []
