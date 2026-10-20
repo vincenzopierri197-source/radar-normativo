@@ -28,7 +28,10 @@ RULES: dict[str, tuple[str, ...]] = {
         "bilancio", "finanza", "banca", "bancario", "mercato finanziario",
         "debito pubblico", "manovra economica", "financial market", "financial markets",
         "banking", "bank", "banks", "capital market", "public debt", "budget",
-        "state aid", "competition",
+        "state aid", "competition", "buoni del tesoro", "titoli di stato",
+        "titoli del tesoro", "government bond", "government bonds", "treasury bond",
+        "treasury bonds", "securities", "assicurazione", "assicurazioni", "ivass",
+        "insurance", "insurer", "insurers",
     ),
     "giustizia_diritto_penale": (
         "codice penale", "reato", "reati", "procedura penale", "sanzione penale",
@@ -67,7 +70,7 @@ RULES: dict[str, tuple[str, ...]] = {
     "difesa_sicurezza": (
         "difesa", "forze armate", "forze di polizia", "sicurezza nazionale",
         "defence", "defense", "armed forces", "peace facility", "military",
-        "restrictive measures", "human rights",
+        "restrictive measures",
     ),
 }
 
