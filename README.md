@@ -8,7 +8,7 @@ Sistema indipendente per monitorare fonti normative italiane ed europee, classif
 
 - Raccolta RSS/Atom configurabile.
 - Normalizzazione URL e deduplicazione per identificatore e URL canonico.
-- Archivio storico con prima/ultima rilevazione e numero di osservazioni.
+- Archivio storico con prima/ultima rilevazione e conteggio dei giorni UTC distinti in cui ogni atto è stato osservato.
 - Classificazione euristica in italiano e inglese, utile anche per EUR-Lex.
 - Punteggio editoriale spiegabile che non premia semplicemente la presenza di una data o di un URL.
 - Briefing testuale e invio Telegram opzionale con registro anti-duplicati.
