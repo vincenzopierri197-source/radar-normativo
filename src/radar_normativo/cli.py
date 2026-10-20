@@ -7,6 +7,7 @@ from pathlib import Path
 
 from radar_normativo.archive import update_archive
 from radar_normativo.briefing import render_briefing
+from radar_normativo.bot import run_bot
 from radar_normativo.collector import collect_sources
 from radar_normativo.telegram import send_new_items
 
@@ -37,6 +38,12 @@ def main() -> None:
     telegram.add_argument("--ledger", default="data/telegram_sent.json", help="registro locale degli invii")
     telegram.add_argument("--dry-run", action="store_true", help="mostra i messaggi senza inviarli né registrarli")
 
+    bot = subparsers.add_parser("bot", help="avvia il bot Telegram interattivo (processo sempre attivo)")
+    bot.add_argument("--archive", dest="archive_path", default="data/archive.json", help="archivio storico")
+    bot.add_argument("--sources", dest="sources_path", default="config/sources.json", help="fonti configurate")
+    bot.add_argument("--state", dest="state_path", default="data/bot_state.json", help="stato persistente dei filtri")
+    bot.add_argument("--latest", dest="latest_path", default="data/latest.json", help="risultati dell'ultima scansione, se disponibili")
+
     args = parser.parse_args()
 
     if args.command == "collect":
@@ -65,6 +72,13 @@ def main() -> None:
         result = send_new_items(args.input, args.ledger, dry_run=args.dry_run)
         mode = "simulazione" if args.dry_run else "invio"
         print(f"Telegram ({mode}): {result['sent']} inviati; {result['pending']} in coda; {result['skipped']} già registrati.")
+    elif args.command == "bot":
+        run_bot(
+            archive_path=args.archive_path,
+            sources_path=args.sources_path,
+            state_path=args.state_path,
+            latest_path=args.latest_path,
+        )
 
 
 if __name__ == "__main__":
