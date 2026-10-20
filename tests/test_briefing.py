@@ -30,6 +30,21 @@ def test_briefing_orders_high_priority_and_includes_source_and_caveat():
     assert "Credito d'imposta & proroga" in result
     assert "Stato giuridico: NON VERIFICATO" in result
     assert "https://example.test/high" in result
+    assert "RIEPILOGO GIORNALIERO" in result
+
+
+def test_briefing_groups_sources_by_category():
+    result = render_briefing([
+        {"title": "Regolamento UE", "source_name": "EUR-Lex"},
+        {"title": "Legge italiana", "source_name": "Gazzetta Ufficiale — Serie Generale"},
+        {"title": "Decisione costituzionale", "source_name": "Gazzetta Ufficiale — Corte costituzionale"},
+        {"title": "Disegno di legge", "source_name": "Senato — Disegni di legge presentati"},
+    ], limit=10)
+
+    assert "🇮🇹 NORMATIVA ITALIANA" in result
+    assert "⚖️ GIURISPRUDENZA" in result
+    assert "🇪🇺 NORMATIVA EUROPEA" in result
+    assert "🏛 ATTIVITÀ PARLAMENTARE" in result
 
 
 def test_briefing_handles_empty_items_and_rejects_invalid_limit():
