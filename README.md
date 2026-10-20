@@ -31,7 +31,7 @@ pytest
 
 ## Configurazione
 
-Le fonti sono dichiarate in `config/sources.json`. Per ora il raccoglitore supporta feed RSS/Atom esplicitamente configurati. Aggiungere solo endpoint ufficiali verificati e testare ciascuna fonte prima di abilitarla in produzione.
+Le fonti sono dichiarate in `config/sources.json`. Il raccoglitore supporta feed RSS/Atom esplicitamente configurati. L'elenco è intenzionalmente vuoto finché non sono verificati gli URL diretti dei feed ufficiali; non inserire la pagina HTML di un sito al posto del feed. Dopo la verifica, testare ogni fonte prima di abilitarla in produzione. Gli argomenti vengono classificati con regole lessicali trasparenti: la classificazione è indicativa e non determina lo stato giuridico.
 
 Variabili d'ambiente opzionali per Telegram:
 
@@ -61,9 +61,9 @@ Il risultato è un JSON con gli elementi raccolti e metadati della scansione. La
 
 - [x] Struttura iniziale, CLI e test automatici
 - [x] Raccolta generica RSS/Atom configurabile
-- [ ] Verifica e attivazione di feed ufficiali italiani ed europei
+- [ ] Verifica e attivazione di feed ufficiali italiani ed europei (non attivi finché gli URL RSS non sono verificati)
 - [ ] Normalizzazione avanzata e archivio persistente
-- [ ] Classificazione tematica e priorità configurabili
+- [x] Prima classificazione tematica euristica (da validare con casi reali)\n- [ ] Priorità configurabili e classificazione avanzata
 - [ ] Bot Telegram e comandi
 - [ ] Monitoraggio delle modifiche e briefing quotidiano
 - [ ] Modulo AI opzionale con citazioni verificabili
