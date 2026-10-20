@@ -46,8 +46,6 @@ def main() -> None:
         output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         failed = sum(1 for source in result["source_results"] if not source["ok"])
         print(f"Scansione completata: {result['item_count']} elementi; {failed} fonti con errori; output: {output}")
-        if failed:
-            raise SystemExit(1)
     elif args.command == "archive":
         result = update_archive(args.latest, args.archive_path, args.new_items)
         print(f"Archivio aggiornato: {result['archive_count']} elementi totali; {result['new_item_count']} nuove pubblicazioni.")
