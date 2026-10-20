@@ -9,7 +9,8 @@ Sistema indipendente per monitorare fonti normative italiane ed europee, con pri
 - Raccogliere atti e aggiornamenti da fonti ufficiali configurate.
 - Normalizzare e deduplicare gli elementi raccolti.
 - Conservare metadati, data di rilevazione e URL della fonte.
-- Classificare per area tematica senza confondere classificazione automatica e stato giuridico.
+- Classificare per area tematica e stimare la rilevanza editoriale con regole trasparenti, senza confondere il punteggio con lo stato giuridico.
+- Esporre i motivi del punteggio e mantenere lo stato giuridico `non_verificato` finché non viene verificato su fonti ufficiali.
 - Inviare riepiloghi e avvisi Telegram, quando configurati.
 - Mantenere l'architettura pronta per un futuro modulo AI opzionale, senza richiedere API a pagamento nella prima fase.
 
@@ -48,7 +49,7 @@ python -m radar_normativo collect --config config/sources.json --output data/lat
 python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
 ```
 
-Il risultato è un JSON con gli elementi raccolti e metadati della scansione. La cartella `data/` è esclusa da Git: i runner di GitHub Actions sono effimeri, quindi la persistenza storica in produzione richiederà uno storage durevole dedicato.
+Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gli elementi includono `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. Il punteggio è una stima editoriale euristica e spiegabile, non una valutazione legale. La persistenza storica dipende dalla configurazione di versionamento e del workflow GitHub Actions.
 
 ## Principi di affidabilità
 
