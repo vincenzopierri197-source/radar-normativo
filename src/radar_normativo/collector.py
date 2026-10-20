@@ -10,6 +10,8 @@ from typing import Any
 
 import feedparser
 
+from radar_normativo.classifier import classify_topics
+
 
 def _first_text(entry: Any, *keys: str) -> str:
     for key in keys:
@@ -58,7 +60,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                     "published_at": _entry_date(entry),
                     "summary": _first_text(entry, "summary", "description"),
                     "language": source.get("language"),
-                    "topics": [],
+                    "topics": classify_topics(title, _first_text(entry, "summary", "description")),
                     "legal_status": "non_verificato",
                     "collected_at": datetime.now(timezone.utc).isoformat(),
                 }
