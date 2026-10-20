@@ -3,13 +3,28 @@ from __future__ import annotations
 
 import hashlib
 import json
+import posixpath
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _canonical_url(value: Any) -> str:
+    url = str(value or "").strip()
+    parts = urlsplit(url)
+    if parts.scheme.lower() not in {"http", "https"} or not parts.netloc:
+        return url
+    path = posixpath.normpath(parts.path or "/")
+    if parts.path.endswith("/") and not path.endswith("/"):
+        path += "/"
+    if parts.path.startswith("/") and not path.startswith("/"):
+        path = "/" + path
+    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, parts.fragment))
 
 
 def update_archive(
@@ -17,11 +32,13 @@ def update_archive(
     archive_path: str | Path,
     new_items_path: str | Path,
 ) -> dict[str, Any]:
-    """Unisce una scansione completa all'archivio, deduplicando per ID/URL."""
+    """Unisce una scansione completa all'archivio, deduplicando per ID e URL canonico."""
     latest_file = Path(latest_path)
     archive_file = Path(archive_path)
     new_file = Path(new_items_path)
     latest = json.loads(latest_file.read_text(encoding="utf-8"))
+    if not isinstance(latest, dict) or not isinstance(latest.get("items"), list):
+        raise ValueError("Scansione non valida: atteso un oggetto JSON con 'items'")
 
     failures = [
         source for source in latest.get("source_results", [])
@@ -34,32 +51,60 @@ def update_archive(
     scan_time = latest.get("generated_at") or _now()
     if archive_file.exists():
         stored = json.loads(archive_file.read_text(encoding="utf-8"))
-        existing_items = stored.get("items", [])
+        existing_items = stored.get("items", []) if isinstance(stored, dict) else []
     else:
         existing_items = []
 
     items_by_id: dict[str, dict[str, Any]] = {}
-    for item in existing_items:
+    id_by_url: dict[str, str] = {}
+    for original in existing_items:
+        item = dict(original)
         item_id = str(item.get("id") or hashlib.sha256(str(item.get("url", "")).encode()).hexdigest()[:20])
-        items_by_id[item_id] = dict(item)
+        canonical_url = _canonical_url(item.get("url"))
+        item["url"] = canonical_url or item.get("url", "")
+        if canonical_url and canonical_url in id_by_url:
+            # Non moltiplicare record che puntano allo stesso URL canonico.
+            kept_id = id_by_url[canonical_url]
+            kept = items_by_id[kept_id]
+            if len(str(item.get("summary") or "")) > len(str(kept.get("summary") or "")):
+                kept["summary"] = item["summary"]
+            continue
+        item["id"] = item_id
+        items_by_id[item_id] = item
+        if canonical_url:
+            id_by_url[canonical_url] = item_id
 
     newly_discovered: list[dict[str, Any]] = []
     for current in latest.get("items", []):
         item = dict(current)
-        item_id = str(item.get("id") or hashlib.sha256(str(item.get("url", "")).encode()).hexdigest()[:20])
-        if item_id in items_by_id:
-            previous = items_by_id[item_id]
+        canonical_url = _canonical_url(item.get("url"))
+        if canonical_url:
+            item["url"] = canonical_url
+        candidate_id = str(item.get("id") or hashlib.sha256(canonical_url.encode()).hexdigest()[:20])
+        existing_id = candidate_id if candidate_id in items_by_id else id_by_url.get(canonical_url)
+        if existing_id is not None:
+            previous = items_by_id[existing_id]
             first_seen = previous.get("first_seen_at", scan_time)
-            seen_count = int(previous.get("seen_count", 1)) + 1
+            try:
+                seen_count = int(previous.get("seen_count", 1)) + 1
+            except (TypeError, ValueError):
+                seen_count = 2
+            # Mantiene l'identificatore storico anche quando cambia la forma dell'URL.
+            item["id"] = existing_id
             previous.update(item)
             previous["first_seen_at"] = first_seen
             previous["last_seen_at"] = scan_time
             previous["seen_count"] = seen_count
+            if canonical_url:
+                id_by_url[canonical_url] = existing_id
         else:
+            item["id"] = candidate_id
             item["first_seen_at"] = scan_time
             item["last_seen_at"] = scan_time
             item["seen_count"] = 1
-            items_by_id[item_id] = item
+            items_by_id[candidate_id] = item
+            if canonical_url:
+                id_by_url[canonical_url] = candidate_id
             newly_discovered.append(dict(item))
 
     all_items = sorted(
