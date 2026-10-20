@@ -85,7 +85,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
             count = 0
             for entry in feed.entries:
                 link = _canonical_url(_first_text(entry, "link"))
-                title = _first_text(entry, "title")
+                title = _entry_title(entry)
                 if not link or not title:
                     continue
                 item_id = hashlib.sha256(link.encode("utf-8")).hexdigest()[:20]
