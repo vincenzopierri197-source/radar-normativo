@@ -7,7 +7,8 @@ __pycache__/
 .env
 .env.*
 !.env.example
-data/
+data/*
+!data/archive.json
 dist/
 build/
 *.egg-info/
