@@ -47,9 +47,10 @@ Non inserire mai token o credenziali nei file versionati. In GitHub vanno impost
 python -m radar_normativo collect
 python -m radar_normativo collect --config config/sources.json --output data/latest.json
 python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
+python -m radar_normativo briefing --input data/new_items.json --output data/briefing.txt --limit 10
 ```
 
-Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gli elementi includono `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. Il punteggio è una stima editoriale euristica e spiegabile, non una valutazione legale. La persistenza storica dipende dalla configurazione di versionamento e del workflow GitHub Actions.
+Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gli elementi includono `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. Il punteggio è una stima editoriale euristica e spiegabile, non una valutazione legale. Il comando `briefing` produce un testo semplice ordinato per priorità, con materia, data, fonte, sintesi disponibile, URL e avvertenza sullo stato giuridico. Il briefing è preparatorio: non invia ancora messaggi a Telegram. La persistenza storica dipende dalla configurazione di versionamento e del workflow GitHub Actions.
 
 ## Principi di affidabilità
 
@@ -68,6 +69,7 @@ Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gl
 - [x] Prima classificazione tematica euristica (da validare con casi reali)
 - [x] Punteggio di rilevanza editoriale spiegabile e priorità bassa/media/alta
 - [ ] Priorità configurabili e classificazione avanzata
-- [ ] Bot Telegram e comandi
+- [x] Generazione di briefing testuali pronti per revisione e Telegram
+- [ ] Invio Telegram e comandi
 - [ ] Monitoraggio delle modifiche e briefing quotidiano
 - [ ] Modulo AI opzionale con citazioni verificabili
