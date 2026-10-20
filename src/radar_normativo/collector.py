@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import posixpath
+import re
 from calendar import timegm
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,6 +37,14 @@ def _canonical_url(value: str) -> str:
     if parts.path.startswith("/") and not path.startswith("/"):
         path = "/" + path
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, parts.fragment))
+
+
+def _entry_title(entry: Any) -> str:
+    """Rimuove il prefisso CELEX ridondante quando il feed include il titolo."""
+    title = _entry_title(entry)
+    if title.upper().startswith("CELEX:") and title.count(":") >= 2:
+        return re.sub(r"^CELEX:[^:]+:\s*", "", title, count=1, flags=re.IGNORECASE)
+    return title
 
 
 def _entry_summary(entry: Any) -> str:
