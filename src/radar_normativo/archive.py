@@ -7,10 +7,10 @@ import posixpath
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 from radar_normativo.analysis import analyze_item
 from radar_normativo.classifier import classify_topics
-from urllib.parse import urlsplit, urlunsplit
 
 
 def _now() -> str:
@@ -28,7 +28,6 @@ def _utc_day(value: Any) -> str:
             parsed = parsed.replace(tzinfo=timezone.utc)
         return parsed.astimezone(timezone.utc).date().isoformat()
     except ValueError:
-        # Per dati storici non ISO mantiene un fallback conservativo.
         return timestamp[:10]
 
 
@@ -63,7 +62,8 @@ def update_archive(
         raise ValueError("Archivio non aggiornato: la scansione non contiene risultati delle fonti")
     failures = [
         source for source in source_results
-        if not isinstance(source, dict) or not source.get("ok", False)
+        if not isinstance(source, dict)
+        or (not source.get("ok", False) and source.get("required", True))
     ]
     if failures:
         names = ", ".join(str(source.get("name", "fonte sconosciuta")) for source in failures)
@@ -84,7 +84,6 @@ def update_archive(
         canonical_url = _canonical_url(item.get("url"))
         item["url"] = canonical_url or item.get("url", "")
         if canonical_url and canonical_url in id_by_url:
-            # Non moltiplicare record che puntano allo stesso URL canonico.
             kept_id = id_by_url[canonical_url]
             kept = items_by_id[kept_id]
             if len(str(item.get("summary") or "")) > len(str(kept.get("summary") or "")):
@@ -111,18 +110,10 @@ def update_archive(
                 prior_count = max(1, int(previous.get("seen_count", 1)))
             except (TypeError, ValueError):
                 prior_count = 1
-            # Il conteggio rappresenta i giorni UTC distinti in cui l'atto è stato visto,
-            # non il numero di workflow/manual run ripetuti nella stessa giornata.
             last_seen = previous.get("last_seen_at") or ""
-            seen_count = (
-                prior_count
-                if _utc_day(last_seen) == _utc_day(scan_time)
-                else prior_count + 1
-            )
-            # Mantiene l'identificatore storico anche quando cambia la forma dell'URL.
+            seen_count = prior_count if _utc_day(last_seen) == _utc_day(scan_time) else prior_count + 1
             item["id"] = existing_id
             previous.update(item)
-            # Un feed che omette una sintesi non deve cancellare una sintesi già disponibile.
             if not str(item.get("summary") or "").strip() and previous_summary:
                 previous["summary"] = previous_summary
             previous.update(analyze_item(previous))
@@ -142,15 +133,10 @@ def update_archive(
                 id_by_url[canonical_url] = candidate_id
             newly_discovered.append(dict(item))
 
-    # Ricalcola tutte le schede, non solo quelle presenti nel feed odierno:
-    # così le nuove regole raggiungono anche gli atti storici non ripubblicati.
     refreshed_items = []
     for stored_item in items_by_id.values():
         item = dict(stored_item)
-        item["topics"] = classify_topics(
-            str(item.get("title") or ""),
-            str(item.get("summary") or ""),
-        )
+        item["topics"] = classify_topics(str(item.get("title") or ""), str(item.get("summary") or ""))
         refreshed_items.append(analyze_item(item))
 
     all_items = sorted(
