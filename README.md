@@ -33,7 +33,7 @@ pytest
 
 ## Fonti
 
-Le fonti sono configurate in `config/sources.json`. Le fonti attuali sono la Gazzetta Ufficiale — Serie Generale, la Gazzetta Ufficiale — Corte costituzionale e EUR-Lex — serie L. La raggiungibilità del feed viene controllata ad ogni scansione; la presenza nel feed non certifica che una norma sia vigente o applicabile.
+Le fonti sono configurate in `config/sources.json` e organizzate in tre filoni: normativa italiana (Gazzetta Ufficiale), normativa europea (EUR-Lex) e attività parlamentare (Senato: disegni di legge e atti del Governo). La Gazzetta Ufficiale — Corte costituzionale resta inclusa nel filone giurisprudenziale. Ogni fonte indica `required`: se una fonte opzionale non è raggiungibile, il workflow registra l’errore ma continua la raccolta; se fallisce una fonte obbligatoria, la scansione non viene archiviata. La presenza nel feed non certifica che una norma sia vigente o applicabile.
 
 ## Flusso principale
 
