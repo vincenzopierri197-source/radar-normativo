@@ -16,6 +16,11 @@ on:
 permissions:
   contents: write
 
+# Evita che due raccolte aggiornino l'archivio contemporaneamente.
+concurrency:
+  group: radar-normativo-collect-main
+  cancel-in-progress: false
+
 jobs:
   collect:
     runs-on: ubuntu-24.04
@@ -65,7 +70,10 @@ jobs:
             echo "Archivio invariato: nessun commit necessario."
           else
             git commit -m "data: update regulatory archive"
-            git push
+            # Integra eventuali commit arrivati su main dopo il checkout.
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
 
       - name: Upload scan and newly discovered items
