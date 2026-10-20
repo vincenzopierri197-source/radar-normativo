@@ -7,6 +7,8 @@ import posixpath
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from radar_normativo.analysis import analyze_item
 from urllib.parse import urlsplit, urlunsplit
 
 
@@ -85,6 +87,7 @@ def update_archive(
         if existing_id is not None:
             previous = items_by_id[existing_id]
             first_seen = previous.get("first_seen_at", scan_time)
+            previous_summary = str(previous.get("summary") or "")
             try:
                 seen_count = int(previous.get("seen_count", 1)) + 1
             except (TypeError, ValueError):
@@ -92,6 +95,10 @@ def update_archive(
             # Mantiene l'identificatore storico anche quando cambia la forma dell'URL.
             item["id"] = existing_id
             previous.update(item)
+            # Un feed che omette una sintesi non deve cancellare una sintesi già disponibile.
+            if not str(item.get("summary") or "").strip() and previous_summary:
+                previous["summary"] = previous_summary
+            previous.update(analyze_item(previous))
             previous["first_seen_at"] = first_seen
             previous["last_seen_at"] = scan_time
             previous["seen_count"] = seen_count
