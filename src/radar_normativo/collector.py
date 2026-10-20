@@ -79,7 +79,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
         name = str(source.get("name", "Fonte senza nome"))
         url = str(source.get("url", "")).strip()
         if not url:
-            source_results.append({"name": name, "ok": False, "error": "URL mancante"})
+            source_results.append({"name": name, "ok": False, "required": source.get("required", True), "error": "URL mancante"})
             continue
         try:
             feed = feedparser.parse(url)
@@ -109,9 +109,9 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 }
                 items[item_id] = analyze_item(item)
                 count += 1
-            source_results.append({"name": name, "ok": True, "items": count})
+            source_results.append({"name": name, "ok": True, "required": source.get("required", True), "items": count})
         except Exception as exc:
-            source_results.append({"name": name, "ok": False, "error": str(exc)[:300]})
+            source_results.append({"name": name, "ok": False, "required": source.get("required", True), "error": str(exc)[:300]})
 
     return {
         "schema_version": 1,
