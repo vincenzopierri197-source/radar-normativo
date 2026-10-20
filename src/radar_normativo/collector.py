@@ -1,12 +1,14 @@
-"""Raccolta generica RSS/Atom; non determina lo stato giuridico degli atti."""
+"""Raccolta RSS/Atom; non determina lo stato giuridico degli atti."""
 from __future__ import annotations
 
 import hashlib
 import json
+import posixpath
 from calendar import timegm
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 import feedparser
 
@@ -19,6 +21,32 @@ def _first_text(entry: Any, *keys: str) -> str:
         value = entry.get(key)
         if value:
             return str(value).strip()
+    return ""
+
+
+def _canonical_url(value: str) -> str:
+    """Normalizza URL senza cambiare query o identificatori dell'atto."""
+    value = value.strip()
+    parts = urlsplit(value)
+    if parts.scheme.lower() not in {"http", "https"} or not parts.netloc:
+        return value
+    path = posixpath.normpath(parts.path or "/")
+    if parts.path.endswith("/") and not path.endswith("/"):
+        path += "/"
+    if parts.path.startswith("/") and not path.startswith("/"):
+        path = "/" + path
+    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, parts.fragment))
+
+
+def _entry_summary(entry: Any) -> str:
+    summary = _first_text(entry, "summary", "description")
+    if summary:
+        return summary
+    content = entry.get("content")
+    if isinstance(content, list):
+        for part in content:
+            if isinstance(part, dict) and part.get("value"):
+                return str(part["value"]).strip()
     return ""
 
 
@@ -47,12 +75,12 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 raise ValueError(str(getattr(feed, "bozo_exception", "feed non leggibile")))
             count = 0
             for entry in feed.entries:
-                link = _first_text(entry, "link")
+                link = _canonical_url(_first_text(entry, "link"))
                 title = _first_text(entry, "title")
                 if not link or not title:
                     continue
-                item_id = hashlib.sha256(link.strip().encode("utf-8")).hexdigest()[:20]
-                summary = _first_text(entry, "summary", "description")
+                item_id = hashlib.sha256(link.encode("utf-8")).hexdigest()[:20]
+                summary = _entry_summary(entry)
                 item = {
                     "id": item_id,
                     "title": title,
