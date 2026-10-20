@@ -42,6 +42,36 @@ def test_archive_records_new_items_and_preserves_first_seen(tmp_path):
     assert new_scan["items"] == []
 
 
+def test_archive_matches_normalized_url_when_legacy_id_changes(tmp_path):
+    latest = tmp_path / "latest.json"
+    archive = tmp_path / "archive.json"
+    new_items = tmp_path / "new_items.json"
+    old_item = {
+        "id": "old-id",
+        "title": "Atto UE",
+        "url": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:32026R1234",
+        "first_seen_at": "2026-10-01T00:00:00+00:00",
+        "last_seen_at": "2026-10-01T00:00:00+00:00",
+        "seen_count": 3,
+    }
+    archive.write_text(json.dumps({"items": [old_item], "item_count": 1}), encoding="utf-8")
+    new_item = {
+        "id": "new-id",
+        "title": "Atto UE aggiornato",
+        "url": "https://eur-lex.europa.eu/legal-content/AUTO/?uri=CELEX:32026R1234",
+    }
+
+    write_scan(latest, "2026-10-21T06:00:00+00:00", [new_item])
+    result = update_archive(latest, archive, new_items)
+    saved = json.loads(archive.read_text(encoding="utf-8"))
+
+    assert result["archive_count"] == 1
+    assert result["new_item_count"] == 0
+    assert saved["items"][0]["id"] == "old-id"
+    assert saved["items"][0]["seen_count"] == 4
+    assert saved["items"][0]["first_seen_at"] == "2026-10-01T00:00:00+00:00"
+
+
 def test_archive_refuses_incomplete_scan(tmp_path):
     latest = tmp_path / "latest.json"
     write_scan(
