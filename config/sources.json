@@ -1,5 +1,16 @@
 {
   "version": 1,
-  "description": "Inserire qui soltanto feed RSS/Atom ufficiali verificati e testati.",
-  "sources": []
+  "description": "Feed RSS ufficiali iniziali. Verificare periodicamente disponibilità e contenuti; la presenza nel feed non certifica lo stato giuridico dell'atto.",
+  "sources": [
+    {
+      "name": "Gazzetta Ufficiale — Serie Generale",
+      "url": "https://www.gazzettaufficiale.it/rss/SG",
+      "language": "it"
+    },
+    {
+      "name": "EUR-Lex — Atti della Gazzetta ufficiale, serie L",
+      "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=222",
+      "language": "en"
+    }
+  ]
 }
