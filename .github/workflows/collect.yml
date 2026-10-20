@@ -58,7 +58,10 @@ jobs:
               print(f"{status}: {source['name']} — {source.get('items', 0)} elementi")
               if not source["ok"]:
                   print(f"  Dettaglio: {source.get('error', 'errore non specificato')}")
-          failed = [source for source in result["source_results"] if not source["ok"]]
+          failed = [source for source in result["source_results"] if not source["ok"] and source.get("required", True)]
+          optional_failed = [source for source in result["source_results"] if not source["ok"] and not source.get("required", True)]
+          if optional_failed:
+              print(f"Fonti opzionali non disponibili (la raccolta continua): {len(optional_failed)}")
           print(f"Totale elementi raccolti: {result['item_count']}")
           if failed:
               raise SystemExit(f"{len(failed)} fonte/i non raggiungibile/i o non leggibile/i")
