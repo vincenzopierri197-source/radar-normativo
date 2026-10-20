@@ -85,3 +85,19 @@ def test_archive_refuses_incomplete_scan(tmp_path):
         update_archive(latest, tmp_path / "archive.json", tmp_path / "new_items.json")
 
     assert not (tmp_path / "archive.json").exists()
+
+def test_archive_does_not_increment_seen_count_twice_on_same_day(tmp_path):
+    latest = tmp_path / "latest.json"
+    archive = tmp_path / "archive.json"
+    new_items = tmp_path / "new_items.json"
+    item = {"id": "daily", "title": "Atto giornaliero", "url": "https://example.test/daily"}
+
+    write_scan(latest, "2026-10-20T06:00:00+00:00", [item])
+    update_archive(latest, archive, new_items)
+    write_scan(latest, "2026-10-20T18:00:00+00:00", [item])
+    update_archive(latest, archive, new_items)
+
+    saved = json.loads(archive.read_text(encoding="utf-8"))["items"][0]
+    assert saved["seen_count"] == 1
+    assert saved["last_seen_at"] == "2026-10-20T18:00:00+00:00"
+\n
