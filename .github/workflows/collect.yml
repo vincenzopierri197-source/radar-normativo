@@ -1,19 +1,13 @@
-name: Raccolta fonti normative
-
+name: Radar normativo e finanziario
 on:
   workflow_dispatch:
   schedule:
-    # GitHub Actions usa UTC. Due controlli coprono ora legale/solare italiana;
-    # il job prosegue solo quando in Europe/Rome sono le 08:00.
     - cron: "0 6,7 * * *"
-
 permissions:
   contents: write
-
 concurrency:
   group: radar-normativo-collect-main
   cancel-in-progress: false
-
 jobs:
   collect:
     runs-on: ubuntu-24.04
@@ -22,116 +16,58 @@ jobs:
         id: window
         shell: bash
         run: |
-          if [[ "${GITHUB_EVENT_NAME}" != "schedule" || "$(TZ=Europe/Rome date +%H)" == "08" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "Avvio raccolta."
-          else
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "Fuori dalla finestra delle 08:00 italiane: salto questa esecuzione."
-          fi
-
+          if [[ "${GITHUB_EVENT_NAME}" != "schedule" || "$(TZ=Europe/Rome date +%H)" == "08" ]]; then echo "run=true" >> "$GITHUB_OUTPUT"; else echo "run=false" >> "$GITHUB_OUTPUT"; fi
       - name: Checkout
         if: steps.window.outputs.run == 'true'
         uses: actions/checkout@v6
-
       - name: Set up Python
         if: steps.window.outputs.run == 'true'
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
-
-      - name: Install
+      - name: Install and test
         if: steps.window.outputs.run == 'true'
-        run: python -m pip install -e .
-
-      - name: Collect configured feeds
+        run: python -m pip install -e ".[dev]" && pytest
+      - name: Collect regulatory feeds
         if: steps.window.outputs.run == 'true'
         run: python -m radar_normativo collect --config config/sources.json --output data/latest.json
-
-      - name: Check source availability
+      - name: Check required sources
         if: steps.window.outputs.run == 'true'
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-
-          result = json.loads(Path("data/latest.json").read_text(encoding="utf-8"))
-          for source in result["source_results"]:
-              status = "OK" if source["ok"] else "ERRORE"
-              print(f"{status}: {source['name']} — {source.get('items', 0)} elementi")
-              if not source["ok"]:
-                  print(f"  Dettaglio: {source.get('error', 'errore non specificato')}")
-          failed = [source for source in result["source_results"] if not source["ok"] and source.get("required", True)]
-          optional_failed = [source for source in result["source_results"] if not source["ok"] and not source.get("required", True)]
-          if optional_failed:
-              print(f"Fonti opzionali non disponibili (la raccolta continua): {len(optional_failed)}")
-          print(f"Totale elementi raccolti: {result['item_count']}")
-          if failed:
-              raise SystemExit(f"{len(failed)} fonte/i non raggiungibile/i o non leggibile/i")
+          r=json.loads(Path("data/latest.json").read_text())
+          for s in r["source_results"]: print(f"{'OK' if s['ok'] else 'ERRORE'}: {s['name']} — {s.get('items',0)}")
+          failed=[s for s in r["source_results"] if not s["ok"] and s.get("required",True)]
+          if failed: raise SystemExit(f"{len(failed)} fonti obbligatorie non raggiungibili")
           PY
-
-      - name: Update historical archive
+      - name: Update archive
         if: steps.window.outputs.run == 'true'
         run: python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
-
-      - name: Persist archive without rebase conflicts
+      - name: Persist archive
         if: steps.window.outputs.run == 'true'
-        shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for attempt in 1 2 3 4 5; do
-            git fetch origin main
-            git reset --hard origin/main
-            python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
-            git add data/archive.json
-            if git diff --cached --quiet; then
-              echo "Archivio invariato: nessun commit necessario."
-              exit 0
-            fi
-            git commit -m "data: update regulatory archive"
-            if git push origin HEAD:main; then
-              echo "Archivio salvato correttamente."
-              exit 0
-            fi
-            echo "Push concorrente al tentativo $attempt; riprovo sull'ultima main."
-            sleep $((attempt * 2))
-          done
-          echo "Impossibile salvare l'archivio dopo 5 tentativi." >&2
-          exit 1
-
-      - name: Send one daily Telegram briefing
+          git add data/archive.json
+          if ! git diff --cached --quiet; then git commit -m "data: update regulatory archive"; git push origin HEAD:main; fi
+      - name: Send combined daily Telegram briefing
         if: steps.window.outputs.run == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        shell: bash
         run: |
           set -euo pipefail
-          if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
-            echo "Telegram non configurato: salto l'invio."
-            exit 0
-          fi
+          if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then echo "Telegram non configurato: invio saltato."; exit 0; fi
           git fetch origin main
-          if git cat-file -e origin/main:data/telegram_sent.json 2>/dev/null; then
-            git show origin/main:data/telegram_sent.json > data/telegram_sent.json
-          else
-            printf '{ "schema_version": 1, "sent_ids": {} }\n' > data/telegram_sent.json
-          fi
-          python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json
+          if git cat-file -e origin/main:data/telegram_sent.json 2>/dev/null; then git show origin/main:data/telegram_sent.json > data/telegram_sent.json; else printf '{ "schema_version": 1, "sent_ids": {} }\n' > data/telegram_sent.json; fi
+          python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json --finance
           git add -f data/telegram_sent.json
-          if git diff --cached --quiet; then
-            echo "Nessuna nuova notizia da registrare."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "data: update Telegram delivery ledger"
-          git push origin HEAD:main
-
-      - name: Upload scan and newly discovered items
+          if ! git diff --cached --quiet; then git commit -m "data: update Telegram delivery ledger"; git push origin HEAD:main; fi
+      - name: Upload scan artifacts
         if: always() && steps.window.outputs.run == 'true'
         uses: actions/upload-artifact@v6
         with:
