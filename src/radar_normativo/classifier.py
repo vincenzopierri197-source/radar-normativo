@@ -52,14 +52,19 @@ RULES: dict[str, tuple[str, ...]] = {
     "agricoltura_alimentazione": (
         "agricoltura", "agricolo", "agricoli", "alimentare", "alimenti", "mangimi",
         "pesca", "prodotti agricoli", "agriculture", "agricultural", "food", "feed",
-        "fisheries", "fishery", "food additives", "geographical indication",
+        "fisheries", "fishery", "food additives", "food additive", "geographical indication",
         "protected geographical indication", "lupin", "nitrate and nitrite",
+        "poultry", "fresh meat", "sheep pox", "goat pox", "seed potatoes",
+        "fishing effort", "maximum residue levels", "pesticide", "pesticides",
+        "plant protection product", "plant protection products", "curdlan",
+        "difenoconazole", "acequinocyl", "deltamethrin",
     ),
     "trasporti_infrastrutture": (
         "trasporto", "trasporti", "infrastruttura", "infrastrutture", "strada", "stradale",
         "veicolo", "veicoli", "sicurezza stradale", "transport", "transportation",
         "infrastructure", "road safety", "road transport", "vehicle", "vehicles",
-        "aviation", "maritime transport",
+        "aviation", "maritime transport", "mobile driving licence",
+        "mobile driving licences", "driving licence", "driving licences",
     ),
     "digitale_cyber": (
         "digitale", "cybersecurity", "cyber security", "cybercrime", "cybercriminalità",
@@ -77,7 +82,8 @@ RULES: dict[str, tuple[str, ...]] = {
 
 def classify_topics(title: str, summary: str = "") -> list[str]:
     """Restituisce tutte le categorie con corrispondenze lessicali nel testo."""
-    text = f" {title} {summary} ".casefold()
+    # Uniforma spazi, tab, newline e spazi Unicode prima del matching lessicale.
+    text = " ".join(f"{title} {summary}".casefold().split())
     return [
         topic
         for topic, keywords in RULES.items()

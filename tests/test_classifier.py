@@ -46,3 +46,30 @@ def test_classifies_treasury_bonds_and_insurance():
     assert "economia_finanza" in classify_topics(
         "IVASS — modifiche al registro delle imprese assicurative"
     )
+
+
+
+def test_normalizes_whitespace_before_matching_keywords():
+    topics = classify_topics(
+        "Riapertura delle operazioni di sottoscrizione dei buoni del Tesoro",
+        "poliennali"
+    )
+    assert "economia_finanza" in topics
+    assert "economia_finanza" in classify_topics(
+        "Titolo generico", "Riapertura dei  buoni  del Tesoro\npoliennali"
+    )
+
+
+def test_classifies_common_eu_agriculture_and_transport_terms():
+    for title in (
+        "Commission Regulation on maximum residue levels for pesticides",
+        "Commission Regulation on poultry and fresh meat",
+        "Commission Implementing Regulation on seed potatoes",
+        "Commission Regulation on sheep pox and goat pox",
+        "Commission Regulation on fishing effort",
+        "Commission Regulation on food additives and curdlan",
+    ):
+        assert "agricoltura_alimentazione" in classify_topics(title), title
+    assert "trasporti_infrastrutture" in classify_topics(
+        "Regulation on mobile driving licences"
+    )

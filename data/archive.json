@@ -396,7 +396,9 @@
       "published_at": "2026-10-19T16:50:06+00:00",
       "summary": "Riapertura delle operazioni di sottoscrizione dei  buoni  del  Tesoro\npoliennali  3,00%,  con  godimento  15  giugno  2026  e  scadenza  15\nsettembre 2029, settima e ottava tranche. (26A05460)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.482999+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -404,9 +406,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 7,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: scadenza (+7)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -420,7 +423,9 @@
       "published_at": "2026-10-19T16:50:06+00:00",
       "summary": "Riapertura delle operazioni di sottoscrizione dei  buoni  del  Tesoro\npoliennali  3,35%,  con  godimento  15  luglio  2026  e  scadenza  15\nsettembre 2033, quinta e sesta tranche. (26A05461)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483054+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -428,9 +433,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 7,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: scadenza (+7)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -444,7 +450,9 @@
       "published_at": "2026-10-19T16:50:06+00:00",
       "summary": "Riapertura delle operazioni di sottoscrizione dei  buoni  del  Tesoro\npoliennali 3,95%, con  godimento  10  febbraio  2026  e  scadenza  1°\nottobre 2041, sesta e settima tranche. (26A05462)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.483110+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -452,9 +460,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 7,
+      "relevance_score": 26,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: scadenza (+7)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -918,7 +927,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382151+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -926,9 +937,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 17,
-      "priority": "bassa",
+      "relevance_score": 35,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending, implementing (+17)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -969,7 +981,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381853+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -977,9 +991,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1277,7 +1292,9 @@
       "published_at": "2026-10-15T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382506+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1285,9 +1302,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1301,7 +1319,9 @@
       "published_at": "2026-10-15T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383142+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1309,9 +1329,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1398,7 +1419,9 @@
       "published_at": "2026-10-15T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382647+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1406,9 +1429,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: decision, amending, implementing (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1504,7 +1528,9 @@
       "published_at": "2026-10-15T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.382573+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1512,9 +1538,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 16,
-      "priority": "bassa",
+      "relevance_score": 34,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: directive, decision, implementing (+16)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2133,7 +2160,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "trasporti_infrastrutture"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385778+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2141,9 +2170,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 23,
-      "priority": "bassa",
+      "relevance_score": 40,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: trasporti_infrastrutture (+17)",
         "indicatori testuali: regulation, directive, provision, implementing (+23)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2635,7 +2665,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386424+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2643,9 +2675,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2659,7 +2692,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386474+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2667,9 +2702,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 30,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2773,7 +2809,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386699+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2781,9 +2819,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 17,
-      "priority": "bassa",
+      "relevance_score": 35,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: directive, amending, implementing (+17)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
