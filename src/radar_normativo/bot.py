@@ -16,6 +16,8 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
+from radar_normativo.finance import render_market_briefing
+
 ROME = ZoneInfo("Europe/Rome")
 HELP = """Comandi Radar Normativo:
 /start — avvia il bot
@@ -25,6 +27,7 @@ HELP = """Comandi Radar Normativo:
 /fonti — fonti configurate
 /filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
 /stato — stato dell'archivio e delle fonti
+/mercati — quotazioni e valutazione dei nove strumenti finanziari
 /aiuto — mostra questo elenco
 
 Nota: le schede sono rilevazioni automatiche, non certificazioni di vigenza."""
@@ -126,6 +129,8 @@ def handle_command(
 
     if command == "/start":
         return "Radar Normativo è pronto. Usa /aiuto per vedere i comandi."
+    if command == "/mercati":
+        return render_market_briefing()
     if command in {"/aiuto", "/help"}:
         return HELP
     if command == "/filtri":
@@ -232,6 +237,7 @@ def run_bot(
         {"command": "fonti", "description": "Elenca le fonti monitorate"},
         {"command": "filtri", "description": "Configura gli argomenti d'interesse"},
         {"command": "stato", "description": "Mostra lo stato del sistema"},
+        {"command": "mercati", "description": "Quotazioni e valutazione dei mercati"},
         {"command": "aiuto", "description": "Visualizza i comandi disponibili"},
     ])})
     offset = 0
