@@ -73,3 +73,28 @@ def test_classifies_common_eu_agriculture_and_transport_terms():
     assert "trasporti_infrastrutture" in classify_topics(
         "Regulation on mobile driving licences"
     )
+
+
+
+def test_classifies_additional_clear_eu_and_italian_topics():
+    assert "lavoro" in classify_topics(
+        "Directive on the establishment and operation of European Works Councils"
+    )
+    assert "agricoltura_alimentazione" in classify_topics(
+        "Decision on school fruit and vegetables and school milk"
+    )
+    assert "agricoltura_alimentazione" in classify_topics(
+        "Measures concerning outbreaks of highly pathogenic avian influenza"
+    )
+    assert "trasporti_infrastrutture" in classify_topics(
+        "Requirements to install GSM-R in a railway tunnel"
+    )
+    assert "economia_finanza" in classify_topics(
+        "CONSOB: disposizioni sul mercato mobiliare"
+    )
+    assert "digitale_cyber" in classify_topics(
+        "Harmonised standards for high-risk AI systems"
+    )
+    assert "difesa_sicurezza" in classify_topics(
+        "Riordino delle funzioni e ordinamento della polizia locale"
+    )

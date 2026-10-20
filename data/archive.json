@@ -348,7 +348,9 @@
       "published_at": "2026-10-19T16:50:07+00:00",
       "summary": "Delega al Governo per il riordino delle funzioni  e  dell'ordinamento\ndella polizia locale. (26G00204)",
       "language": "it",
-      "topics": [],
+      "topics": [
+        "difesa_sicurezza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:41.482666+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -356,9 +358,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 8,
+      "relevance_score": 22,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: difesa_sicurezza (+14)",
         "indicatori testuali: legge (+8)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1035,7 +1038,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381974+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1043,9 +1048,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 4,
+      "relevance_score": 22,
       "priority": "bassa",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: decision (+4)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1086,7 +1092,9 @@
       "published_at": "2026-10-18T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "lavoro"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.381444+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1094,9 +1102,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 36,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: lavoro (+23)",
         "indicatori testuali: directive, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -1829,7 +1838,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384130+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -1837,9 +1848,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 17,
-      "priority": "bassa",
+      "relevance_score": 35,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: regulation, amending, implementing (+17)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2038,7 +2050,9 @@
       "published_at": "2026-10-14T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "trasporti_infrastrutture"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.383796+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2046,9 +2060,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 16,
-      "priority": "bassa",
+      "relevance_score": 33,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: trasporti_infrastrutture (+17)",
         "indicatori testuali: directive, repeal (+16)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2215,7 +2230,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "economia_finanza"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385059+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2223,9 +2240,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 32,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: economia_finanza (+19)",
         "indicatori testuali: regulation, amending (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2393,7 +2411,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384586+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2401,9 +2421,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: decision, amending, implementing (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2417,7 +2438,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "digitale_cyber"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.385181+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2425,9 +2448,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 16,
-      "priority": "bassa",
+      "relevance_score": 35,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: digitale_cyber (+19)",
         "indicatori testuali: regulation, decision, implementing (+16)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2441,7 +2465,9 @@
       "published_at": "2026-10-13T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "trasporti_infrastrutture"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.384983+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2449,9 +2475,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 24,
-      "priority": "bassa",
+      "relevance_score": 41,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: trasporti_infrastrutture (+17)",
         "indicatori testuali: regulation, directive, decision, implementing (+24)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2719,7 +2746,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386140+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2727,9 +2756,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 12,
-      "priority": "bassa",
+      "relevance_score": 32,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: regulation, implementing (+12)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2860,7 +2890,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "agricoltura_alimentazione"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386209+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2868,9 +2900,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 13,
-      "priority": "bassa",
+      "relevance_score": 31,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: agricoltura_alimentazione (+18)",
         "indicatori testuali: decision, amending, implementing (+13)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
@@ -2935,7 +2968,9 @@
       "published_at": "2026-10-12T22:00:00+00:00",
       "summary": "",
       "language": "en",
-      "topics": [],
+      "topics": [
+        "salute_farmaci"
+      ],
       "legal_status": "non_verificato",
       "collected_at": "2026-10-20T17:25:42.386278+00:00",
       "first_seen_at": "2026-10-20T17:00:54.407955+00:00",
@@ -2943,9 +2978,10 @@
       "seen_count": 1,
       "detection_status": "rilevato_da_feed",
       "analysis_version": 2,
-      "relevance_score": 24,
-      "priority": "bassa",
+      "relevance_score": 44,
+      "priority": "media",
       "relevance_reasons": [
+        "area tematica: salute_farmaci (+20)",
         "indicatori testuali: regulation, decision, repeal, implementing (+24)"
       ],
       "legal_status_note": "Punteggio e classificazione sono euristici; la vigenza, le modifiche e le abrogazioni richiedono verifica su fonti ufficiali."
