@@ -40,10 +40,11 @@ def _canonical_url(value: str) -> str:
 
 
 def _entry_title(entry: Any) -> str:
-    """Rimuove il prefisso CELEX ridondante quando il feed include il titolo."""
+    """Rimuove CELEX iniziale solo se seguito da un vero titolo descrittivo."""
     title = _first_text(entry, "title")
-    if title.upper().startswith("CELEX:") and title.count(":") >= 2:
-        return re.sub(r"^CELEX:[^:]+:\s*", "", title, count=1, flags=re.IGNORECASE)
+    match = re.match(r"^CELEX:\s*[^:]+:\s*(.*?)\s*$", title, flags=re.IGNORECASE)
+    if match and match.group(1):
+        return match.group(1)
     return title
 
 
