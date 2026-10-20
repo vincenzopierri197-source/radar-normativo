@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from radar_normativo.analysis import analyze_item
+from radar_normativo.classifier import classify_topics
 from urllib.parse import urlsplit, urlunsplit
 
 
@@ -135,13 +136,25 @@ def update_archive(
             item["first_seen_at"] = scan_time
             item["last_seen_at"] = scan_time
             item["seen_count"] = 1
+            item = analyze_item(item)
             items_by_id[candidate_id] = item
             if canonical_url:
                 id_by_url[canonical_url] = candidate_id
             newly_discovered.append(dict(item))
 
+    # Ricalcola tutte le schede, non solo quelle presenti nel feed odierno:
+    # così le nuove regole raggiungono anche gli atti storici non ripubblicati.
+    refreshed_items = []
+    for stored_item in items_by_id.values():
+        item = dict(stored_item)
+        item["topics"] = classify_topics(
+            str(item.get("title") or ""),
+            str(item.get("summary") or ""),
+        )
+        refreshed_items.append(analyze_item(item))
+
     all_items = sorted(
-        items_by_id.values(),
+        refreshed_items,
         key=lambda item: (item.get("published_at") or "", item.get("title") or ""),
         reverse=True,
     )
