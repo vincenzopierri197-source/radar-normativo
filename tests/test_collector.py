@@ -26,6 +26,7 @@ def test_missing_url_is_reported_without_crashing(tmp_path):
     assert result["item_count"] == 0
     assert result["source_results"][0]["ok"] is False
     assert result["source_results"][0]["error"] == "URL mancante"
+    assert result["source_results"][0]["required"] is True
 
 
 def test_normalizes_url_and_classifies_english_eu_titles(tmp_path, monkeypatch):
