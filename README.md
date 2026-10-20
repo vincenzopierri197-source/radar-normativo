@@ -1,20 +1,20 @@
 # Radar Normativo 🇮🇹🇪🇺
 
-Sistema indipendente per monitorare fonti normative italiane ed europee, con priorità a fisco, economia, imprese, lavoro e previdenza.
+Sistema indipendente per monitorare fonti normative italiane ed europee, classificare le pubblicazioni e preparare briefing verificabili.
 
-> **Stato del progetto:** fondamenta iniziali. Il progetto non è ancora un servizio di monitoraggio operativo e non fornisce consulenza legale. Ogni scheda dovrà rimandare alla fonte ufficiale; gli stati giuridici saranno indicati solo quando verificabili.
+> **Stato:** prototipo operativo in evoluzione. La raccolta automatica non equivale a una verifica giuridica: ogni scheda mantiene `legal_status: non_verificato` finché non viene controllata su fonti ufficiali.
 
-## Obiettivi
+## Funzionalità
 
-- Raccogliere atti e aggiornamenti da fonti ufficiali configurate.
-- Normalizzare e deduplicare gli elementi raccolti.
-- Conservare metadati, data di rilevazione e URL della fonte.
-- Classificare per area tematica e stimare la rilevanza editoriale con regole trasparenti, senza confondere il punteggio con lo stato giuridico.
-- Esporre i motivi del punteggio e mantenere lo stato giuridico `non_verificato` finché non viene verificato su fonti ufficiali.
-- Inviare riepiloghi e avvisi Telegram, quando configurati.
-- Mantenere l'architettura pronta per un futuro modulo AI opzionale, senza richiedere API a pagamento nella prima fase.
+- Raccolta RSS/Atom configurabile.
+- Normalizzazione URL e deduplicazione per identificatore e URL canonico.
+- Archivio storico con prima/ultima rilevazione e numero di osservazioni.
+- Classificazione euristica in italiano e inglese, utile anche per EUR-Lex.
+- Punteggio editoriale spiegabile che non premia semplicemente la presenza di una data o di un URL.
+- Briefing testuale e invio Telegram opzionale con registro anti-duplicati.
+- Test automatici per classificazione, archivio, briefing, CLI e Telegram.
 
-## Avvio locale
+## Requisiti e installazione
 
 Richiede Python 3.11 o superiore.
 
@@ -30,46 +30,46 @@ python -m radar_normativo --help
 pytest
 ```
 
-## Configurazione
+## Fonti
 
-Le fonti sono dichiarate in `config/sources.json`. Il raccoglitore supporta feed RSS/Atom esplicitamente configurati. L'elenco è intenzionalmente vuoto finché non sono verificati gli URL diretti dei feed ufficiali; non inserire la pagina HTML di un sito al posto del feed. Dopo la verifica, testare ogni fonte prima di abilitarla in produzione. Gli argomenti vengono classificati con regole lessicali trasparenti: la classificazione è indicativa e non determina lo stato giuridico.
+Le fonti sono configurate in `config/sources.json`. Le fonti attuali sono la Gazzetta Ufficiale — Serie Generale e EUR-Lex — serie L. La raggiungibilità del feed viene controllata ad ogni scansione; la presenza nel feed non certifica che una norma sia vigente o applicabile.
 
-Variabili d'ambiente opzionali per Telegram:
-
-- `TELEGRAM_BOT_TOKEN`
-- `TELEGRAM_CHAT_ID`
-
-Non inserire mai token o credenziali nei file versionati. In GitHub vanno impostati come Actions secrets.
-
-## Esecuzione
+## Flusso principale
 
 ```bash
-python -m radar_normativo collect
 python -m radar_normativo collect --config config/sources.json --output data/latest.json
 python -m radar_normativo archive --latest data/latest.json --archive data/archive.json --new-items data/new_items.json
 python -m radar_normativo briefing --input data/new_items.json --output data/briefing.txt --limit 10
 ```
 
-Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gli elementi includono `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. Il punteggio è una stima editoriale euristica e spiegabile, non una valutazione legale. Il comando `briefing` produce un testo semplice ordinato per priorità, con materia, data, fonte, sintesi disponibile, URL e avvertenza sullo stato giuridico. Il briefing è preparatorio: non invia ancora messaggi a Telegram. La persistenza storica dipende dalla configurazione di versionamento e del workflow GitHub Actions.
+La scansione fallisce se una fonte non è leggibile, e l'archivio rifiuta scansioni incomplete. Il workflow GitHub Actions esegue la raccolta dal lunedì al sabato alle 05:30 UTC. Se trova aggiornamenti concorrenti sulla `main`, rilegge l'archivio più recente e riapplica la scansione, evitando di risolvere conflitti JSON tramite rebase.
 
-## Principi di affidabilità
+## Telegram (opzionale)
 
-1. La fonte primaria e il suo URL devono essere conservati.
-2. La data di pubblicazione non va confusa con quella di rilevazione.
-3. Un feed o un titolo, da soli, non bastano a stabilire se una norma sia in vigore, abrogata o in attesa di attuazione.
-4. Se lo stato non è verificato, dichiararlo esplicitamente come `non_verificato`.
-5. I riepiloghi automatici non sostituiscono la lettura dell'atto ufficiale.
+Per simulare gli invii senza credenziali e senza modificare il registro:
+
+```bash
+python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json --dry-run
+```
+
+Per un invio reale, configura le variabili d'ambiente `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`, poi esegui:
+
+```bash
+python -m radar_normativo telegram --input data/new_items.json --ledger data/telegram_sent.json
+```
+
+Il registro `data/telegram_sent.json` impedisce di reinviare gli elementi già registrati. Non inserire mai token o credenziali nei file versionati; se in futuro si abilita l'invio automatico da GitHub Actions, usare esclusivamente GitHub Actions secrets. Il workflow attuale non invia messaggi Telegram automaticamente.
+
+## Campi e limiti
+
+Ogni scheda può contenere `topics`, `relevance_score`, `priority`, `relevance_reasons`, `detection_status` e `legal_status`. I punteggi sono euristici e le classificazioni possono essere errate o incomplete. La data del feed può essere diversa dalla data di adozione, pubblicazione ufficiale o entrata in vigore. Le sintesi del feed non vengono inventate: se la fonte non ne fornisce una, il campo resta vuoto.
 
 ## Roadmap
 
-- [x] Struttura iniziale, CLI e test automatici
-- [x] Raccolta generica RSS/Atom configurabile
-- [ ] Verifica e attivazione di feed ufficiali italiani ed europei (non attivi finché gli URL RSS non sono verificati)
-- [x] Archivio storico versionato e rilevamento delle nuove pubblicazioni
-- [x] Prima classificazione tematica euristica (da validare con casi reali)
-- [x] Punteggio di rilevanza editoriale spiegabile e priorità bassa/media/alta
-- [ ] Priorità configurabili e classificazione avanzata
-- [x] Generazione di briefing testuali pronti per revisione e Telegram
-- [ ] Invio Telegram e comandi
-- [ ] Monitoraggio delle modifiche e briefing quotidiano
-- [ ] Modulo AI opzionale con citazioni verificabili
+- [x] Raccolta RSS/Atom configurabile e controllo fonti
+- [x] Archivio storico e deduplicazione URL canonici
+- [x] Classificazione multilingue e punteggio spiegabile
+- [x] Briefing e invio Telegram manuale opzionale
+- [ ] Verifica più ampia delle fonti ufficiali e dei feed
+- [ ] Monitoraggio delle modifiche agli atti e briefing giornaliero Telegram
+- [ ] Modulo AI opzionale con riferimenti controllabili alle fonti primarie
