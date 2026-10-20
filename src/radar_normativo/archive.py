@@ -92,9 +92,13 @@ def update_archive(
             first_seen = previous.get("first_seen_at", scan_time)
             previous_summary = str(previous.get("summary") or "")
             try:
-                seen_count = int(previous.get("seen_count", 1)) + 1
+                prior_count = max(1, int(previous.get("seen_count", 1)))
             except (TypeError, ValueError):
-                seen_count = 2
+                prior_count = 1
+            # Il conteggio rappresenta i giorni UTC distinti in cui l'atto è stato visto,
+            # non il numero di workflow/manual run ripetuti nella stessa giornata.
+            last_seen = str(previous.get("last_seen_at") or "")
+            seen_count = prior_count if last_seen[:10] == str(scan_time)[:10] else prior_count + 1
             # Mantiene l'identificatore storico anche quando cambia la forma dell'URL.
             item["id"] = existing_id
             previous.update(item)
