@@ -10,6 +10,7 @@ from typing import Any
 
 import feedparser
 
+from radar_normativo.analysis import analyze_item
 from radar_normativo.classifier import classify_topics
 
 
@@ -51,19 +52,22 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 if not link or not title:
                     continue
                 item_id = hashlib.sha256(link.strip().encode("utf-8")).hexdigest()[:20]
-                items[item_id] = {
+                summary = _first_text(entry, "summary", "description")
+                item = {
                     "id": item_id,
                     "title": title,
                     "url": link,
                     "source_name": name,
                     "source_url": url,
                     "published_at": _entry_date(entry),
-                    "summary": _first_text(entry, "summary", "description"),
+                    "summary": summary,
                     "language": source.get("language"),
-                    "topics": classify_topics(title, _first_text(entry, "summary", "description")),
+                    "topics": classify_topics(title, summary),
                     "legal_status": "non_verificato",
+                    "detection_status": "rilevato_da_feed",
                     "collected_at": datetime.now(timezone.utc).isoformat(),
                 }
+                items[item_id] = analyze_item(item)
                 count += 1
             source_results.append({"name": name, "ok": True, "items": count})
         except Exception as exc:
