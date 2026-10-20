@@ -28,6 +28,27 @@ def test_sends_only_unsent_items_and_persists_ledger(tmp_path):
     assert json.loads(ledger.read_text(encoding="utf-8"))["sent_ids"]["fresh"]
 
 
+def test_aggregates_all_new_items_into_one_message(tmp_path):
+    source = tmp_path / "new_items.json"
+    ledger = tmp_path / "ledger.json"
+    items = [
+        {"id": "it", "title": "Nuova legge italiana", "source_name": "Gazzetta Ufficiale"},
+        {"id": "eu", "title": "Nuovo regolamento europeo", "source_name": "EUR-Lex"},
+        {"id": "court", "title": "Decisione costituzionale", "source_name": "Corte costituzionale"},
+    ]
+    source.write_text(json.dumps({"items": items}), encoding="utf-8")
+    sent = []
+
+    result = send_new_items(
+        source, ledger, token="t", chat_id="c",
+        sender=lambda token, chat_id, message: sent.append(message),
+    )
+
+    assert result == {"sent": 3, "pending": 3, "skipped": 0}
+    assert len(sent) == 1
+    assert all(item["title"] in sent[0] for item in items)
+
+
 def test_dry_run_needs_no_credentials_and_does_not_write_ledger(tmp_path, capsys):
     source = tmp_path / "new_items.json"
     ledger = tmp_path / "telegram_sent.json"
