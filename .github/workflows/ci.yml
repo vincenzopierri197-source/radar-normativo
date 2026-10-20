@@ -22,5 +22,7 @@ jobs:
           cache: pip
       - name: Install
         run: python -m pip install -e ".[dev]"
+      - name: Verify package imports
+        run: python -c "from radar_normativo.classifier import classify_topics; print(classify_topics('IVA e contributi INPS'))"
       - name: Test
         run: pytest
