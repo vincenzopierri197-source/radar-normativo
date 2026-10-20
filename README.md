@@ -65,7 +65,9 @@ Il risultato è un JSON con gli elementi raccolti e metadati della scansione. Gl
 - [x] Raccolta generica RSS/Atom configurabile
 - [ ] Verifica e attivazione di feed ufficiali italiani ed europei (non attivi finché gli URL RSS non sono verificati)
 - [x] Archivio storico versionato e rilevamento delle nuove pubblicazioni
-- [x] Prima classificazione tematica euristica (da validare con casi reali)\n- [ ] Priorità configurabili e classificazione avanzata
+- [x] Prima classificazione tematica euristica (da validare con casi reali)
+- [x] Punteggio di rilevanza editoriale spiegabile e priorità bassa/media/alta
+- [ ] Priorità configurabili e classificazione avanzata
 - [ ] Bot Telegram e comandi
 - [ ] Monitoraggio delle modifiche e briefing quotidiano
 - [ ] Modulo AI opzionale con citazioni verificabili
