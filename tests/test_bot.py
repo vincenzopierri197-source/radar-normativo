@@ -49,3 +49,17 @@ def test_filters_are_saved_applied_and_cleared(tmp_path):
     assert "decreto fiscale" in latest_text
     assert "Regolamento agricolo" not in latest_text
     assert "disattivati" in handle_command("/filtri off", 123, **args)
+
+
+
+def test_markets_command_returns_financial_briefing(tmp_path, monkeypatch):
+    from radar_normativo import bot
+
+    archive, sources, state, latest = _fixtures(tmp_path)
+    monkeypatch.setattr(bot, "render_market_briefing", lambda: "📈 RADAR FINANZIARIO\\nValutazione complessiva: misto")
+    response = handle_command(
+        "/mercati", 123, archive_path=archive, sources_path=sources,
+        state_path=state, latest_path=latest,
+    )
+    assert "RADAR FINANZIARIO" in response
+    assert "Valutazione complessiva" in response
