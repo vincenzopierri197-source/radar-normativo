@@ -223,6 +223,17 @@ def run_bot(
         raise ValueError("Configurare TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID nell'ambiente.")
     if not allowed_chat.lstrip("-").isdigit():
         raise ValueError("Per ricevere comandi, TELEGRAM_CHAT_ID deve essere l'ID numerico della chat privata.")
+    # Pubblica il menu dei comandi nella UI Telegram, oltre a gestirli via polling.
+    _api_call(token, "setMyCommands", {"commands": json.dumps([
+        {"command": "start", "description": "Avvia il bot"},
+        {"command": "ultime", "description": "Mostra le ultime pubblicazioni"},
+        {"command": "oggi", "description": "Mostra le novità della giornata"},
+        {"command": "cerca", "description": "Cerca una parola o un argomento"},
+        {"command": "fonti", "description": "Elenca le fonti monitorate"},
+        {"command": "filtri", "description": "Configura gli argomenti d'interesse"},
+        {"command": "stato", "description": "Mostra lo stato del sistema"},
+        {"command": "aiuto", "description": "Visualizza i comandi disponibili"},
+    ])})
     offset = 0
     print("Bot Radar Normativo in ascolto. Interrompere con Ctrl+C.")
     while True:
