@@ -11,7 +11,7 @@ const HELP = `Comandi Radar Normativo e Finanziario:
 /ieri — pubblicazioni normative di ieri
 /ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
-/ia domanda — risponde usando l'archivio normativo con IA
+/ia o /ai domanda — risponde usando l'archivio normativo con IA
 /fonti — fonti normative monitorate
 /filtri — mostra o configura i filtri personali
 /stato — stato dell'archivio normativo e delle fonti
@@ -350,7 +350,8 @@ export async function handleCommand(text, chatId, env, deps = {}) {
       const nSources = Array.isArray(cfg?.sources) ? cfg.sources.length : 0;
       return `Radar Normativo: bot attivo (Cloudflare Workers).\nElementi in archivio: ${items.length}\nArchivio aggiornato: ${archive.updated_at || "non disponibile"}\nFonti configurate: ${nSources}\nLo stato giuridico degli atti non è certificato automaticamente.`;
     }
-    case "/ia": {
+    case "/ia":
+    case "/ai": {
       if (!argument) return "Uso: /ia seguito dalla domanda. Esempio: /ia quali novità fiscali sono state pubblicate?";
       return answerWithGroq(argument, env, deps);
     }
