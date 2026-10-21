@@ -131,3 +131,23 @@ def test_help_lists_official_normative_and_financial_commands(tmp_path):
     ):
         assert command in help_text
     assert "/economia" not in help_text
+
+
+
+def test_ai_command_requires_a_question(tmp_path):
+    archive, sources, state, latest = _fixtures(tmp_path)
+    args = {"archive_path": archive, "sources_path": sources, "state_path": state, "latest_path": latest}
+    response = handle_command("/ia", 123, **args)
+    assert "Uso: /ia" in response
+
+
+def test_ai_command_forwards_question_and_archive(tmp_path, monkeypatch):
+    from radar_normativo import bot
+
+    archive, sources, state, latest = _fixtures(tmp_path)
+    calls = []
+    monkeypatch.setattr(bot, "answer_with_groq", lambda question, archive_path: calls.append((question, archive_path)) or "Risposta AI")
+    args = {"archive_path": archive, "sources_path": sources, "state_path": state, "latest_path": latest}
+    response = handle_command("/ia quali novità fiscali?", 123, **args)
+    assert response == "Risposta AI"
+    assert calls == [("quali novità fiscali?", archive)]
