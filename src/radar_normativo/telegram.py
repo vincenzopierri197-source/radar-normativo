@@ -5,7 +5,8 @@ from datetime import datetime,timezone
 from pathlib import Path
 from typing import Any,Callable
 from radar_normativo.briefing import render_briefing
-from radar_normativo.finance import render_market_briefing
+from radar_normativo.finance import collect_market_data, render_market_briefing
+from radar_normativo.economic import render_economic_report
 TELEGRAM_SAFE_LIMIT=3900
 def _item_key(item:dict[str,Any])->str:
  if item.get("id"): return str(item["id"])
@@ -24,7 +25,10 @@ def _send_message(token:str,chat_id:str,text:str)->None:
  except (urllib.error.URLError,TimeoutError,json.JSONDecodeError): raise RuntimeError("Invio Telegram non riuscito (rete o risposta non valida)") from None
  if not payload.get("ok"): raise RuntimeError(f"Telegram ha rifiutato il messaggio: {str(payload.get('description') or 'errore API')[:200]}")
 def _render_chunks(items:list[dict[str,Any]],include_finance:bool)->list[tuple[list[dict[str,Any]],str]]:
- finance=render_market_briefing() if include_finance else ""
+ finance=""
+ if include_finance:
+  market_rows=collect_market_data()
+  finance=render_market_briefing(market_rows)+"\n\n"+render_economic_report("analisi",market_rows)
  if not items:
   text="📡 RADAR NORMATIVO — RIEPILOGO GIORNALIERO\nNessuna nuova pubblicazione normativa rilevata oggi."
   if finance: text += "\n\n"+finance
