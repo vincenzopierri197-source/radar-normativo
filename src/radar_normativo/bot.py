@@ -17,6 +17,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from radar_normativo.finance import render_market_briefing
+from radar_normativo.economic import render_economic_report
 
 ROME = ZoneInfo("Europe/Rome")
 HELP = """Comandi Radar Normativo:
@@ -30,6 +31,11 @@ HELP = """Comandi Radar Normativo:
 /filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
 /stato — stato dell'archivio e delle fonti
 /mercati — quotazioni e valutazione dei nove strumenti finanziari
+/economia — quadro sintetico dei mercati e motivazioni
+/stime — scenari condizionali e possibili sviluppi
+/andamento — indicatore sintetico: positivo, misto o negativo
+/rischi — principali segnali di rischio nei dati disponibili
+/analisi — analisi ragionata dei movimenti rilevati
 /aiuto — mostra questo elenco
 
 Nota: le schede sono rilevazioni automatiche, non certificazioni di vigenza."""
@@ -133,6 +139,8 @@ def handle_command(
         return "Radar Normativo è pronto. Usa /aiuto per vedere i comandi."
     if command == "/mercati":
         return render_market_briefing()
+    if command in {"/economia", "/stime", "/andamento", "/rischi", "/analisi"}:
+        return render_economic_report(command[1:])
     if command in {"/aiuto", "/help"}:
         return HELP
     if command == "/filtri":
@@ -251,6 +259,11 @@ def run_bot(
         {"command": "filtri", "description": "Configura gli argomenti d'interesse"},
         {"command": "stato", "description": "Mostra lo stato del sistema"},
         {"command": "mercati", "description": "Quotazioni e valutazione dei mercati"},
+        {"command": "economia", "description": "Quadro sintetico e motivazioni"},
+        {"command": "stime", "description": "Scenari economici condizionali"},
+        {"command": "andamento", "description": "Indicatore positivo, misto o negativo"},
+        {"command": "rischi", "description": "Segnali di rischio nei dati disponibili"},
+        {"command": "analisi", "description": "Analisi ragionata dei movimenti"},
         {"command": "aiuto", "description": "Visualizza i comandi disponibili"},
     ])})
     offset = 0
