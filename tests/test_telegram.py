@@ -78,7 +78,9 @@ def test_successfully_sent_item_is_not_sent_twice(tmp_path):
     send_new_items(source, ledger, token="t", chat_id="c", sender=lambda *args: calls.append(args))
     result = send_new_items(source, ledger, token="t", chat_id="c", sender=lambda *args: calls.append(args))
 
-    assert len(calls) == 1
+    assert len(calls) == 2
+    assert "Atto" in calls[0][2]
+    assert "Nessuna nuova pubblicazione normativa" in calls[1][2]
     assert result == {"sent": 0, "pending": 0, "skipped": 1}
 
 
