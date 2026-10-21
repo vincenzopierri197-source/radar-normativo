@@ -87,7 +87,7 @@ test("comando IA usa i documenti dell'archivio e Groq", async () => {
   let requestBody;
   const answer = await handleCommand("/ia decreto fiscale", 1, e, {
     fetchGroq: async (url, options) => {
-      assert.match(String(url), /api\\.groq\\.com/);
+      assert.match(String(url), /api\.groq\.com/);
       assert.equal(options.headers.Authorization, "Bearer test-key");
       requestBody = JSON.parse(options.body);
       return new Response(JSON.stringify({
