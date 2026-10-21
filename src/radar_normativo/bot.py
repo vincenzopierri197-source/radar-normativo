@@ -23,6 +23,8 @@ HELP = """Comandi Radar Normativo:
 /start — avvia il bot
 /ultime — ultime pubblicazioni
 /oggi — novità pubblicate oggi
+/ieri — pubblicazioni di ieri
+/ultimi7giorni — pubblicazioni degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
 /fonti — fonti configurate
 /filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
@@ -183,15 +185,24 @@ def handle_command(
             and _matches_filter(item, _filters(state, chat_key))
         ]
         return _format_items(found, f"Nessun risultato per «{argument}».", limit=10)
-    if command in {"/ultime", "/oggi"}:
+    if command in {"/ultime", "/oggi", "/ieri", "/ultimi7giorni"}:
         items = _items(archive_path)
         items.sort(key=lambda item: str(item.get("published_at") or ""), reverse=True)
         filters = _filters(state, chat_key)
         items = [item for item in items if _matches_filter(item, filters)]
+        today = datetime.now(ROME).date()
         if command == "/oggi":
-            today = datetime.now(ROME).date()
             items = [item for item in items if _published_date(item) == today]
             heading = "Pubblicazioni di oggi"
+        elif command == "/ieri":
+            yesterday = today.fromordinal(today.toordinal() - 1)
+            items = [item for item in items if _published_date(item) == yesterday]
+            heading = f"Pubblicazioni di ieri ({yesterday.isoformat()})"
+        elif command == "/ultimi7giorni":
+            from datetime import timedelta
+            start = today - timedelta(days=6)
+            items = [item for item in items if (published := _published_date(item)) is not None and start <= published <= today]
+            heading = f"Pubblicazioni ultimi 7 giorni ({start.isoformat()} — {today.isoformat()})"
         else:
             heading = "Ultime pubblicazioni"
         if not items and filters:
@@ -233,6 +244,8 @@ def run_bot(
         {"command": "start", "description": "Avvia il bot"},
         {"command": "ultime", "description": "Mostra le ultime pubblicazioni"},
         {"command": "oggi", "description": "Mostra le novità della giornata"},
+        {"command": "ieri", "description": "Mostra le pubblicazioni di ieri"},
+        {"command": "ultimi7giorni", "description": "Mostra le pubblicazioni degli ultimi 7 giorni"},
         {"command": "cerca", "description": "Cerca una parola o un argomento"},
         {"command": "fonti", "description": "Elenca le fonti monitorate"},
         {"command": "filtri", "description": "Configura gli argomenti d'interesse"},
