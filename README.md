@@ -8,7 +8,7 @@ Riepilogo giornaliero Telegram che unisce nuove pubblicazioni normative e monito
 - Valutazione complessiva descrittiva basata solo sui dati disponibili, senza inventare valori né attribuire pesi di portafoglio ignoti.
 
 ## Programmazione
-GitHub Actions esegue la scansione alle 08:00 Europe/Rome (ora legale/solare). Configurare i secrets `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`. Per la ricerca AI interattiva, configurare anche `GROQ_API_KEY`; facoltativamente `GROQ_MODEL` (predefinito `openai/gpt-oss-20b`). La chiave si crea dal pannello GroqCloud e non va mai inserita nel codice o committata nel repository. Le quotazioni provengono dall'endpoint chart Yahoo Finance, possono essere ritardate e alcuni simboli potrebbero non essere disponibili.
+GitHub Actions esegue la scansione alle 08:00 Europe/Rome (ora legale/solare). Configurare i secrets `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`. Per il comando AI `/ia` del Worker Cloudflare, aggiungere `GROQ_API_KEY` come secret nelle impostazioni del repository GitHub (Settings → Secrets and variables → Actions); il workflow di deploy lo trasferisce al Worker. Facoltativamente si può impostare `GROQ_MODEL` nel Worker (predefinito `openai/gpt-oss-20b`). La chiave si crea in GroqCloud e non va mai inserita nel codice o committata nel repository. Le quotazioni provengono dall'endpoint chart Yahoo Finance, possono essere ritardate e alcuni simboli potrebbero non essere disponibili.
 
 ## Installazione e test
 Python 3.11+: `python -m pip install -e ".[dev]"` e `pytest`.
