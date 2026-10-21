@@ -1,7 +1,7 @@
 """Quote indicative per il riepilogo giornaliero dei mercati."""
 from __future__ import annotations
 import json, urllib.error, urllib.parse, urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 from zoneinfo import ZoneInfo
 ROME=ZoneInfo("Europe/Rome")
@@ -67,3 +67,89 @@ def render_market_briefing(rows:list[dict[str,Any]]|None=None)->str:
   lines.append("La media non è il rendimento del portafoglio: non considera pesi, costi o cambi.")
  lines.extend(["","Nota: dati indicativi da Yahoo Finance, eventualmente ritardati; ticker non disponibili segnalati senza stimare valori. Non è consulenza finanziaria."])
  return "\n".join(lines)
+
+
+
+def _fetch_history(symbol: str, period: str = "1mo") -> list[dict[str, Any]]:
+    """Restituisce chiusure giornaliere reali con data locale, senza inventare valori."""
+    query = urllib.parse.urlencode({"range": period, "interval": "1d"})
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(symbol, safe='^')}?{query}"
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 RadarNormativo/1.0"})
+    with urllib.request.urlopen(request, timeout=12) as response:
+        payload = json.loads(response.read().decode())
+    result = payload.get("chart", {}).get("result") or []
+    if not result:
+        raise ValueError("storico non disponibile")
+    chart = result[0]
+    timestamps = chart.get("timestamp") or []
+    quote = (chart.get("indicators", {}).get("quote") or [{}])[0]
+    closes = quote.get("close") or []
+    points = []
+    for stamp, close in zip(timestamps, closes):
+        if close is None:
+            continue
+        local_date = datetime.fromtimestamp(int(stamp), timezone.utc).astimezone(ROME).date()
+        points.append({"date": local_date, "close": float(close)})
+    if not points:
+        raise ValueError("nessuna chiusura storica disponibile")
+    return points
+
+
+def render_finance_report(mode: str = "current") -> str:
+    """Riepilogo sintetico, ultima seduta entro ieri o variazione su sette giorni."""
+    if mode not in {"current", "yesterday", "seven_days"}:
+        raise ValueError("modalità finanziaria non valida")
+    today = datetime.now(ROME).date()
+    cutoff = today - timedelta(days=1) if mode == "yesterday" else today
+    start = today - timedelta(days=7)
+    lines = ["📊 RADAR FINANZIARIO — " + {
+        "current": "RIEPILOGO ATTUALE",
+        "yesterday": "ULTIMA SEDUTA ENTRO IERI",
+        "seven_days": "ANDAMENTO DEGLI ULTIMI 7 GIORNI",
+    }[mode], ""]
+    changes: list[float] = []
+    available = 0
+    for name, symbol, region in INSTRUMENTS:
+        try:
+            points = _fetch_history(symbol, "1mo")
+            eligible = [point for point in points if point["date"] <= cutoff]
+            if not eligible:
+                lines.append(f"⚪ {name}: storico non disponibile entro {cutoff.isoformat()}")
+                continue
+            latest = eligible[-1]
+            if mode == "seven_days":
+                earlier = [point for point in points if point["date"] <= latest["date"] - timedelta(days=7)]
+                if not earlier:
+                    lines.append(f"⚪ {name}: storico insufficiente per il confronto a 7 giorni")
+                    continue
+                baseline = earlier[-1]
+                label = f"{baseline['date'].strftime('%d/%m')} → {latest['date'].strftime('%d/%m')}"
+            else:
+                prior = [point for point in points if point["date"] < latest["date"]]
+                if not prior:
+                    lines.append(f"⚪ {name}: chiusura precedente non disponibile")
+                    continue
+                baseline = prior[-1]
+                label = latest["date"].strftime("%d/%m")
+            change = (latest["close"] / baseline["close"] - 1) * 100 if baseline["close"] else None
+            if change is None:
+                lines.append(f"⚪ {name}: variazione non disponibile")
+                continue
+            icon = "🟢" if change > 0.05 else "🔴" if change < -0.05 else "🟡"
+            lines.append(f"{icon} {name}: {change:+.2f}% · {label}")
+            changes.append(change)
+            available += 1
+        except (urllib.error.URLError, TimeoutError, ValueError, KeyError, TypeError, json.JSONDecodeError):
+            lines.append(f"⚪ {name}: dato non disponibile")
+    lines.extend(["", "VALUTAZIONE SINTETICA"])
+    if changes:
+        average = sum(changes) / len(changes)
+        positive = sum(value > 0.05 for value in changes)
+        negative = sum(value < -0.05 for value in changes)
+        mood = "prevalentemente positivo" if average > 0.15 and positive > negative else "prevalentemente negativo" if average < -0.15 and negative > positive else "misto o stabile"
+        lines.append(f"Quadro {mood}; media semplice indicativa: {average:+.2f}% su {available} strumenti disponibili.")
+        lines.append(f"Positivi: {positive}; negativi: {negative}; stabili: {available - positive - negative}.")
+    else:
+        lines.append("Dati insufficienti per una valutazione complessiva.")
+    lines.append("Dati storici indicativi da Yahoo Finance, eventualmente ritardati. La media non rappresenta il rendimento di un portafoglio e non è consulenza finanziaria.")
+    return "\n".join(lines)
