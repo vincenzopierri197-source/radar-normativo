@@ -84,9 +84,19 @@ jobs:
           git add -f data/.financial_last_run_date
           if ! git diff --cached --quiet; then
             git commit -m "chore: mark financial radar daily run"
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [[ "$attempt" -eq 5 ]]; then
+                echo "Push fallito dopo 5 tentativi."
+                exit 1
+              fi
+              echo "Push in conflitto, nuovo tentativo ($attempt/5)..."
+              sleep "$((attempt * 2))"
+            done
           else
             echo "Marker giornaliero già aggiornato: nessuna modifica da salvare."
           fi
