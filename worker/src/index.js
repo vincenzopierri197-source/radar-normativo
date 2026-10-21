@@ -184,10 +184,10 @@ async function answerWithGroq(question, env, deps = {}) {
 // né di scaricare o riprodurre integralmente gli articoli degli editori.
 function decodeXml(value) {
   return String(value || "")
-    .replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g, "$1")
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
     .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
-    .replace(/&#(\\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
     .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .trim();
 }
@@ -196,7 +196,7 @@ function rssTag(block, tag) {
   return match ? decodeXml(match[1]) : "";
 }
 export function parseEconomicRss(xml) {
-  const blocks = String(xml || "").match(/<item\\b[\\s\\S]*?<\\/item>/gi) || [];
+  const blocks = String(xml || "").match(/<item\b[\s\S]*?<\/item>/gi) || [];
   return blocks.map((block) => ({
     title: rssTag(block, "title"),
     url: rssTag(block, "link"),
@@ -206,10 +206,10 @@ export function parseEconomicRss(xml) {
   })).filter((item) => item.title && item.url).slice(0, 15);
 }
 async function searchEconomicNews(question, fetchFn = fetch) {
-  const q = String(question || "").replace(/[\\r\\n]+/g, " ").slice(0, 240).trim();
+  const q = String(question || "").replace(/[\r\n]+/g, " ").slice(0, 240).trim();
   const queries = [
-    { q: `(${q}) (site:reuters.com OR site:bloomberg.com OR site:ft.com OR site:cnbc.com OR site:finance.yahoo.com OR site:marketwatch.com) when:7d`, hl: "en-US", gl: "US", ceid: "US:en" },
-    { q: `(${q}) when:7d`, hl: "it", gl: "IT", ceid: "IT:it" }
+    { q: \`(\${q}) (site:reuters.com OR site:bloomberg.com OR site:ft.com OR site:cnbc.com OR site:finance.yahoo.com OR site:marketwatch.com) when:7d\`, hl: "en-US", gl: "US", ceid: "US:en" },
+    { q: \`(\${q}) when:7d\`, hl: "it", gl: "IT", ceid: "IT:it" }
   ];
   const feeds = await Promise.all(queries.map(async (query) => {
     const url = "https://news.google.com/rss/search?" + new URLSearchParams({
@@ -254,14 +254,14 @@ async function answerWithEconomicNews(question, env, deps = {}) {
   try {
     response = await fetchFn("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { "Authorization": `Bearer ${env.GROQ_API_KEY}`, "Content-Type": "application/json" },
+      headers: { "Authorization": \`Bearer \${env.GROQ_API_KEY}\`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: env.GROQ_MODEL || "openai/gpt-oss-20b",
         temperature: 0.2,
         max_tokens: 1000,
         messages: [
           { role: "system", content: "Sei un analista informativo di economia e mercati. Rispondi in italiano alla domanda usando con prudenza le notizie e i metadati forniti. Le fonti possono includere Reuters, Bloomberg, Financial Times, CNBC, Yahoo Finance e testate italiane; non dichiarare che una testata ha pubblicato qualcosa se non compare nell'elenco. I dati possono contenere solo titoli e brevi descrizioni, non il testo integrale degli articoli: non inventare dettagli, numeri, quotazioni o cause non presenti nelle fonti. Se gli elementi non bastano, dillo chiaramente e separa i fatti riportati dalla tua interpretazione. Riporta in fondo 3-6 fonti pertinenti con titolo, testata, data se disponibile e link completo. Non fornire raccomandazioni personalizzate di investimento. Specifica che si tratta di informazione, non consulenza finanziaria." },
-          { role: "user", content: `Domanda: ${String(question).slice(0, 500)}\\n\\nNotizie recenti trovate (RSS, JSON):\\n${JSON.stringify(sources)}` }
+          { role: "user", content: \`Domanda: \${String(question).slice(0, 500)}\\n\\nNotizie recenti trovate (RSS, JSON):\\n\${JSON.stringify(sources)}\` }
         ]
       }),
       signal: AbortSignal.timeout(25000)
@@ -271,13 +271,13 @@ async function answerWithEconomicNews(question, env, deps = {}) {
   }
   if (!response.ok) {
     if (response.status === 401 || response.status === 403) return "La chiave Groq non è valida o non è autorizzata. Verifica GROQ_API_KEY su Cloudflare.";
-    return `Il servizio IA ha restituito un errore (HTTP ${response.status}). Riprova più tardi.`;
+    return \`Il servizio IA ha restituito un errore (HTTP \${response.status}). Riprova più tardi.\`;
   }
   let payload;
   try { payload = await response.json(); } catch { return "Il servizio IA ha restituito una risposta non valida."; }
   const answer = payload?.choices?.[0]?.message?.content;
   return typeof answer === "string" && answer.trim()
-    ? (answer.trim() + "\\n\\nFonti raccolte da Google News RSS; gli articoli possono essere soggetti a paywall. Dati e sintesi a scopo informativo, non consulenza finanziaria.").slice(0, 3900)
+    ? (answer.trim() + "\n\nFonti raccolte da Google News RSS; gli articoli possono essere soggetti a paywall. Dati e sintesi a scopo informativo, non consulenza finanziaria.").slice(0, 3900)
     : "Il servizio IA non ha prodotto una risposta. Riprova con una domanda più specifica.";
 }
 
