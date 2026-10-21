@@ -117,10 +117,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f data/.normative_last_run_date
-          git commit -m "chore: mark normative radar daily run"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: mark normative radar daily run"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          else
+            echo "Marker giornaliero già aggiornato: nessuna modifica da salvare."
+          fi
 
       - name: Upload scan artifacts
         if: always() && steps.window.outputs.run == 'true'
