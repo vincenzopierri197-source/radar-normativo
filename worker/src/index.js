@@ -11,7 +11,9 @@ const HELP = `Comandi Radar Normativo e Finanziario:
 /ieri — pubblicazioni normative di ieri
 /ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
-/ia o /ai domanda — risponde usando l'archivio normativo con IA
+/ia domanda — risponde usando l'archivio normativo con IA
+/ai domanda — risponde su economia e mercati da notizie recenti
+/economia domanda — cerca notizie economiche e le sintetizza con IA
 /fonti — fonti normative monitorate
 /filtri — mostra o configura i filtri personali
 /stato — stato dell'archivio normativo e delle fonti
@@ -32,7 +34,8 @@ export const BOT_COMMANDS = [
   ["ultimi7giorni", "Pubblicazioni normative degli ultimi 7 giorni"],
   ["cerca", "Cerca nei titoli e nelle sintesi"],
   ["ia", "Risponde usando l'archivio normativo con IA"],
-  ["ai", "Alias di /ia: risponde usando l'archivio normativo con IA"],
+  ["ai", "Risponde su economia e mercati da notizie recenti"],
+  ["economia", "Cerca notizie economiche recenti e le sintetizza con IA"],
   ["fonti", "Elenca le fonti normative monitorate"],
   ["filtri", "Mostra o configura i filtri personali"],
   ["stato", "Stato dell'archivio e delle fonti"],
@@ -173,6 +176,108 @@ async function answerWithGroq(question, env, deps = {}) {
   const answer = payload?.choices?.[0]?.message?.content;
   return typeof answer === "string" && answer.trim()
     ? answer.trim().slice(0, 3900)
+    : "Il servizio IA non ha prodotto una risposta. Riprova con una domanda più specifica.";
+}
+
+// ---------- ricerca economica su notizie recenti ----------
+// Google News RSS aggrega link e metadati pubblici; non si tenta di aggirare paywall
+// né di scaricare o riprodurre integralmente gli articoli degli editori.
+function decodeXml(value) {
+  return String(value || "")
+    .replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g, "$1")
+    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+    .replace(/&#(\\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .trim();
+}
+function rssTag(block, tag) {
+  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">", "i"));
+  return match ? decodeXml(match[1]) : "";
+}
+export function parseEconomicRss(xml) {
+  const blocks = String(xml || "").match(/<item\\b[\\s\\S]*?<\\/item>/gi) || [];
+  return blocks.map((block) => ({
+    title: rssTag(block, "title"),
+    url: rssTag(block, "link"),
+    source: rssTag(block, "source") || "Fonte non identificata",
+    published_at: rssTag(block, "pubDate"),
+    description: rssTag(block, "description")
+  })).filter((item) => item.title && item.url).slice(0, 15);
+}
+async function searchEconomicNews(question, fetchFn = fetch) {
+  const q = String(question || "").replace(/[\\r\\n]+/g, " ").slice(0, 240).trim();
+  const queries = [
+    { q: `(${q}) (site:reuters.com OR site:bloomberg.com OR site:ft.com OR site:cnbc.com OR site:finance.yahoo.com OR site:marketwatch.com) when:7d`, hl: "en-US", gl: "US", ceid: "US:en" },
+    { q: `(${q}) when:7d`, hl: "it", gl: "IT", ceid: "IT:it" }
+  ];
+  const feeds = await Promise.all(queries.map(async (query) => {
+    const url = "https://news.google.com/rss/search?" + new URLSearchParams({
+      q: query.q, hl: query.hl, gl: query.gl, ceid: query.ceid
+    }).toString();
+    try {
+      const response = await fetchFn(url, { headers: { "User-Agent": "RadarNormativoBot/1.0" }, signal: AbortSignal.timeout(9000) });
+      if (!response.ok) return [];
+      return parseEconomicRss(await response.text());
+    } catch {
+      return [];
+    }
+  }));
+  const seen = new Set();
+  return feeds.flat().filter((item) => {
+    const key = item.url || item.title;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 18);
+}
+async function answerWithEconomicNews(question, env, deps = {}) {
+  if (!env.GROQ_API_KEY) {
+    return "La funzione IA non è configurata. L'amministratore deve impostare il secret GROQ_API_KEY nel Worker Cloudflare.";
+  }
+  const fetchNews = deps.fetchEconomicNews || searchEconomicNews;
+  let articles;
+  try { articles = await fetchNews(question, deps.fetchRss || fetch); }
+  catch { articles = []; }
+  if (!Array.isArray(articles) || !articles.length) {
+    return "Non ho trovato notizie economiche recenti pertinenti. Prova a specificare società, indice, paese o argomento; per le quotazioni usa /mercati.";
+  }
+  const sources = articles.slice(0, 14).map((a) => ({
+    titolo: String(a.title || "").slice(0, 350),
+    fonte: String(a.source || "Fonte non identificata").slice(0, 100),
+    data: String(a.published_at || "data non disponibile").slice(0, 100),
+    descrizione: String(a.description || "").replace(/<[^>]*>/g, " ").slice(0, 500),
+    url: String(a.url || "").slice(0, 700)
+  }));
+  const fetchFn = deps.fetchGroq || fetch;
+  let response;
+  try {
+    response = await fetchFn("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${env.GROQ_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: env.GROQ_MODEL || "openai/gpt-oss-20b",
+        temperature: 0.2,
+        max_tokens: 1000,
+        messages: [
+          { role: "system", content: "Sei un analista informativo di economia e mercati. Rispondi in italiano alla domanda usando con prudenza le notizie e i metadati forniti. Le fonti possono includere Reuters, Bloomberg, Financial Times, CNBC, Yahoo Finance e testate italiane; non dichiarare che una testata ha pubblicato qualcosa se non compare nell'elenco. I dati possono contenere solo titoli e brevi descrizioni, non il testo integrale degli articoli: non inventare dettagli, numeri, quotazioni o cause non presenti nelle fonti. Se gli elementi non bastano, dillo chiaramente e separa i fatti riportati dalla tua interpretazione. Riporta in fondo 3-6 fonti pertinenti con titolo, testata, data se disponibile e link completo. Non fornire raccomandazioni personalizzate di investimento. Specifica che si tratta di informazione, non consulenza finanziaria." },
+          { role: "user", content: `Domanda: ${String(question).slice(0, 500)}\\n\\nNotizie recenti trovate (RSS, JSON):\\n${JSON.stringify(sources)}` }
+        ]
+      }),
+      signal: AbortSignal.timeout(25000)
+    });
+  } catch {
+    return "Non riesco a contattare il servizio IA in questo momento. Riprova più tardi.";
+  }
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) return "La chiave Groq non è valida o non è autorizzata. Verifica GROQ_API_KEY su Cloudflare.";
+    return `Il servizio IA ha restituito un errore (HTTP ${response.status}). Riprova più tardi.`;
+  }
+  let payload;
+  try { payload = await response.json(); } catch { return "Il servizio IA ha restituito una risposta non valida."; }
+  const answer = payload?.choices?.[0]?.message?.content;
+  return typeof answer === "string" && answer.trim()
+    ? (answer.trim() + "\\n\\nFonti raccolte da Google News RSS; gli articoli possono essere soggetti a paywall. Dati e sintesi a scopo informativo, non consulenza finanziaria.").slice(0, 3900)
     : "Il servizio IA non ha prodotto una risposta. Riprova con una domanda più specifica.";
 }
 
@@ -351,10 +456,14 @@ export async function handleCommand(text, chatId, env, deps = {}) {
       const nSources = Array.isArray(cfg?.sources) ? cfg.sources.length : 0;
       return `Radar Normativo: bot attivo (Cloudflare Workers).\nElementi in archivio: ${items.length}\nArchivio aggiornato: ${archive.updated_at || "non disponibile"}\nFonti configurate: ${nSources}\nLo stato giuridico degli atti non è certificato automaticamente.`;
     }
-    case "/ia":
-    case "/ai": {
-      if (!argument) return "Uso: /ia seguito dalla domanda. Esempio: /ia quali novità fiscali sono state pubblicate?";
+    case "/ia": {
+      if (!argument) return "Uso: /ia seguito dalla domanda normativa. Esempio: /ia quali novità fiscali sono state pubblicate?";
       return answerWithGroq(argument, env, deps);
+    }
+    case "/ai":
+    case "/economia": {
+      if (!argument) return "Uso: /ai o /economia seguito da una domanda su economia, aziende, borse, tassi, inflazione o mercati.";
+      return answerWithEconomicNews(argument, env, deps);
     }
     case "/cerca": {
       if (!argument) return "Uso: /cerca parola o argomento";
