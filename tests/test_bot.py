@@ -91,3 +91,43 @@ def test_yesterday_and_last_seven_days_commands(tmp_path):
     assert "Atto pubblicato ieri" in week_result
     assert "Atto pubblicato oggi" in week_result
     assert "Atto più vecchio" not in week_result
+
+
+
+def test_financial_commands_and_aliases(tmp_path, monkeypatch):
+    from radar_normativo import bot
+
+    archive, sources, state, latest = _fixtures(tmp_path)
+    calls = []
+    def fake_report(mode):
+        calls.append(mode)
+        return f"report:{mode}"
+
+    monkeypatch.setattr(bot, "render_finance_report", fake_report)
+    args = {
+        "archive_path": archive,
+        "sources_path": sources,
+        "state_path": state,
+        "latest_path": latest,
+    }
+
+    assert handle_command("/finanza", 123, **args) == "report:current"
+    assert handle_command("/finanzaoggi", 123, **args) == "report:current"
+    assert handle_command("/finanzieri", 123, **args) == "report:yesterday"
+    assert handle_command("/finanza7giorni", 123, **args) == "report:seven_days"
+    assert calls == ["current", "current", "yesterday", "seven_days"]
+
+
+def test_help_lists_official_normative_and_financial_commands(tmp_path):
+    archive, sources, state, latest = _fixtures(tmp_path)
+    help_text = handle_command(
+        "/aiuto", 123, archive_path=archive, sources_path=sources,
+        state_path=state, latest_path=latest,
+    )
+    for command in (
+        "/start", "/aiuto", "/ultime", "/oggi", "/ieri", "/ultimi7giorni",
+        "/cerca", "/fonti", "/filtri", "/stato", "/mercati", "/finanza",
+        "/finanzaoggi", "/finanzieri", "/finanza7giorni",
+    ):
+        assert command in help_text
+    assert "/economia" not in help_text
