@@ -81,10 +81,19 @@ jobs:
           git add data/archive.json
           if ! git diff --cached --quiet; then
             git commit -m "data: update regulatory archive"
-            # L'altro radar può aggiornare main in parallelo: integra prima i commit remoti.
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [[ "$attempt" -eq 5 ]]; then
+                echo "Push fallito dopo 5 tentativi."
+                exit 1
+              fi
+              echo "Push in conflitto, nuovo tentativo ($attempt/5)..."
+              sleep "$((attempt * 2))"
+            done
           fi
 
       - name: Send normative daily Telegram briefing
@@ -109,9 +118,19 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "data: update Telegram delivery ledger"
             # Evita il push non-fast-forward se il radar finanziario aggiorna main in parallelo.
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [[ "$attempt" -eq 5 ]]; then
+                echo "Push fallito dopo 5 tentativi."
+                exit 1
+              fi
+              echo "Push in conflitto, nuovo tentativo ($attempt/5)..."
+              sleep "$((attempt * 2))"
+            done
           fi
 
       - name: Mark successful daily run
@@ -125,9 +144,19 @@ jobs:
           git add -f data/.normative_last_run_date
           if ! git diff --cached --quiet; then
             git commit -m "chore: mark normative radar daily run"
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [[ "$attempt" -eq 5 ]]; then
+                echo "Push fallito dopo 5 tentativi."
+                exit 1
+              fi
+              echo "Push in conflitto, nuovo tentativo ($attempt/5)..."
+              sleep "$((attempt * 2))"
+            done
           else
             echo "Marker giornaliero già aggiornato: nessuna modifica da salvare."
           fi
