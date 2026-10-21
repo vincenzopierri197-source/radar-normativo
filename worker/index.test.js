@@ -97,5 +97,5 @@ test("comando IA usa i documenti dell'archivio e Groq", async () => {
   });
   assert.match(answer, /misure IVA/);
   assert.match(JSON.stringify(requestBody), /Nuovo decreto fiscale/);
-  assert.match(JSON.stringify(requestBody), /openai\\/gpt-oss-20b/);
+  assert.equal(requestBody.model, "openai/gpt-oss-20b");
 });
