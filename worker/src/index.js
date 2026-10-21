@@ -179,13 +179,12 @@ export async function renderHistoricalMarkets(mode, fetchFn = fetchChartHistory,
   for (const row of rows) {
     if (!row.ok) { lines.push(`⚪ ${row.name}: dati storici non disponibili`); continue; }
     const pct = row.baseline ? (row.latest.close / row.baseline.close - 1) * 100 : null;
-    const period = mode === "yesterday" ? "var. giornaliera" : "var. periodo";
     const change = pct == null ? "variazione n.d." : `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
     const icon = pct == null ? "⚪" : pct > 0.05 ? "🟢" : pct < -0.05 ? "🔴" : "🟡";
     lines.push(`${icon} ${row.name}: ${row.latest.close.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })} (${change}) · dato ${row.latest.day}${row.baseline ? ` · base ${row.baseline.day}` : ""}`);
   }
   lines.push("", "Dati storici indicativi da Yahoo Finance, eventualmente ritardati. Alcuni strumenti possono non avere una quotazione per ogni giorno. Non è consulenza finanziaria.");
-  return lines.join("\\n").slice(0, 3900);
+  return lines.join("\n").slice(0, 3900);
 }
 
 const stampFmt = new Intl.DateTimeFormat("it-IT", { timeZone: TZ, day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
