@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { handleCommand, renderMarkets, publishedDay } from "./src/index.js";
+import { handleCommand, renderMarkets, renderHistoricalMarkets, publishedDay } from "./src/index.js";
 
 const today = new Date().toISOString();
 const archive = { updated_at: today, items: [
@@ -57,6 +57,23 @@ test("mercati con dati simulati e con errori", async () => {
   const ko = await renderMarkets(async () => { throw new Error("HTTP 429"); });
   assert.match(ko, /dato non disponibile/);
   assert.match(ko, /Dati insufficienti/);
+});
+
+test("comandi finanziari storici", async () => {
+  const history = [
+    { day: "2026-10-14", close: 100 },
+    { day: "2026-10-15", close: 101 },
+    { day: "2026-10-16", close: 102 },
+    { day: "2026-10-19", close: 103 },
+    { day: "2026-10-20", close: 104 },
+  ];
+  const yesterday = await renderHistoricalMarkets("yesterday", async () => history, new Date("2026-10-21T10:00:00Z"));
+  assert.match(yesterday, /RADAR FINANZIARIO/);
+  assert.match(yesterday, /104\.0000/);
+  assert.match(yesterday, /\+0\.97%/);
+  const week = await renderHistoricalMarkets("week", async () => history, new Date("2026-10-21T10:00:00Z"));
+  assert.match(week, /andamento ultimi 7 giorni/);
+  assert.match(week, /\+4\.00%/);
 });
 
 test("data pubblicazione in fuso Roma", () => {
