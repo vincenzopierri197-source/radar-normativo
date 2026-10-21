@@ -1,0 +1,61 @@
+name: Deploy bot Telegram (Cloudflare Worker)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-worker.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Test del Worker
+        run: node --test worker/index.test.js
+
+      - name: Deploy su Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          secrets: |
+            TELEGRAM_BOT_TOKEN
+            TELEGRAM_CHAT_ID
+            WEBHOOK_SECRET
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+
+      - name: Registra webhook e menu comandi su Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$WORKER_URL" ]]; then
+            echo "Secret WORKER_URL mancante: copia l'URL del Worker (https://radar-normativo-bot.<tuo-sottodominio>.workers.dev) nei secrets e rilancia."
+            exit 1
+          fi
+          api="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}"
+          curl -fsS "$api/setWebhook" \
+            --data-urlencode "url=${WORKER_URL}" \
+            --data-urlencode "secret_token=${WEBHOOK_SECRET}" \
+            --data-urlencode 'allowed_updates=["message"]' \
+            --data-urlencode "drop_pending_updates=true" >/dev/null
+          node worker/src/commands.mjs | curl -fsS "$api/setMyCommands" --data-urlencode "commands@-" >/dev/null
+          echo "Webhook e comandi registrati."
