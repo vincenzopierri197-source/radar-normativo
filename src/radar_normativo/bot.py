@@ -16,29 +16,28 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from radar_normativo.finance import render_market_briefing
+from radar_normativo.finance import render_finance_report, render_market_briefing
 from radar_normativo.economic import render_economic_report
 
 ROME = ZoneInfo("Europe/Rome")
-HELP = """Comandi Radar Normativo:
+HELP = """Comandi Radar Normativo e Finanziario:
 /start — avvia il bot
-/ultime — ultime pubblicazioni
-/oggi — novità pubblicate oggi
-/ieri — pubblicazioni di ieri
-/ultimi7giorni — pubblicazioni degli ultimi 7 giorni
-/cerca parola — cerca nei titoli e nelle sintesi
-/fonti — fonti configurate
-/filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
-/stato — stato dell'archivio e delle fonti
-/mercati — quotazioni e valutazione dei nove strumenti finanziari
-/economia — quadro sintetico dei mercati e motivazioni
-/stime — scenari condizionali e possibili sviluppi
-/andamento — indicatore sintetico: positivo, misto o negativo
-/rischi — principali segnali di rischio nei dati disponibili
-/analisi — analisi ragionata dei movimenti rilevati
 /aiuto — mostra questo elenco
+/ultime — ultime pubblicazioni normative
+/oggi — pubblicazioni normative di oggi
+/ieri — pubblicazioni normative di ieri
+/ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
+/cerca parola — cerca nei titoli e nelle sintesi
+/fonti — fonti normative monitorate
+/filtri — mostra o configura i filtri personali
+/stato — stato dell'archivio normativo e delle fonti
+/mercati — quotazioni e valutazione dei nove strumenti finanziari
+/finanza — riepilogo finanziario attuale
+/finanzaoggi — alias di /finanza
+/finanzieri — ultima seduta disponibile entro ieri
+/finanza7giorni — andamento finanziario degli ultimi 7 giorni
 
-Nota: le schede sono rilevazioni automatiche, non certificazioni di vigenza."""
+Nota: dati automatici e indicativi; quotazioni eventualmente ritardate. Le schede normative non certificano la vigenza degli atti. I dati finanziari non costituiscono consulenza."""
 
 
 def _read_json(path: str | Path, default: Any) -> Any:
@@ -139,8 +138,12 @@ def handle_command(
         return "Radar Normativo è pronto. Usa /aiuto per vedere i comandi."
     if command == "/mercati":
         return render_market_briefing()
-    if command in {"/economia", "/stime", "/andamento", "/rischi", "/analisi"}:
-        return render_economic_report(command[1:])
+    if command in {"/finanza", "/finanzaoggi"}:
+        return render_finance_report("current")
+    if command == "/finanzieri":
+        return render_finance_report("yesterday")
+    if command == "/finanza7giorni":
+        return render_finance_report("seven_days")
     if command in {"/aiuto", "/help"}:
         return HELP
     if command == "/filtri":
@@ -250,21 +253,20 @@ def run_bot(
     # Pubblica il menu dei comandi nella UI Telegram, oltre a gestirli via polling.
     _api_call(token, "setMyCommands", {"commands": json.dumps([
         {"command": "start", "description": "Avvia il bot"},
-        {"command": "ultime", "description": "Mostra le ultime pubblicazioni"},
-        {"command": "oggi", "description": "Mostra le novità della giornata"},
-        {"command": "ieri", "description": "Mostra le pubblicazioni di ieri"},
-        {"command": "ultimi7giorni", "description": "Mostra le pubblicazioni degli ultimi 7 giorni"},
-        {"command": "cerca", "description": "Cerca una parola o un argomento"},
-        {"command": "fonti", "description": "Elenca le fonti monitorate"},
-        {"command": "filtri", "description": "Configura gli argomenti d'interesse"},
-        {"command": "stato", "description": "Mostra lo stato del sistema"},
-        {"command": "mercati", "description": "Quotazioni e valutazione dei mercati"},
-        {"command": "economia", "description": "Quadro sintetico e motivazioni"},
-        {"command": "stime", "description": "Scenari economici condizionali"},
-        {"command": "andamento", "description": "Indicatore positivo, misto o negativo"},
-        {"command": "rischi", "description": "Segnali di rischio nei dati disponibili"},
-        {"command": "analisi", "description": "Analisi ragionata dei movimenti"},
-        {"command": "aiuto", "description": "Visualizza i comandi disponibili"},
+        {"command": "aiuto", "description": "Mostra l'elenco dei comandi"},
+        {"command": "ultime", "description": "Ultime pubblicazioni normative"},
+        {"command": "oggi", "description": "Pubblicazioni normative di oggi"},
+        {"command": "ieri", "description": "Pubblicazioni normative di ieri"},
+        {"command": "ultimi7giorni", "description": "Pubblicazioni degli ultimi 7 giorni"},
+        {"command": "cerca", "description": "Cerca nei titoli e nelle sintesi"},
+        {"command": "fonti", "description": "Fonti normative monitorate"},
+        {"command": "filtri", "description": "Mostra o configura i filtri"},
+        {"command": "stato", "description": "Stato archivio normativo e fonti"},
+        {"command": "mercati", "description": "Quotazioni dei nove strumenti finanziari"},
+        {"command": "finanza", "description": "Riepilogo finanziario attuale"},
+        {"command": "finanzaoggi", "description": "Alias del riepilogo finanziario"},
+        {"command": "finanzieri", "description": "Ultima seduta disponibile entro ieri"},
+        {"command": "finanza7giorni", "description": "Andamento finanziario degli ultimi 7 giorni"},
     ])})
     offset = 0
     print("Bot Radar Normativo in ascolto. Interrompere con Ctrl+C.")
