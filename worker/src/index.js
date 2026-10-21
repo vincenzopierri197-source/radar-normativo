@@ -33,6 +33,8 @@ export const BOT_COMMANDS = [
   ["stato", "Mostra lo stato del sistema"],
   ["mercati", "Quotazioni e valutazione dei mercati"],
   ["finanza", "Riepilogo finanziario attuale"],
+  ["finanzaoggi", "Alias del riepilogo finanziario"],
+  ["help", "Mostra l’elenco dei comandi"],
   ["finanzieri", "Confronto con l'ultima seduta disponibile entro ieri"],
   ["finanza7giorni", "Andamento finanziario degli ultimi 7 giorni"],
   ["aiuto", "Visualizza i comandi disponibili"],
