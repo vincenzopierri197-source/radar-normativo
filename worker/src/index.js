@@ -11,6 +11,7 @@ const HELP = `Comandi Radar Normativo e Finanziario:
 /ieri — pubblicazioni normative di ieri
 /ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
+/ia domanda — risponde usando l'archivio normativo con IA
 /fonti — fonti normative monitorate
 /filtri — mostra o configura i filtri personali
 /stato — stato dell'archivio normativo e delle fonti
@@ -30,6 +31,7 @@ export const BOT_COMMANDS = [
   ["ieri", "Pubblicazioni normative di ieri"],
   ["ultimi7giorni", "Pubblicazioni normative degli ultimi 7 giorni"],
   ["cerca", "Cerca nei titoli e nelle sintesi"],
+  ["ia", "Risponde usando l'archivio normativo con IA"],
   ["fonti", "Elenca le fonti normative monitorate"],
   ["filtri", "Mostra o configura i filtri personali"],
   ["stato", "Stato dell'archivio e delle fonti"],
@@ -111,6 +113,66 @@ function formatItems(items, empty, limit = 10) {
   });
   const suffix = items.length > limit ? `\n\nMostrate ${limit} di ${items.length} pubblicazioni.` : "";
   return (rows.join("\n\n") + suffix).slice(0, 3900);
+}
+
+// ---------- ricerca assistita con IA ----------
+async function answerWithGroq(question, env, deps = {}) {
+  if (!env.GROQ_API_KEY) {
+    return "La funzione IA non è ancora configurata. L'amministratore deve aggiungere il secret GROQ_API_KEY nelle impostazioni del Worker Cloudflare.";
+  }
+  const { items } = await archiveItems(env);
+  const terms = question.toLowerCase().split(/[^\\p{L}\\p{N}]+/u).filter((t) => t.length > 2);
+  const relevant = items.map((item) => {
+    const title = String(item.title || "");
+    const summary = String(item.summary || "");
+    const topics = Array.isArray(item.topics) ? item.topics.join(" ") : String(item.topics || "");
+    const haystack = `${title} ${summary} ${topics} ${item.source_name || ""}`.toLowerCase();
+    const score = terms.reduce((n, term) => n + (haystack.includes(term) ? 1 : 0), 0);
+    return { item, score };
+  }).filter((row) => row.score > 0).sort((a, b) => b.score - a.score)
+    .slice(0, 10).map(({ item }) => ({
+      titolo: item.title || "Titolo non disponibile",
+      sintesi: item.summary || "",
+      fonte: item.source_name || "Fonte non indicata",
+      data: item.published_at || "Data non indicata",
+      url: item.url || ""
+    }));
+  if (!relevant.length) {
+    return "Non trovo nell'archivio normativo documenti pertinenti alla domanda. Prova con termini più specifici oppure usa /cerca parola.";
+  }
+  const fetchFn = deps.fetchGroq || fetch;
+  let response;
+  try {
+    response = await fetchFn("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.GROQ_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: env.GROQ_MODEL || "openai/gpt-oss-20b",
+        temperature: 0.2,
+        max_tokens: 900,
+        messages: [
+          { role: "system", content: "Sei un assistente di informazione normativa italiana. Rispondi in italiano usando esclusivamente i documenti forniti. Distingui sempre fatti e interpretazioni; non inventare norme, date, obblighi o vigenza. Se i documenti non bastano, dichiaralo. Alla fine indica le fonti pertinenti con titolo, data, fonte e URL. Non fornire consulenza legale definitiva." },
+          { role: "user", content: `Domanda: ${question}\\n\\nDocumenti disponibili (JSON):\\n${JSON.stringify(relevant)}` }
+        ]
+      }),
+      signal: AbortSignal.timeout(25000)
+    });
+  } catch {
+    return "Non riesco a contattare il servizio IA in questo momento. Riprova più tardi.";
+  }
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) return "La chiave Groq non è valida o non è autorizzata. Verifica il secret GROQ_API_KEY su Cloudflare.";
+    return `Il servizio IA ha restituito un errore (HTTP ${response.status}). Riprova più tardi.`;
+  }
+  let payload;
+  try { payload = await response.json(); } catch { return "Il servizio IA ha restituito una risposta non valida."; }
+  const answer = payload?.choices?.[0]?.message?.content;
+  return typeof answer === "string" && answer.trim()
+    ? answer.trim().slice(0, 3900)
+    : "Il servizio IA non ha prodotto una risposta. Riprova con una domanda più specifica.";
 }
 
 // ---------- mercati ----------
@@ -287,6 +349,10 @@ export async function handleCommand(text, chatId, env, deps = {}) {
       const cfg = await ghJson(env, "config/sources.json");
       const nSources = Array.isArray(cfg?.sources) ? cfg.sources.length : 0;
       return `Radar Normativo: bot attivo (Cloudflare Workers).\nElementi in archivio: ${items.length}\nArchivio aggiornato: ${archive.updated_at || "non disponibile"}\nFonti configurate: ${nSources}\nLo stato giuridico degli atti non è certificato automaticamente.`;
+    }
+    case "/ia": {
+      if (!argument) return "Uso: /ia seguito dalla domanda. Esempio: /ia quali novità fiscali sono state pubblicate?";
+      return answerWithGroq(argument, env, deps);
     }
     case "/cerca": {
       if (!argument) return "Uso: /cerca parola o argomento";
