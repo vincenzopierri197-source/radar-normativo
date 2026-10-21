@@ -79,3 +79,23 @@ test("comandi finanziari storici", async () => {
 test("data pubblicazione in fuso Roma", () => {
   assert.equal(publishedDay({ published_at: "2026-10-20T23:30:00+00:00" }), "2026-10-21");
 });
+
+test("comando IA usa i documenti dell'archivio e Groq", async () => {
+  const e = env();
+  assert.match(await handleCommand("/ia decreto fiscale", 1, e), /GROQ_API_KEY/);
+  e.GROQ_API_KEY = "test-key";
+  let requestBody;
+  const answer = await handleCommand("/ia decreto fiscale", 1, e, {
+    fetchGroq: async (url, options) => {
+      assert.match(String(url), /api\\.groq\\.com/);
+      assert.equal(options.headers.Authorization, "Bearer test-key");
+      requestBody = JSON.parse(options.body);
+      return new Response(JSON.stringify({
+        choices: [{ message: { content: "Il documento segnala misure IVA. Fonte: GU." } }]
+      }), { status: 200 });
+    }
+  });
+  assert.match(answer, /misure IVA/);
+  assert.match(JSON.stringify(requestBody), /Nuovo decreto fiscale/);
+  assert.match(JSON.stringify(requestBody), /openai\\/gpt-oss-20b/);
+});
