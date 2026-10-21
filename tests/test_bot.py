@@ -63,3 +63,31 @@ def test_markets_command_returns_financial_briefing(tmp_path, monkeypatch):
     )
     assert "RADAR FINANZIARIO" in response
     assert "Valutazione complessiva" in response
+
+
+def test_yesterday_and_last_seven_days_commands(tmp_path):
+    from datetime import timedelta
+    from zoneinfo import ZoneInfo
+
+    archive, sources, state, latest = _fixtures(tmp_path)
+    today = datetime.now(ZoneInfo("Europe/Rome")).date()
+    yesterday = today - timedelta(days=1)
+    older = today - timedelta(days=10)
+    archive.write_text(json.dumps({
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "items": [
+            {"id": "y", "title": "Atto pubblicato ieri", "summary": "", "url": "https://example.test/y", "source_name": "GU", "published_at": yesterday.isoformat(), "topics": []},
+            {"id": "t", "title": "Atto pubblicato oggi", "summary": "", "url": "https://example.test/t", "source_name": "GU", "published_at": today.isoformat(), "topics": []},
+            {"id": "o", "title": "Atto più vecchio", "summary": "", "url": "https://example.test/o", "source_name": "GU", "published_at": older.isoformat(), "topics": []},
+        ],
+    }), encoding="utf-8")
+    args = {"archive_path": archive, "sources_path": sources, "state_path": state, "latest_path": latest}
+
+    yesterday_result = handle_command("/ieri", 123, **args)
+    assert "Atto pubblicato ieri" in yesterday_result
+    assert "Atto pubblicato oggi" not in yesterday_result
+
+    week_result = handle_command("/ultimi7giorni", 123, **args)
+    assert "Atto pubblicato ieri" in week_result
+    assert "Atto pubblicato oggi" in week_result
+    assert "Atto più vecchio" not in week_result
