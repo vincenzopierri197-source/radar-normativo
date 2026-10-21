@@ -121,7 +121,7 @@ async function answerWithGroq(question, env, deps = {}) {
     return "La funzione IA non è ancora configurata. L'amministratore deve aggiungere il secret GROQ_API_KEY nelle impostazioni del Worker Cloudflare.";
   }
   const { items } = await archiveItems(env);
-  const terms = question.toLowerCase().split(/[^\\p{L}\\p{N}]+/u).filter((t) => t.length > 2);
+  const terms = question.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((t) => t.length > 2);
   const relevant = items.map((item) => {
     const title = String(item.title || "");
     const summary = String(item.summary || "");
@@ -155,7 +155,7 @@ async function answerWithGroq(question, env, deps = {}) {
         max_tokens: 900,
         messages: [
           { role: "system", content: "Sei un assistente di informazione normativa italiana. Rispondi in italiano usando esclusivamente i documenti forniti. Distingui sempre fatti e interpretazioni; non inventare norme, date, obblighi o vigenza. Se i documenti non bastano, dichiaralo. Alla fine indica le fonti pertinenti con titolo, data, fonte e URL. Non fornire consulenza legale definitiva." },
-          { role: "user", content: `Domanda: ${question}\\n\\nDocumenti disponibili (JSON):\\n${JSON.stringify(relevant)}` }
+          { role: "user", content: `Domanda: ${question}\n\nDocumenti disponibili (JSON):\n${JSON.stringify(relevant)}` }
         ]
       }),
       signal: AbortSignal.timeout(25000)
