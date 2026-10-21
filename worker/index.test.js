@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { handleCommand, renderMarkets, renderHistoricalMarkets, publishedDay } from "./src/index.js";
+import { handleCommand, renderMarkets, renderHistoricalMarkets, publishedDay, parseEconomicRss } from "./src/index.js";
 
 const today = new Date().toISOString();
 const archive = { updated_at: today, items: [
@@ -100,4 +100,44 @@ test("comando IA usa i documenti dell'archivio e Groq", async () => {
   assert.match(answer, /misure IVA/);
   assert.match(JSON.stringify(requestBody), /Nuovo decreto fiscale/);
   assert.equal(requestBody.model, "openai/gpt-oss-20b");
+});
+
+
+test("parser RSS economico", () => {
+  const xml = '<?xml version="1.0"?><rss><channel><item><title><![CDATA[Reuters: inflazione in calo & mercati]]></title><link>https://news.google.com/rss/articles/example</link><source url="https://www.reuters.com">Reuters</source><pubDate>Wed, 21 Oct 2026 10:00:00 GMT</pubDate><description>Prezzi e mercati</description></item></channel></rss>';
+  const items = parseEconomicRss(xml);
+  assert.equal(items.length, 1);
+  assert.match(items[0].title, /Reuters: inflazione in calo & mercati/);
+  assert.equal(items[0].source, "Reuters");
+  assert.equal(items[0].description, "Prezzi e mercati");
+});
+
+test("comando economia usa notizie recenti e Groq", async () => {
+  const e = env();
+  e.GROQ_API_KEY = "test-key";
+  let requestBody;
+  const answer = await handleCommand("/economia come stanno andando i mercati?", 1, e, {
+    fetchEconomicNews: async (question) => {
+      assert.match(question, /mercati/);
+      return [{
+        title: "Reuters: mercati globali in rialzo",
+        source: "Reuters",
+        published_at: "Wed, 21 Oct 2026 10:00:00 GMT",
+        description: "Gli investitori valutano i dati macroeconomici.",
+        url: "https://news.google.com/rss/articles/example"
+      }];
+    },
+    fetchGroq: async (url, options) => {
+      assert.match(String(url), /api\.groq\.com/);
+      assert.equal(options.headers.Authorization, "Bearer test-key");
+      requestBody = JSON.parse(options.body);
+      return new Response(JSON.stringify({
+        choices: [{ message: { content: "Le notizie indicano un quadro positivo ma da confermare." } }]
+      }), { status: 200 });
+    }
+  });
+  assert.match(answer, /quadro positivo/);
+  assert.match(answer, /Google News RSS/);
+  assert.match(JSON.stringify(requestBody), /Reuters: mercati globali in rialzo/);
+  assert.match(JSON.stringify(requestBody), /news.google.com/);
 });
