@@ -32,6 +32,7 @@ export const BOT_COMMANDS = [
   ["ultimi7giorni", "Pubblicazioni normative degli ultimi 7 giorni"],
   ["cerca", "Cerca nei titoli e nelle sintesi"],
   ["ia", "Risponde usando l'archivio normativo con IA"],
+  ["ai", "Alias di /ia: risponde usando l'archivio normativo con IA"],
   ["fonti", "Elenca le fonti normative monitorate"],
   ["filtri", "Mostra o configura i filtri personali"],
   ["stato", "Stato dell'archivio e delle fonti"],
