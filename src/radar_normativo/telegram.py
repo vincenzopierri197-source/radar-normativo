@@ -26,8 +26,9 @@ def _send_message(token:str,chat_id:str,text:str)->None:
 def _render_chunks(items:list[dict[str,Any]],include_finance:bool)->list[tuple[list[dict[str,Any]],str]]:
  finance=render_market_briefing() if include_finance else ""
  if not items:
-  text=("📡 RADAR NORMATIVO — RIEPILOGO GIORNALIERO\nNessuna nuova pubblicazione normativa rilevata oggi.\n\n"+finance) if include_finance else ""
-  return [([],text)] if text else []
+  text="📡 RADAR NORMATIVO — RIEPILOGO GIORNALIERO\nNessuna nuova pubblicazione normativa rilevata oggi."
+  if finance: text += "\n\n"+finance
+  return [([],text)]
  chunks=[]; current=[]
  for item in items:
   candidate=current+[item]; msg=render_briefing(candidate,limit=len(candidate)).strip()
