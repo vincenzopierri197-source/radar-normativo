@@ -3,41 +3,41 @@
 
 const TZ = "Europe/Rome";
 
-const HELP = `Comandi Radar Normativo:
+const HELP = `Comandi Radar Normativo e Finanziario:
 /start — avvia il bot
-/ultime — ultime pubblicazioni
-/oggi — novità pubblicate oggi
-/ieri — pubblicazioni di ieri
-/ultimi7giorni — pubblicazioni degli ultimi 7 giorni
+/aiuto — mostra questo elenco
+/ultime — ultime pubblicazioni normative
+/oggi — pubblicazioni normative di oggi
+/ieri — pubblicazioni normative di ieri
+/ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
-/fonti — fonti configurate
-/filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
-/stato — stato dell'archivio e delle fonti
+/fonti — fonti normative monitorate
+/filtri — mostra o configura i filtri personali
+/stato — stato dell'archivio normativo e delle fonti
 /mercati — quotazioni e valutazione dei nove strumenti finanziari
 /finanza — riepilogo finanziario attuale
-/finanzieri — confronto con l'ultima seduta disponibile entro ieri
-/finanza7giorni — andamento degli strumenti negli ultimi 7 giorni
-/aiuto — mostra questo elenco
+/finanzaoggi — alias di /finanza
+/finanzieri — ultima seduta disponibile entro ieri
+/finanza7giorni — andamento finanziario degli ultimi 7 giorni
 
-Nota: le schede sono rilevazioni automatiche, non certificazioni di vigenza.`;
+Nota: dati automatici e indicativi; quotazioni eventualmente ritardate. Le schede normative non certificano la vigenza degli atti. I dati finanziari non costituiscono consulenza.`;
 
 export const BOT_COMMANDS = [
   ["start", "Avvia il bot"],
-  ["ultime", "Mostra le ultime pubblicazioni"],
-  ["oggi", "Mostra le novità della giornata"],
-  ["ieri", "Mostra le pubblicazioni di ieri"],
-  ["ultimi7giorni", "Mostra le pubblicazioni degli ultimi 7 giorni"],
-  ["cerca", "Cerca una parola o un argomento"],
-  ["fonti", "Elenca le fonti monitorate"],
-  ["filtri", "Configura gli argomenti d'interesse"],
-  ["stato", "Mostra lo stato del sistema"],
-  ["mercati", "Quotazioni e valutazione dei mercati"],
+  ["aiuto", "Mostra tutti i comandi disponibili"],
+  ["ultime", "Ultime pubblicazioni normative"],
+  ["oggi", "Pubblicazioni normative di oggi"],
+  ["ieri", "Pubblicazioni normative di ieri"],
+  ["ultimi7giorni", "Pubblicazioni normative degli ultimi 7 giorni"],
+  ["cerca", "Cerca nei titoli e nelle sintesi"],
+  ["fonti", "Elenca le fonti normative monitorate"],
+  ["filtri", "Mostra o configura i filtri personali"],
+  ["stato", "Stato dell'archivio e delle fonti"],
+  ["mercati", "Quotazioni dei nove strumenti finanziari"],
   ["finanza", "Riepilogo finanziario attuale"],
   ["finanzaoggi", "Alias del riepilogo finanziario"],
-  ["help", "Mostra l’elenco dei comandi"],
-  ["finanzieri", "Confronto con l'ultima seduta disponibile entro ieri"],
+  ["finanzieri", "Quotazioni dell'ultima seduta entro ieri"],
   ["finanza7giorni", "Andamento finanziario degli ultimi 7 giorni"],
-  ["aiuto", "Visualizza i comandi disponibili"],
 ];
 
 const INSTRUMENTS = [
