@@ -81,6 +81,9 @@ jobs:
           git add data/archive.json
           if ! git diff --cached --quiet; then
             git commit -m "data: update regulatory archive"
+            # L'altro radar può aggiornare main in parallelo: integra prima i commit remoti.
+            git fetch origin main
+            git rebase origin/main
             git push origin HEAD:main
           fi
 
@@ -105,6 +108,9 @@ jobs:
           git add -f data/telegram_sent.json
           if ! git diff --cached --quiet; then
             git commit -m "data: update Telegram delivery ledger"
+            # Evita il push non-fast-forward se il radar finanziario aggiorna main in parallelo.
+            git fetch origin main
+            git rebase origin/main
             git push origin HEAD:main
           fi
 
