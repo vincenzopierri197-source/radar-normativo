@@ -14,6 +14,9 @@ const HELP = `Comandi Radar Normativo:
 /filtri — mostra i filtri; /filtri parola1, parola2 per impostarli; /filtri off per disattivarli
 /stato — stato dell'archivio e delle fonti
 /mercati — quotazioni e valutazione dei nove strumenti finanziari
+/finanza — riepilogo finanziario attuale
+/finanzieri — confronto con l'ultima seduta disponibile entro ieri
+/finanza7giorni — andamento degli strumenti negli ultimi 7 giorni
 /aiuto — mostra questo elenco
 
 Nota: le schede sono rilevazioni automatiche, non certificazioni di vigenza.`;
@@ -29,6 +32,9 @@ export const BOT_COMMANDS = [
   ["filtri", "Configura gli argomenti d'interesse"],
   ["stato", "Mostra lo stato del sistema"],
   ["mercati", "Quotazioni e valutazione dei mercati"],
+  ["finanza", "Riepilogo finanziario attuale"],
+  ["finanzieri", "Confronto con l'ultima seduta disponibile entro ieri"],
+  ["finanza7giorni", "Andamento finanziario degli ultimi 7 giorni"],
   ["aiuto", "Visualizza i comandi disponibili"],
 ];
 
@@ -127,6 +133,61 @@ async function fetchChart(symbol) {
   };
 }
 
+// Dati storici giornalieri per i comandi finanziari con data.
+async function fetchChartHistory(symbol) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=1mo&interval=1d`;
+  const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 RadarNormativo/1.0" }, signal: AbortSignal.timeout(9000) });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const payload = await r.json();
+  const result = payload?.chart?.result?.[0];
+  if (!result) throw new Error("storico non disponibile");
+  const timestamps = result.timestamp || [];
+  const closes = result.indicators?.quote?.[0]?.close || [];
+  return timestamps.map((ts, i) => ({ day: romeDay(new Date(ts * 1000)), close: closes[i] == null ? null : Number(closes[i]) }))
+    .filter((row) => row.close != null && Number.isFinite(row.close))
+    .sort((a, b) => a.day.localeCompare(b.day));
+}
+
+export async function renderHistoricalMarkets(mode, fetchFn = fetchChartHistory, now = new Date()) {
+  const today = romeDay(now);
+  const target = mode === "yesterday" ? shiftDay(today, -1) : today;
+  const start = shiftDay(today, -7);
+  const rows = await Promise.all(INSTRUMENTS.map(async ([name, symbol, region]) => {
+    try {
+      const history = await fetchFn(symbol);
+      if (!history.length) throw new Error("nessuna seduta disponibile");
+      let latest;
+      let baseline;
+      if (mode === "yesterday") {
+        latest = [...history].reverse().find((p) => p.day <= target);
+        if (!latest || latest.day < shiftDay(target, -4)) throw new Error("nessuna seduta recente");
+        const idx = history.findIndex((p) => p.day === latest.day);
+        baseline = idx > 0 ? history[idx - 1] : null;
+      } else {
+        latest = [...history].reverse().find((p) => p.day <= today);
+        baseline = history.find((p) => p.day >= start && p.day < latest?.day);
+        if (!baseline) baseline = [...history].reverse().find((p) => p.day < (latest?.day || today));
+        if (!latest || !baseline) throw new Error("storico insufficiente");
+      }
+      return { name, symbol, region, latest, baseline, ok: true };
+    } catch (e) {
+      return { name, symbol, region, ok: false, error: String(e.message || e) };
+    }
+  }));
+  const title = mode === "yesterday" ? `📈 RADAR FINANZIARIO — ultima seduta disponibile entro ieri (${target})` : `📈 RADAR FINANZIARIO — andamento ultimi 7 giorni`;
+  const lines = [title, ""];
+  for (const row of rows) {
+    if (!row.ok) { lines.push(`⚪ ${row.name}: dati storici non disponibili`); continue; }
+    const pct = row.baseline ? (row.latest.close / row.baseline.close - 1) * 100 : null;
+    const period = mode === "yesterday" ? "var. giornaliera" : "var. periodo";
+    const change = pct == null ? "variazione n.d." : `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
+    const icon = pct == null ? "⚪" : pct > 0.05 ? "🟢" : pct < -0.05 ? "🔴" : "🟡";
+    lines.push(`${icon} ${row.name}: ${row.latest.close.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })} (${change}) · dato ${row.latest.day}${row.baseline ? ` · base ${row.baseline.day}` : ""}`);
+  }
+  lines.push("", "Dati storici indicativi da Yahoo Finance, eventualmente ritardati. Alcuni strumenti possono non avere una quotazione per ogni giorno. Non è consulenza finanziaria.");
+  return lines.join("\\n").slice(0, 3900);
+}
+
 const stampFmt = new Intl.DateTimeFormat("it-IT", { timeZone: TZ, day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
 const nowFmt = new Intl.DateTimeFormat("it-IT", { timeZone: TZ, day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
 const sgn = (n) => (n >= 0 ? "+" : "") + n.toFixed(2);
@@ -192,7 +253,13 @@ export async function handleCommand(text, chatId, env, deps = {}) {
     case "/help":
       return HELP;
     case "/mercati":
+    case "/finanza":
+    case "/finanzaoggi":
       return renderMarkets(deps.fetchChart || fetchChart);
+    case "/finanzieri":
+      return renderHistoricalMarkets("yesterday", deps.fetchChartHistory || fetchChartHistory, deps.now || new Date());
+    case "/finanza7giorni":
+      return renderHistoricalMarkets("week", deps.fetchChartHistory || fetchChartHistory, deps.now || new Date());
     case "/filtri": {
       if (!env.STATE) return "Filtri non disponibili: manca il KV 'STATE' del Worker.";
       if (argument.toLowerCase() === "off") {
