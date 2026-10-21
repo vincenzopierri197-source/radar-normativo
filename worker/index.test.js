@@ -28,6 +28,8 @@ test("start, aiuto, fonti", async () => {
   const e = env();
   assert.match(await handleCommand("/start", 1, e), /pronto/);
   assert.match(await handleCommand("/aiuto@MioBot", 1, e), /\/ultime/);
+  assert.match(await handleCommand("/aiuto", 1, e), /\/ai domanda/);
+  assert.match(await handleCommand("/ai decreto fiscale", 1, e), /GROQ_API_KEY/);
   assert.match(await handleCommand("/fonti", 1, e), /Gazzetta Ufficiale/);
 });
 
