@@ -80,3 +80,19 @@ def test_successfully_sent_item_is_not_sent_twice(tmp_path):
 
     assert len(calls) == 1
     assert result == {"sent": 0, "pending": 0, "skipped": 1}
+
+
+def test_sends_daily_notice_when_no_new_items(tmp_path):
+    source = tmp_path / "new_items.json"
+    ledger = tmp_path / "ledger.json"
+    source.write_text(json.dumps({"items": []}), encoding="utf-8")
+    sent = []
+
+    result = send_new_items(
+        source, ledger, token="t", chat_id="c",
+        sender=lambda token, chat_id, message: sent.append(message),
+    )
+
+    assert result == {"sent": 0, "pending": 0, "skipped": 0}
+    assert len(sent) == 1
+    assert "Nessuna nuova pubblicazione normativa" in sent[0]
