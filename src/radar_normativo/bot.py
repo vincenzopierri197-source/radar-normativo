@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 from radar_normativo.finance import render_finance_report, render_market_briefing
 from radar_normativo.economic import render_economic_report
+from radar_normativo.ai_search import answer_with_groq
 
 ROME = ZoneInfo("Europe/Rome")
 HELP = """Comandi Radar Normativo e Finanziario:
@@ -28,6 +29,7 @@ HELP = """Comandi Radar Normativo e Finanziario:
 /ieri — pubblicazioni normative di ieri
 /ultimi7giorni — pubblicazioni normative degli ultimi 7 giorni
 /cerca parola — cerca nei titoli e nelle sintesi
+/ia domanda — ricerca assistita da AI nell'archivio normativo (Groq)
 /fonti — fonti normative monitorate
 /filtri — mostra o configura i filtri personali
 /stato — stato dell'archivio normativo e delle fonti
@@ -196,6 +198,10 @@ def handle_command(
             and _matches_filter(item, _filters(state, chat_key))
         ]
         return _format_items(found, f"Nessun risultato per «{argument}».", limit=10)
+    if command == "/ia":
+        if not argument:
+            return "Uso: /ia domanda in linguaggio naturale. Esempio: /ia quali pubblicazioni riguardano il lavoro?"
+        return answer_with_groq(argument, archive_path=archive_path)
     if command in {"/ultime", "/oggi", "/ieri", "/ultimi7giorni"}:
         items = _items(archive_path)
         items.sort(key=lambda item: str(item.get("published_at") or ""), reverse=True)
@@ -259,6 +265,7 @@ def run_bot(
         {"command": "ieri", "description": "Pubblicazioni normative di ieri"},
         {"command": "ultimi7giorni", "description": "Pubblicazioni degli ultimi 7 giorni"},
         {"command": "cerca", "description": "Cerca nei titoli e nelle sintesi"},
+        {"command": "ia", "description": "Ricerca AI in linguaggio naturale (Groq)"},
         {"command": "fonti", "description": "Fonti normative monitorate"},
         {"command": "filtri", "description": "Mostra o configura i filtri"},
         {"command": "stato", "description": "Stato archivio normativo e fonti"},
