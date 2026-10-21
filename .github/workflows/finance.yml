@@ -3,11 +3,11 @@ name: Radar finanziario indipendente
 on:
   workflow_dispatch:
   schedule:
-    # Esegue alle 08:10 Europe/Rome sia con ora legale sia con ora solare.
-    - cron: "10 6,7 * * *"
+    # Retry ogni 5 minuti; il marker impedisce invii doppi.
+    - cron: "*/5 6,7 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: radar-finanziario-main
@@ -17,19 +17,32 @@ jobs:
   financial-briefing:
     runs-on: ubuntu-24.04
     steps:
-      - name: Verifica finestra delle 08:10 italiane
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Verifica finestra italiana e idempotenza giornaliera
         id: window
         shell: bash
         run: |
-          if [[ "${GITHUB_EVENT_NAME}" != "schedule" || "$(TZ=Europe/Rome date +%H%M)" == "0810" ]]; then
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" != "schedule" ]]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
-
-      - name: Checkout
-        if: steps.window.outputs.run == 'true'
-        uses: actions/checkout@v6
+          now="$(TZ=Europe/Rome date +%H%M)"
+          today="$(TZ=Europe/Rome date +%F)"
+          # Target 08:10; recupero fino alle 09:30 se GitHub ritarda.
+          if [[ "$now" < "0810" || "$now" > "0930" ]]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Fuori dalla finestra di recupero: $now"
+            exit 0
+          fi
+          if [[ -f data/.financial_last_run_date ]] && [[ "$(cat data/.financial_last_run_date)" == "$today" ]]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Radar finanziario già eseguito oggi ($today)."
+            exit 0
+          fi
+          echo "run=true" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         if: steps.window.outputs.run == 'true'
@@ -51,10 +64,25 @@ jobs:
           set -euo pipefail
           if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
             echo "Telegram non configurato: invio saltato."
-            exit 0
+            exit 1
           fi
           printf '{"items": []}\n' > /tmp/radar-finanziario-items.json
           python -m radar_normativo telegram \
             --input /tmp/radar-finanziario-items.json \
             --ledger /tmp/radar-finanziario-ledger.json \
             --finance
+
+      - name: Mark successful daily run
+        if: steps.window.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data
+          TZ=Europe/Rome date +%F > data/.financial_last_run_date
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/.financial_last_run_date
+          git commit -m "chore: mark financial radar daily run"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
