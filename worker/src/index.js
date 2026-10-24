@@ -207,9 +207,13 @@ export function parseEconomicRss(xml) {
 }
 async function searchEconomicNews(question, fetchFn = fetch) {
   const q = String(question || "").replace(/[\r\n]+/g, " ").slice(0, 240).trim();
+  // Prima ricerca mirata sulle testate finanziarie; poi ricerche generiche.
+  // Non rendere obbligatoria la presenza di una testata specifica: Google News
+  // spesso non restituisce risultati quando si combinano molti site: con OR.
   const queries = [
-    { q: `(${q}) (site:reuters.com OR site:bloomberg.com OR site:ft.com OR site:cnbc.com OR site:finance.yahoo.com OR site:marketwatch.com) when:7d`, hl: "en-US", gl: "US", ceid: "US:en" },
-    { q: `(${q}) when:7d`, hl: "it", gl: "IT", ceid: "IT:it" }
+    { q: `${q} when:7d`, hl: "it", gl: "IT", ceid: "IT:it" },
+    { q: `${q} when:7d`, hl: "en-US", gl: "US", ceid: "US:en" },
+    { q: `(${q}) (site:reuters.com OR site:bloomberg.com OR site:ft.com OR site:cnbc.com OR site:finance.yahoo.com OR site:marketwatch.com) when:7d`, hl: "en-US", gl: "US", ceid: "US:en" }
   ];
   const feeds = await Promise.all(queries.map(async (query) => {
     const url = "https://news.google.com/rss/search?" + new URLSearchParams({
