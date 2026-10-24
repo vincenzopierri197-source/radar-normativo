@@ -26,29 +26,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "\${GITHUB_EVENT_NAME}" == "push" ]]; then
-            echo "run=true" >> "\$GITHUB_OUTPUT"
-            echo "notify=false" >> "\$GITHUB_OUTPUT"
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "notify=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "notify=true" >> "\$GITHUB_OUTPUT"
-          if [[ "\${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            echo "run=true" >> "\$GITHUB_OUTPUT"
+          echo "notify=true" >> "$GITHUB_OUTPUT"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           now="$(TZ=Europe/Rome date +%H%M)"
           today="$(TZ=Europe/Rome date +%F)"
           if [[ "$now" < "0800" || "$now" > "0930" ]]; then
-            echo "run=false" >> "\$GITHUB_OUTPUT"
+            echo "run=false" >> "$GITHUB_OUTPUT"
             echo "Fuori dalla finestra di recupero: $now"
             exit 0
           fi
           if [[ -f data/.normative_last_run_date ]] && [[ "$(cat data/.normative_last_run_date)" == "$today" ]]; then
-            echo "run=false" >> "\$GITHUB_OUTPUT"
+            echo "run=false" >> "$GITHUB_OUTPUT"
             echo "Radar normativo già eseguito oggi ($today)."
             exit 0
           fi
-          echo "run=true" >> "\$GITHUB_OUTPUT"
+          echo "run=true" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         if: steps.window.outputs.run == 'true'
@@ -112,8 +112,8 @@ jobs:
       - name: Send normative daily Telegram briefing
         if: steps.window.outputs.run == 'true' && steps.window.outputs.notify == 'true'
         env:
-          TELEGRAM_BOT_TOKEN: \${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: \${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           set -euo pipefail
           if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
