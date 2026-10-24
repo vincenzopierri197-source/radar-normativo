@@ -9,6 +9,8 @@ from calendar import timegm
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 from urllib.parse import urlsplit, urlunsplit
 
 import feedparser
@@ -47,8 +49,8 @@ def _entry_title(entry: Any) -> str:
         cleaned_title = match.group(1).strip()
         if cleaned_title:
             return cleaned_title
-    # Se il feed contiene solo l'identificativo CELEX, lo conserva.
     return title
+
 
 def _entry_summary(entry: Any) -> str:
     summary = _first_text(entry, "summary", "description")
@@ -69,6 +71,34 @@ def _entry_date(entry: Any) -> str | None:
     return _first_text(entry, "published", "updated") or None
 
 
+def _parse_feed(url: str) -> Any:
+    """Scarica un feed con timeout e User-Agent espliciti, poi lo analizza."""
+    request = Request(
+        url,
+        headers={
+            "User-Agent": "RadarNormativo/1.0 (+https://github.com/vincenzopierri197-source/radar-normativo)",
+            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+        },
+    )
+    try:
+        with urlopen(request, timeout=25) as response:
+            status = getattr(response, "status", 200)
+            if status < 200 or status >= 300:
+                raise RuntimeError(f"HTTP {status} durante il download del feed")
+            payload = response.read()
+    except HTTPError as exc:
+        raise RuntimeError(f"HTTP {exc.code} durante il download del feed") from exc
+    except URLError as exc:
+        reason = getattr(exc, "reason", exc)
+        raise RuntimeError(f"errore di rete durante il download del feed: {reason}") from exc
+    except TimeoutError as exc:
+        raise RuntimeError("timeout durante il download del feed (25 secondi)") from exc
+
+    if not payload.strip():
+        raise ValueError("il server ha restituito una risposta vuota")
+    return feedparser.parse(payload)
+
+
 def collect_sources(config_path: str | Path) -> dict[str, Any]:
     """Legge i feed configurati e restituisce una scansione serializzabile."""
     config = json.loads(Path(config_path).read_text(encoding="utf-8"))
@@ -82,9 +112,9 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
             source_results.append({"name": name, "ok": False, "required": source.get("required", True), "error": "URL mancante"})
             continue
         try:
-            feed = feedparser.parse(url)
+            feed = _parse_feed(url)
             if getattr(feed, "bozo", False) and not feed.entries:
-                raise ValueError(str(getattr(feed, "bozo_exception", "feed non leggibile")))
+                raise ValueError(f"RSS/Atom non valido: {getattr(feed, 'bozo_exception', 'errore di parsing sconosciuto')}")
             count = 0
             for entry in feed.entries:
                 link = _canonical_url(_first_text(entry, "link"))
@@ -111,7 +141,7 @@ def collect_sources(config_path: str | Path) -> dict[str, Any]:
                 count += 1
             source_results.append({"name": name, "ok": True, "required": source.get("required", True), "items": count})
         except Exception as exc:
-            source_results.append({"name": name, "ok": False, "required": source.get("required", True), "error": str(exc)[:300]})
+            source_results.append({"name": name, "ok": False, "required": source.get("required", True), "error": f"{type(exc).__name__}: {exc}"[:300]})
 
     return {
         "schema_version": 1,
