@@ -1,9 +1,13 @@
 name: Radar normativo indipendente
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/radar_normativo/collector.py"
+      - "config/sources.json"
+      - ".github/workflows/collect.yml"
   schedule:
-    # Retry ogni 5 minuti nelle ore UTC che coprono le 08:00 italiane
-    # sia con ora legale sia con ora solare. Il marker evita invii doppi.
     - cron: "*/5 6,7 * * *"
 permissions:
   contents: write
@@ -22,24 +26,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "${GITHUB_EVENT_NAME}" != "schedule" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
+          if [[ "\${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo "run=true" >> "\$GITHUB_OUTPUT"
+            echo "notify=false" >> "\$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "notify=true" >> "\$GITHUB_OUTPUT"
+          if [[ "\${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "run=true" >> "\$GITHUB_OUTPUT"
             exit 0
           fi
           now="$(TZ=Europe/Rome date +%H%M)"
           today="$(TZ=Europe/Rome date +%F)"
-          # Finestra di recupero: dalle 08:00 alle 09:30 italiane.
           if [[ "$now" < "0800" || "$now" > "0930" ]]; then
-            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "run=false" >> "\$GITHUB_OUTPUT"
             echo "Fuori dalla finestra di recupero: $now"
             exit 0
           fi
           if [[ -f data/.normative_last_run_date ]] && [[ "$(cat data/.normative_last_run_date)" == "$today" ]]; then
-            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "run=false" >> "\$GITHUB_OUTPUT"
             echo "Radar normativo già eseguito oggi ($today)."
             exit 0
           fi
-          echo "run=true" >> "$GITHUB_OUTPUT"
+          echo "run=true" >> "\$GITHUB_OUTPUT"
 
       - name: Set up Python
         if: steps.window.outputs.run == 'true'
@@ -63,9 +72,13 @@ jobs:
           import json
           from pathlib import Path
           r=json.loads(Path("data/latest.json").read_text())
-          for s in r["source_results"]: print(f"{'OK' if s['ok'] else 'ERRORE'}: {s['name']} — {s.get('items',0)}")
+          for s in r["source_results"]:
+              status = "OK" if s["ok"] else "ERRORE"
+              print(f"{status}: {s['name']} — {s.get('items',0)}")
+              if not s["ok"]:
+                  print(f"  Dettaglio: {s.get('error', 'errore non specificato')}")
           failed=[s for s in r["source_results"] if not s["ok"] and s.get("required",True)]
-          if failed: raise SystemExit(f"{len(failed)} fonti obbligatorie non raggiungibili")
+          if failed: raise SystemExit(f"{len(failed)} fonti obbligatorie non raggiungibili; dettagli sopra")
           PY
 
       - name: Update archive
@@ -97,10 +110,10 @@ jobs:
           fi
 
       - name: Send normative daily Telegram briefing
-        if: steps.window.outputs.run == 'true'
+        if: steps.window.outputs.run == 'true' && steps.window.outputs.notify == 'true'
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: \${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: \${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           set -euo pipefail
           if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
@@ -117,7 +130,6 @@ jobs:
           git add -f data/telegram_sent.json
           if ! git diff --cached --quiet; then
             git commit -m "data: update Telegram delivery ledger"
-            # Evita il push non-fast-forward se il radar finanziario aggiorna main in parallelo.
             for attempt in 1 2 3 4 5; do
               git fetch origin main
               git rebase origin/main
@@ -134,7 +146,7 @@ jobs:
           fi
 
       - name: Mark successful daily run
-        if: steps.window.outputs.run == 'true'
+        if: steps.window.outputs.run == 'true' && steps.window.outputs.notify == 'true'
         shell: bash
         run: |
           set -euo pipefail
