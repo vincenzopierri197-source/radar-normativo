@@ -8,7 +8,7 @@ on:
       - "config/sources.json"
       - ".github/workflows/collect.yml"
   schedule:
-    - cron: "*/5 6,7 * * *"
+    - cron: "17 6-12 * * *"
 permissions:
   contents: write
 concurrency:
@@ -36,13 +36,7 @@ jobs:
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          now="$(TZ=Europe/Rome date +%H%M)"
           today="$(TZ=Europe/Rome date +%F)"
-          if [[ "$now" < "0800" || "$now" > "0930" ]]; then
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "Fuori dalla finestra di recupero: $now"
-            exit 0
-          fi
           if [[ -f data/.normative_last_run_date ]] && [[ "$(cat data/.normative_last_run_date)" == "$today" ]]; then
             echo "run=false" >> "$GITHUB_OUTPUT"
             echo "Radar normativo già eseguito oggi ($today)."
