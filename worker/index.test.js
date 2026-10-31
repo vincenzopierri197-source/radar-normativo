@@ -61,6 +61,38 @@ test("mercati con dati simulati e con errori", async () => {
   assert.match(ko, /Dati insufficienti/);
 });
 
+test("valutazione mercati integra Groq e verifica davvero la chiave", async () => {
+  const e = env();
+  e.GROQ_API_KEY = "test-key";
+  let calls = 0;
+  const market = await renderMarkets(
+    async () => ({ value: 100, change: -1.25, currency: "EUR", time: new Date() }),
+    e,
+    { fetchGroq: async (url, options) => {
+      calls++;
+      assert.match(String(url), /api\\.groq\\.com/);
+      assert.equal(options.headers.Authorization, "Bearer test-key");
+      const body = JSON.parse(options.body);
+      assert.match(JSON.stringify(body.messages), /variazione_percentuale/);
+      return new Response(JSON.stringify({ choices: [{ message: { content: "Il campione mostra debolezza diffusa; un solo giorno non conferma un trend." } }] }), { status: 200 });
+    } }
+  );
+  assert.equal(calls, 1);
+  assert.match(market, /LETTURA IA GROQ/);
+  assert.match(market, /debolezza diffusa/);
+  const check = await handleCommand("/groqtest", 1, e, {
+    fetchGroq: async (url, options) => {
+      assert.equal(options.headers.Authorization, "Bearer test-key");
+      return new Response(JSON.stringify({ choices: [{ message: { content: "OK" } }] }), { status: 200 });
+    }
+  });
+  assert.match(check, /Collegamento Groq riuscito/);
+  const invalid = await handleCommand("/groqtest", 1, e, {
+    fetchGroq: async () => new Response("unauthorized", { status: 401 })
+  });
+  assert.match(invalid, /HTTP 401\/403/);
+});
+
 test("comandi finanziari storici", async () => {
   const history = [
     { day: "2026-10-14", close: 100 },
