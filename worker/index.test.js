@@ -70,7 +70,7 @@ test("valutazione mercati integra Groq e verifica davvero la chiave", async () =
     e,
     { fetchGroq: async (url, options) => {
       calls++;
-      assert.match(String(url), /api\\.groq\\.com/);
+      assert.match(String(url), /api\.groq\.com/);
       assert.equal(options.headers.Authorization, "Bearer test-key");
       const body = JSON.parse(options.body);
       assert.match(JSON.stringify(body.messages), /variazione_percentuale/);
