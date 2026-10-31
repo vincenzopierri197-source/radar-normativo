@@ -17,7 +17,8 @@ const HELP = `Comandi Radar Normativo e Finanziario:
 /fonti — fonti normative monitorate
 /filtri — mostra o configura i filtri personali
 /stato — stato dell'archivio normativo e delle fonti
-/mercati — quotazioni e valutazione dei nove strumenti finanziari
+/mercati — quotazioni e valutazione IA dei nove strumenti finanziari
+/groqtest — verifica in tempo reale del collegamento Groq
 /finanza — riepilogo finanziario attuale
 /finanzaoggi — alias di /finanza
 /finanzieri — ultima seduta disponibile entro ieri
@@ -39,7 +40,8 @@ export const BOT_COMMANDS = [
   ["fonti", "Elenca le fonti normative monitorate"],
   ["filtri", "Mostra o configura i filtri personali"],
   ["stato", "Stato dell'archivio e delle fonti"],
-  ["mercati", "Quotazioni dei nove strumenti finanziari"],
+  ["mercati", "Quotazioni e valutazione IA dei nove strumenti finanziari"],
+  ["groqtest", "Verifica il collegamento al servizio IA Groq"],
   ["finanza", "Riepilogo finanziario attuale"],
   ["finanzaoggi", "Alias del riepilogo finanziario"],
   ["finanzieri", "Quotazioni dell'ultima seduta entro ieri"],
@@ -365,7 +367,39 @@ const stampFmt = new Intl.DateTimeFormat("it-IT", { timeZone: TZ, day: "2-digit"
 const nowFmt = new Intl.DateTimeFormat("it-IT", { timeZone: TZ, day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
 const sgn = (n) => (n >= 0 ? "+" : "") + n.toFixed(2);
 
-export async function renderMarkets(fetchFn = fetchChart) {
+async function requestGroq(env, messages, deps = {}, maxTokens = 500) {
+  if (!env?.GROQ_API_KEY) return { ok: false, status: 0, error: "chiave_mancante" };
+  const fetchFn = deps.fetchGroq || fetch;
+  try {
+    const response = await fetchFn("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${env.GROQ_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: env.GROQ_MODEL || "openai/gpt-oss-20b",
+        temperature: 0.2,
+        max_tokens: maxTokens,
+        messages
+      }),
+      signal: AbortSignal.timeout(25000)
+    });
+    if (!response.ok) return { ok: false, status: response.status, error: response.status === 401 || response.status === 403 ? "chiave_non_valida" : "errore_api" };
+    const payload = await response.json();
+    const answer = payload?.choices?.[0]?.message?.content;
+    if (typeof answer !== "string" || !answer.trim()) return { ok: false, status: 200, error: "risposta_vuota" };
+    return { ok: true, status: 200, text: answer.trim() };
+  } catch {
+    return { ok: false, status: 0, error: "rete_o_timeout" };
+  }
+}
+
+function groqErrorLabel(result) {
+  if (result.error === "chiave_mancante") return "Groq non configurato: manca GROQ_API_KEY.";
+  if (result.error === "chiave_non_valida") return "Groq non ha accettato la chiave (HTTP 401/403): controllare il secret GROQ_API_KEY su Cloudflare.";
+  if (result.status) return `Groq temporaneamente non disponibile (HTTP ${result.status}).`;
+  return "Groq non raggiungibile o in timeout; valutazione numerica mantenuta senza IA.";
+}
+
+export async function renderMarkets(fetchFn = fetchChart, env = null, deps = {}) {
   const rows = await Promise.all(
     INSTRUMENTS.map(async ([name, symbol, region]) => {
       try {
@@ -378,20 +412,24 @@ export async function renderMarkets(fetchFn = fetchChart) {
   const lines = ["📈 RADAR FINANZIARIO", `🕒 Rilevazione: ${nowFmt.format(new Date()).replace(",", "")} (ora italiana)`, ""];
   const changes = [];
   const regions = {};
+  const available = [];
   for (const r of rows) {
     if (!r.ok) { lines.push(`⚪ ${r.name} (${r.symbol}): dato non disponibile`); continue; }
     const value = `${r.value.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })} ${r.currency}`.trim();
     let icon = "⚪", change = "variazione n.d.";
-    if (r.change != null) {
-      change = `${sgn(r.change)}%`;
-      icon = r.change > 0.05 ? "🟢" : r.change < -0.05 ? "🔴" : "🟡";
-      changes.push(r.change);
-      (regions[r.region] ||= []).push(r.change);
+    if (r.change != null && Number.isFinite(Number(r.change))) {
+      const pct = Number(r.change);
+      change = `${sgn(pct)}%`;
+      icon = pct > 0.05 ? "🟢" : pct < -0.05 ? "🔴" : "🟡";
+      changes.push(pct);
+      (regions[r.region] ||= []).push(pct);
+      available.push({ nome: r.name, area: r.region, variazione_percentuale: Number(pct.toFixed(4)) });
     }
     const when = r.time ? stampFmt.format(r.time).replace(",", "") : "ora n.d.";
     lines.push(`${icon} ${r.name}: ${value} (${change}) · ${when}`);
   }
-  lines.push("", "VALUTAZIONE COMPLESSIVA");
+  lines.push("", "VALUTAZIONE QUANTITATIVA");
+  let metrics = null;
   if (!changes.length) {
     lines.push("Dati insufficienti per una valutazione complessiva.");
   } else {
@@ -400,14 +438,37 @@ export async function renderMarkets(fetchFn = fetchChart) {
     const neg = changes.filter((x) => x < -0.05).length;
     const neu = changes.length - pos - neg;
     const mood = avg > 0.15 && pos > neg ? "prevalentemente positivo" : avg < -0.15 && neg > pos ? "prevalentemente negativo" : "misto o stabile";
+    const reg = Object.entries(regions).map(([k, v]) => [v.reduce((a, b) => a + b, 0) / v.length, k]).sort((a, b) => a[0] - b[0]);
+    metrics = { strumenti_disponibili: changes.length, positivi: pos, negativi: neg, stabili: neu, media_semplice_percentuale: Number(avg.toFixed(4)), quadro_regola: mood, gruppi: reg.map(([media, area]) => ({ area, media_percentuale: Number(media.toFixed(4)) })) };
     lines.push(`Quadro ${mood}; media semplice indicativa dei ${changes.length} strumenti disponibili: ${sgn(avg)}%.`);
     lines.push(`Positivi: ${pos}; negativi: ${neg}; stabili: ${neu}.`);
-    const reg = Object.entries(regions).map(([k, v]) => [v.reduce((a, b) => a + b, 0) / v.length, k]).sort((a, b) => a[0] - b[0]);
     if (reg.length) lines.push(`Gruppo più forte: ${reg.at(-1)[1]} (${sgn(reg.at(-1)[0])}%); più debole: ${reg[0][1]} (${sgn(reg[0][0])}%).`);
-    lines.push("La media non è il rendimento del portafoglio: non considera pesi, costi o cambi.");
+    lines.push("La media non è il rendimento di un portafoglio: non considera pesi, costi, valute o correlazioni.");
   }
-  lines.push("", "Nota: dati indicativi da Yahoo Finance, eventualmente ritardati; ticker non disponibili segnalati senza stimare valori. Non è consulenza finanziaria.");
-  return lines.join("\n");
+
+  if (env?.GROQ_API_KEY && metrics) {
+    const result = await requestGroq(env, [
+      { role: "system", content: "Sei un analista quantitativo prudente. Analizza esclusivamente i dati numerici forniti. Scrivi in italiano, in 3-5 punti brevi: lettura del quadro, ampiezza dei rialzi/ribassi, differenze geografiche, rischi e cosa servirebbe per confermare il segnale. Non inventare cause, notizie, dati macro, prezzi o previsioni. Distingui sempre osservazioni e interpretazioni. Un campione di ETF, fondi e indici non rappresenta l'intera economia. Non dare consigli di investimento né probabilità. Specifica che un dato giornaliero non dimostra un trend strutturale." },
+      { role: "user", content: `Valutazione dei mercati basata sui seguenti dati Yahoo Finance, potenzialmente ritardati. I numeri sono la fonte vincolante e non vanno modificati. Metriche: ${JSON.stringify(metrics)}. Variazioni osservate: ${JSON.stringify(available)}.` }
+    ], deps, 450);
+    lines.push("", "🧠 LETTURA IA GROQ");
+    lines.push(result.ok ? result.text : groqErrorLabel(result));
+  } else if (env?.GROQ_API_KEY && !metrics) {
+    lines.push("", "🧠 LETTURA IA GROQ", "Non generata: dati insufficienti.");
+  } else {
+    lines.push("", "🧠 LETTURA IA GROQ", "Non attiva: chiave GROQ_API_KEY non configurata.");
+  }
+  lines.push("", "⚠️ LIMITI E FONTI", "Quotazioni indicative da Yahoo Finance, eventualmente ritardate. Nessun dato macro ufficiale è incluso. Il punteggio/regola quantitativa descrive solo il campione osservato: non è una probabilità né consulenza finanziaria.");
+  return lines.join("\n").slice(0, 3900);
+}
+
+async function testGroqConnection(env, deps = {}) {
+  const result = await requestGroq(env, [
+    { role: "system", content: "Rispondi solo con: OK" },
+    { role: "user", content: "Verifica tecnica del collegamento." }
+  ], deps, 10);
+  if (result.ok) return `✅ Collegamento Groq riuscito. Modello: ${env.GROQ_MODEL || "openai/gpt-oss-20b"}. La chiave è stata accettata e il modello ha risposto.`;
+  return `❌ Verifica Groq non riuscita. ${groqErrorLabel(result)} La chiave non viene mai mostrata.`;
 }
 
 // ---------- comandi ----------
@@ -428,7 +489,9 @@ export async function handleCommand(text, chatId, env, deps = {}) {
     case "/mercati":
     case "/finanza":
     case "/finanzaoggi":
-      return renderMarkets(deps.fetchChart || fetchChart);
+      return renderMarkets(deps.fetchChart || fetchChart, env, deps);
+    case "/groqtest":
+      return testGroqConnection(env, deps);
     case "/finanzieri":
       return renderHistoricalMarkets("yesterday", deps.fetchChartHistory || fetchChartHistory, deps.now || new Date());
     case "/finanza7giorni":
